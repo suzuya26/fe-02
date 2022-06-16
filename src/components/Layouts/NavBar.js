@@ -1,4 +1,8 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +19,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,6 +62,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+  const [name, setName] = useState('');
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    getUsers();
+}, []);
+
+  const getUsers = async () => {
+    const response = await axios.get('http://localhost:8000/api/v1/user')
+    setUsers(response.data);
+    console.log(users);
+  }
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -120,12 +139,12 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+        <IconButton size="large"color="inherit">
+          <Badge>
+            <FormatListBulletedIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>My List</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -186,9 +205,9 @@ export default function NavBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+            <IconButton size="large" color="inherit">
+              <Badge>
+                <FormatListBulletedIcon />
               </Badge>
             </IconButton>
             <IconButton

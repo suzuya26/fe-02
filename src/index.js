@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import SignInSide from './components/SignInSide'
+import SignInSide from './components/auth/SignInSide'
+import RegisterSide from './components/auth/RegisterSide'
 
+axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -18,6 +21,9 @@ root.render(
           <Route path="/" element={<App />} />
           <Route path="/signin" element ={
             <SignInSide/>
+          } />
+          <Route path="/register" element ={
+            <RegisterSide/>
           } />
         </Routes>
       </BrowserRouter>
