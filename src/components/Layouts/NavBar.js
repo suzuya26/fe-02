@@ -1,8 +1,8 @@
 import * as React from 'react';
+import Cookies from 'js-cookie';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -20,6 +20,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -61,21 +62,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 export default function NavBar() {
-  const [name, setName] = useState('');
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    getUsers();
-}, []);
-
-  const getUsers = async () => {
-    const response = await axios.get('http://localhost:8000/api/v1/user')
-    setUsers(response.data);
-    console.log(users);
-  }
-
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -99,6 +87,19 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = (e) => {
+   e.preventDefault()
+   Cookies.remove('jwt')
+   window.location.reload();
+  }
+
+
+  // //nganu token
+  const token = Cookies.get('jwt')
+  console.log(token)
+  const decoded = jwtDecode(token);
+  console.log(decoded)
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -116,8 +117,10 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        {decoded.nama}
+      </MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -168,7 +171,7 @@ export default function NavBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        Profile
       </MenuItem>
     </Menu>
   );
