@@ -17,8 +17,8 @@ export default function CardList() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(12)).map((_, index) => (
-          <Grid item xs={12} sm={12} md={2} lg={2} key={index}>
-            <Item>xs=2</Item>
+          <Grid item xs={12} sm={12} md={4} lg={2} key={index}>
+            <Item>img</Item>
           </Grid>
         ))}
       </Grid>

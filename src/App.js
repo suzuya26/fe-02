@@ -16,9 +16,9 @@ function App() {
       </header>
       <div>
       <Container>
-      <CardList/>
       <Carousel/>
       <Category/>
+      <CardList/>
       </Container>
       </div>
     </div>

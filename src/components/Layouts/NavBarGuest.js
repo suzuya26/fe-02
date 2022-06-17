@@ -23,9 +23,9 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha("#e0e0e0", 1.0),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha("#9e9e9e", 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -122,7 +122,7 @@ export default function NavBarGuest() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{background : "#fafafa" }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -146,7 +146,7 @@ export default function NavBarGuest() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Cari disini.."
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
@@ -154,9 +154,6 @@ export default function NavBarGuest() {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button href="signin" variant="contained" disableElevation startIcon={<LoginIcon />}>
               Login
-            </Button>
-            <Button href="register" variant="contained" disableElevation startIcon={<PersonAddAltIcon />}>
-              Register
             </Button>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
