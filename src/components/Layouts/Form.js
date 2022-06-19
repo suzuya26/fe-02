@@ -39,6 +39,15 @@ export default function FullWidthTextField() {
     setCity(event.target.value);
   };
 
+  const commonStyles = {
+    bgcolor: 'background.paper',
+    borderColor: 'text.primary',
+    m: 1,
+    border: 1,
+    width: '5rem',
+    height: '5rem',
+  };
+
   return (
     <Stack
       component="form"
@@ -48,21 +57,25 @@ export default function FullWidthTextField() {
       }}
       spacing={2}
     >
-      <Typography textAlign="center" variant="h5" gutterBottom component="div">
-        Lengkapi Info Akun
-      </Typography>
-      <Stack>
-      <label htmlFor="icon-button-file">
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ ...commonStyles, borderRadius: 4,backgroundColor: "primary.dark",
+        "&:hover": {
+          backgroundColor: "secondary.main",
+          opacity: [0.9, 0.8, 0.7]
+        }}}>
+        <label htmlFor="icon-button-file">
         <Input accept="image/*" id="icon-button-file" type="file" />
         <IconButton
           color="primary"
           aria-label="upload picture"
           component="span"
         >
-          <PhotoCamera />
+          <PhotoCamera color="secondary"/>
         </IconButton>
       </label>
-    </Stack>
+        </Box>
+      
+    </Box>
       <TextField fullWidth label="Nama*" />
       <TextField
         id=""
@@ -77,7 +90,7 @@ export default function FullWidthTextField() {
           </MenuItem>
         ))}
       </TextField>
-      <TextField fullWidth label="Alamat*"/>
+      <TextField fullWidth label="Alamat*" multiline rows={4}/>
       <TextField fullWidth label="No Handphone*" />
       <Box textAlign="center">
         <Button 
@@ -85,7 +98,8 @@ export default function FullWidthTextField() {
         sx={{
         width: "100%",
         borderRadius: "16px"
-      }}>
+      }}
+      color="secondary">
           Simpan
         </Button>
       </Box>
