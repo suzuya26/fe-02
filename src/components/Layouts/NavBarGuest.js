@@ -141,19 +141,20 @@ export default function NavBarGuest() {
           >
             MUI
           </Typography>
-          <Search>
+          <Search sx={{borderRadius: "16px"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Cari disini.."
               inputProps={{ "aria-label": "search" }}
+              color="dark"
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button href="signin" variant="contained" disableElevation startIcon={<LoginIcon />}>
-              Login
+            <Button sx={{borderRadius: "16px"}} href="signin" variant="contained" color="secondary" disableElevation startIcon={<LoginIcon />}>
+              Masuk
             </Button>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
