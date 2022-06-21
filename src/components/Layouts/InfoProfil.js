@@ -99,7 +99,7 @@ export default function FullWidthTextField() {
         variant="contained"
         sx={{
         width: "100%",
-        borderRadius: "16px", color: 'background.paper',"&:hover": {
+        borderRadius: "10px", color: 'background.paper',"&:hover": {
           color:"secondary.main", bgcolor : "text.primary"
         }
       }}
