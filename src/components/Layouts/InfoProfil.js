@@ -58,10 +58,10 @@ export default function FullWidthTextField() {
       spacing={2}
     >
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box sx={{ ...commonStyles, borderRadius: 4,backgroundColor: "primary.dark",
+        <Box sx={{ ...commonStyles, borderRadius: 4,backgroundColor: "secondary.main", opacity: [0.7, 0.2, 1],
         "&:hover": {
-          backgroundColor: "secondary.main",
-          opacity: [0.9, 0.8, 0.7]
+          bgcolor: 'text.primary', color: 'background.paper',
+          opacity: [0.9, 0.8, 0.2]
         }}}>
         <label htmlFor="icon-button-file">
         <Input accept="image/*" id="icon-button-file" type="file" />
@@ -69,8 +69,10 @@ export default function FullWidthTextField() {
           color="primary"
           aria-label="upload picture"
           component="span"
+          sx={{ mt: 2 }}
         >
-          <PhotoCamera color="secondary"/>
+          <PhotoCamera sx={{ color: 'background.paper',"&:hover": {
+         color:"dark",bgcolor: "text.primary"}}}/>
         </IconButton>
       </label>
         </Box>
@@ -97,7 +99,9 @@ export default function FullWidthTextField() {
         variant="contained"
         sx={{
         width: "100%",
-        borderRadius: "16px"
+        borderRadius: "16px", color: 'background.paper',"&:hover": {
+          color:"secondary.main", bgcolor : "text.primary"
+        }
       }}
       color="secondary">
           Simpan
