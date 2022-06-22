@@ -35,6 +35,7 @@ const Input = styled("input")({
 export default function FullWidthTextField() {
   const [city, setCity] = React.useState("SBY");
 
+
   const handleChange = (event) => {
     setCity(event.target.value);
   };
@@ -85,6 +86,7 @@ export default function FullWidthTextField() {
         label="Kota*"
         value={city}
         onChange={handleChange}
+        sx={{textAlign: "left"}}
       >
         {citys.map((option) => (
           <MenuItem key={option.value} value={option.value} >

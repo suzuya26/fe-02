@@ -9,22 +9,22 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from '@mui/icons-material/Add';
 
-const citys = [
+const categories = [
   {
-    value: "LMG",
-    label: "Lamongan"
+    value: "E",
+    label: "Elektronik"
   },
   {
-    value: "MJK",
-    label: "Mojokerto"
+    value: "H",
+    label: "Kesehatan"
   },
   {
-    value: "SBY",
-    label: "Surabaya"
+    value: "T",
+    label: "Kendaraan"
   },
   {
-    value: "MDR",
-    label: "Madura"
+    value: "H",
+    label: "Hobi"
   }
 ];
 
@@ -33,10 +33,10 @@ const Input = styled("input")({
   });
 
 export default function FullWidthTextField() {
-  const [city, setCity] = React.useState("SBY");
+  const [category, setCategory] = React.useState("E");
 
   const handleChange = (event) => {
-    setCity(event.target.value);
+    setCategory(event.target.value);
   };
 
   const commonStyles = {
@@ -59,15 +59,16 @@ export default function FullWidthTextField() {
     >
       
       <TextField fullWidth label="Nama Produk*" />
-      <TextField fullWidth label="Harga Produk*" />
+      <TextField fullWidth label="Harga Produk*" type="number" />
       <TextField
         id=""
         select
         label="Pilih Kategory*"
-        value={city}
+        value={category}
         onChange={handleChange}
+        sx={{textAlign: "left"}}
       >
-        {citys.map((option) => (
+        {categories.map((option) => (
           <MenuItem key={option.value} value={option.value} >
             {option.label}
           </MenuItem>
@@ -89,7 +90,8 @@ export default function FullWidthTextField() {
           sx={{ mt: 2.5 }}
         >
           <AddIcon sx={{ color: 'text.disabled',"&:hover": {
-         color:"dark",bgcolor: "text.primary"}}}/>
+         color:"secondary.main", opacity: [1, 0.5, 0.5]
+        }}}/>
         </IconButton>
       </label>
         </Box>
