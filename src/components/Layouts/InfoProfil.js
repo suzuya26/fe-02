@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Container from '@mui/material/Container';
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
@@ -50,13 +51,15 @@ export default function FullWidthTextField() {
   };
 
   return (
-    <Stack
+    <Container sx={{ display: 'flex', justifyContent: 'center'}}>
+        <Stack 
       component="form"
       sx={{
         width: "50%",
-        maxWidth: "100%"
+        maxWidth: "100%",
+        mt:4
       }}
-      spacing={2}
+      spacing={3}
     >
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box sx={{ ...commonStyles, borderRadius: 4,backgroundColor: "secondary.main", opacity: [0.7, 0.2, 1],
@@ -70,7 +73,7 @@ export default function FullWidthTextField() {
           color="primary"
           aria-label="upload picture"
           component="span"
-          sx={{ mt: 2 }}
+          sx={{ m: 2.5 }}
         >
           <PhotoCamera sx={{ color: 'background.paper',"&:hover": {
          color:"dark",bgcolor: "text.primary"}}}/>
@@ -101,7 +104,8 @@ export default function FullWidthTextField() {
         variant="contained"
         sx={{
         width: "100%",
-        borderRadius: "10px", color: 'background.paper',"&:hover": {
+        p: 1,
+        borderRadius: "12px", color: 'background.paper',"&:hover": {
           color:"secondary.main", bgcolor : "text.primary"
         }
       }}
@@ -110,5 +114,6 @@ export default function FullWidthTextField() {
         </Button>
       </Box>
     </Stack>
+    </Container>
   );
 }

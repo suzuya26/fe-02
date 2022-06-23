@@ -145,7 +145,7 @@ export default function NavBarGuest() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button sx={{borderRadius: "16px"}} href="signin" variant="containe d" color="secondary" disableElevation startIcon={<LoginIcon />}>
+            <Button sx={{borderRadius: "16px"}} href="signin" variant="contained" color="secondary" disableElevation startIcon={<LoginIcon />}>
               Masuk
             </Button>
           </Box>

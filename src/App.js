@@ -4,7 +4,7 @@ import Carousel from './components/Carousel/Carousel';
 import Category from './components/Layouts/Category';
 import MahaNavbar from './components/Layouts/MahaNavbar';
 import { Container } from '@mui/system';
-
+import List from "./components/Layouts/ListJual"
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
       <Category/>
       <CardList/>
       </Container>
+      <List/>
       </div>
     </div>
   );

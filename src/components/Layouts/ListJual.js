@@ -8,8 +8,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import { createTheme } from '@mui/material/styles';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -24,10 +24,7 @@ const DaftarJual = () => {
 
 const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-  ) => {
+  const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
 

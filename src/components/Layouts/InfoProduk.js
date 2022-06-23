@@ -6,8 +6,10 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Container from '@mui/material/Container';
 import IconButton from "@mui/material/IconButton";
 import AddIcon from '@mui/icons-material/Add';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const categories = [
   {
@@ -49,13 +51,20 @@ export default function FullWidthTextField() {
   };
 
   return (
+    <Container sx={{ display: 'flex', justifyContent: 'center'}}>
+    <Stack>
+    <Button sx={{ color: 'text.primary', m:4 }}>
+      <ArrowBackIcon/>
+    </Button>
+    </Stack>
     <Stack
       component="form"
       sx={{
         width: "50%",
-        maxWidth: "100%"
+        maxWidth: "100%",
+        mt:4
       }}
-      spacing={2}
+      spacing={3}
     >
       
       <TextField fullWidth label="Nama Produk*" />
@@ -87,10 +96,10 @@ export default function FullWidthTextField() {
           color="primary"
           aria-label="upload picture"
           component="span"
-          sx={{ mt: 2.5 }}
+          sx={{ m: 2.5 }}
         >
-          <AddIcon sx={{ color: 'text.disabled',"&:hover": {
-         color:"secondary.main", opacity: [1, 0.5, 0.5]
+          <AddIcon sx={{color: 'text.disabled',"&:hover": {
+         color: "background.paper"
         }}}/>
         </IconButton>
       </label>
@@ -113,6 +122,7 @@ export default function FullWidthTextField() {
         variant="contained"
         sx={{
         width: "20em",
+        p:1,
         borderRadius: "10px", color: 'background.paper',"&:hover": {
           color:"secondary.main", bgcolor : "text.primary"
         }
@@ -122,5 +132,6 @@ export default function FullWidthTextField() {
         </Button>
       </Box>
     </Stack>
+    </Container>
   );
 }
