@@ -22,8 +22,8 @@ export default function BasicButtons() {
   return (
     <Box sx={{mx:"auto"}}>
     <Stack spacing={4} direction="row">
-      <Button variant="contained" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">All</Button>
-      <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Fashion</Button>
+      <Button variant="contained" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Semua</Button>
+      <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Hobi</Button>
       <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Productivity</Button>
       <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Electronic</Button>
       <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Transportation</Button>

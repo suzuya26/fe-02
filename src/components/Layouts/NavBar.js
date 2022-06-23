@@ -200,7 +200,7 @@ export default function NavBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" style={{background : "#424242" }}>
+            <IconButton size="large" style={{background : "#8A8A8A" }}>
               <Badge>
                 <FormatListBulletedIcon />
               </Badge>
