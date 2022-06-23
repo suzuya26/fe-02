@@ -12,6 +12,7 @@ import {
 import SignInSide from './components/auth/SignInSide'
 import RegisterSide from './components/auth/RegisterSide'
 import Profil from './components/pages/Profil';
+import Produk from './components/pages/Produk';
 
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,6 +28,7 @@ root.render(
             <RegisterSide/>
           } />
            <Route path="/profil" element ={<Profil />} />
+           <Route path="/produk" element ={<Produk />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>
