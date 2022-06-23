@@ -8,32 +8,32 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 const kotas = [
   {
     value: "LMG",
-    label: "Lamongan"
+    label: "Lamongan",
   },
   {
     value: "MJK",
-    label: "Mojokerto"
+    label: "Mojokerto",
   },
   {
     value: "SBY",
-    label: "Surabaya"
+    label: "Surabaya",
   },
   {
     value: "MDR",
-    label: "Madura"
-  }
+    label: "Madura",
+  },
 ];
 
 const Input = styled("input")({
-    display: "none"
-  });
+  display: "none",
+});
 
 export default function FullWidthTextField() {
   const [kota, setKota] = React.useState("SBY");
@@ -64,6 +64,7 @@ export default function FullWidthTextField() {
       );
 
       // Kalo di upload langsung di-server
+      console.log(response.data.url)
       setUploadedFileURL(response.data.url);
     } catch (err) {
       console.log(err);
@@ -74,15 +75,16 @@ export default function FullWidthTextField() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/v1/updateinfo/:id",{
-        nama:nama,
-        kota:kota,
-        alamat:alamat,
-        nohp:nohp,
+      await axios.post("http://localhost:8000/api/v1/updateinfo/1", {
+        nama: nama,
+        kota: kota,
+        alamat: alamat,
+        nohp: nohp,
+        profilimg: uploadedFileURL,
       });
     } catch (error) {
-      if(error.response){
-        console.log(error.response.data)
+      if (error.response) {
+        console.log(error.response.data);
       }
     }
   }
@@ -92,12 +94,12 @@ export default function FullWidthTextField() {
   };
 
   const commonStyles = {
-    bgcolor: 'background.paper',
-    borderColor: 'text.primary',
+    bgcolor: "background.paper",
+    borderColor: "text.primary",
     m: 1,
     border: 1,
-    width: '5rem',
-    height: '5rem',
+    width: "5rem",
+    height: "5rem",
   };
 
   return (
@@ -105,74 +107,117 @@ export default function FullWidthTextField() {
       sx={{
         width: "50%",
         maxWidth: "100%",
-        mt:4
+        mt: 4,
       }}
       spacing={3}
     >
       <Box>
-      {uploadedFileURL && (
-        <img src={uploadedFileURL} alt="Uploaded URL" />
-      )}
+        {uploadedFileURL && <img src={uploadedFileURL} alt="Uploaded URL" />}
       </Box>
-      <Box   component="form"
-      onSubmit={handleUpload} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box sx={{ ...commonStyles, borderRadius: 4,backgroundColor: "secondary.main", opacity: [0.7, 0.2, 1],
-        "&:hover": {
-          bgcolor: 'text.primary', color: 'background.paper',
-          opacity: [0.9, 0.8, 0.2]
-        }}}>
-        <label htmlFor="icon-button-file">
-        <Input accept="image/*" id="icon-button-file" type="file" onChange={(e) => setFile(e.target.files[0])} />
-        <IconButton
-          color="primary"
-          aria-label="upload picture"
-          component="span"
-          sx={{ m: 2.5 }}
-        >
-          <PhotoCamera sx={{ color: 'background.paper',"&:hover": {
-         color:"dark",bgcolor: "text.primary"}}}/>
-        </IconButton>
-        </label>
-        </Box>
-        <Button type="submit" variant="contained">upload</Button>
-      </Box>
-      <Container   component="form"
-      onSubmit={handleSubmit}>
-      <TextField fullWidth label="Nama*" name="nama" value={nama}
-        onChange={(e) => setNama(e.target.value)}
-        />
-      <TextField
-        id=""
-        select
-        label="Kota*" kota="kota"
-        value={kota}
-        onChange={handleChange}
-        sx={{textAlign: "left"}}
+      <Box
+        component="form"
+        onSubmit={handleUpload}
+        sx={{ display: "flex", justifyContent: "center" }}
       >
-        {kotas.map((option) => (
-          <MenuItem key={option.value} value={option.value} >
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-      <TextField fullWidth label="Alamat*" multiline rows={4} value={alamat} onChange={(e) => setAlamat(e.target.value)}/>
-      <TextField fullWidth label="No Handphone*" value={nohp} onChange={(e) => setNohp(e.target.value)}/>
-      <Box textAlign="center">
-        <Button 
-        variant="contained"
-        sx={{
-        width: "100%",
-        p: 1,
-        borderRadius: "12px", color: 'background.paper',"&:hover": {
-          color:"secondary.main", bgcolor : "text.primary"
-        }
-      }}
-      color="secondary">
-          Simpan
+        <Box
+          sx={{
+            ...commonStyles,
+            borderRadius: 4,
+            backgroundColor: "secondary.main",
+            opacity: [0.7, 0.2, 1],
+            "&:hover": {
+              bgcolor: "text.primary",
+              color: "background.paper",
+              opacity: [0.9, 0.8, 0.2],
+            },
+          }}
+        >
+          <label htmlFor="icon-button-file">
+            <Input
+              accept="image/*"
+              id="icon-button-file"
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+              sx={{ m: 2.5 }}
+            >
+              <PhotoCamera
+                sx={{
+                  color: "background.paper",
+                  "&:hover": {
+                    color: "dark",
+                    bgcolor: "text.primary",
+                  },
+                }}
+              />
+            </IconButton>
+          </label>
+        </Box>
+        <Button type="submit" variant="contained">
+          upload
         </Button>
       </Box>
+      <Container component="form" onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          label="Nama*"
+          name="nama"
+          value={nama}
+          onChange={(e) => setNama(e.target.value)}
+        />
+        <TextField
+          id=""
+          select
+          label="Kota*"
+          kota="kota"
+          value={kota}
+          onChange={handleChange}
+          sx={{ textAlign: "left" }}
+        >
+          {kotas.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          fullWidth
+          label="Alamat*"
+          multiline
+          rows={4}
+          value={alamat}
+          onChange={(e) => setAlamat(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="No Handphone*"
+          value={nohp}
+          onChange={(e) => setNohp(e.target.value)}
+        />
+        <Box textAlign="center">
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              width: "100%",
+              p: 1,
+              borderRadius: "12px",
+              color: "background.paper",
+              "&:hover": {
+                color: "secondary.main",
+                bgcolor: "text.primary",
+              },
+            }}
+            color="secondary"
+          >
+            Simpan
+          </Button>
+        </Box>
       </Container>
-      
     </Stack>
   );
 }
