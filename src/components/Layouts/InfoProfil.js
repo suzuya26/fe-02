@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useState, Fragment } from "react";
+import axios from "axios";
 import { styled } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -10,7 +12,7 @@ import Container from '@mui/material/Container';
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
-const citys = [
+const kotas = [
   {
     value: "LMG",
     label: "Lamongan"
@@ -34,11 +36,59 @@ const Input = styled("input")({
   });
 
 export default function FullWidthTextField() {
-  const [city, setCity] = React.useState("SBY");
+  const [kota, setKota] = React.useState("SBY");
+  const [file, setFile] = useState(null);
+  const [uploadedFileURL, setUploadedFileURL] = useState(null);
 
+  const [nama, setNama] = useState("");
+  // const [kota, setKota] = useState("");
+  const [alamat, setAlamat] = useState("");
+  const [nohp, setNohp] = useState("");
+
+  async function handleUpload(e) {
+    e.preventDefault();
+
+    const form = new FormData();
+
+    form.append("picture", file);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/updatefotouser",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Kalo di upload langsung di-server
+      setUploadedFileURL(response.data.url);
+    } catch (err) {
+      console.log(err);
+      console.log(err?.responses?.data);
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:8000/api/v1/updateinfo/:id",{
+        nama:nama,
+        kota:kota,
+        alamat:alamat,
+        nohp:nohp,
+      });
+    } catch (error) {
+      if(error.response){
+        console.log(error.response.data)
+      }
+    }
+  }
 
   const handleChange = (event) => {
-    setCity(event.target.value);
+    setKota(event.target.value);
   };
 
   const commonStyles = {
@@ -51,9 +101,7 @@ export default function FullWidthTextField() {
   };
 
   return (
-    <Container sx={{ display: 'flex', justifyContent: 'center'}}>
-        <Stack 
-      component="form"
+    <Stack
       sx={{
         width: "50%",
         maxWidth: "100%",
@@ -61,14 +109,20 @@ export default function FullWidthTextField() {
       }}
       spacing={3}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box>
+      {uploadedFileURL && (
+        <img src={uploadedFileURL} alt="Uploaded URL" />
+      )}
+      </Box>
+      <Box   component="form"
+      onSubmit={handleUpload} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box sx={{ ...commonStyles, borderRadius: 4,backgroundColor: "secondary.main", opacity: [0.7, 0.2, 1],
         "&:hover": {
           bgcolor: 'text.primary', color: 'background.paper',
           opacity: [0.9, 0.8, 0.2]
         }}}>
         <label htmlFor="icon-button-file">
-        <Input accept="image/*" id="icon-button-file" type="file" />
+        <Input accept="image/*" id="icon-button-file" type="file" onChange={(e) => setFile(e.target.files[0])} />
         <IconButton
           color="primary"
           aria-label="upload picture"
@@ -78,27 +132,31 @@ export default function FullWidthTextField() {
           <PhotoCamera sx={{ color: 'background.paper',"&:hover": {
          color:"dark",bgcolor: "text.primary"}}}/>
         </IconButton>
-      </label>
+        </label>
         </Box>
-      
-    </Box>
-      <TextField fullWidth label="Nama*" />
+        <Button type="submit" variant="contained">upload</Button>
+      </Box>
+      <Container   component="form"
+      onSubmit={handleSubmit}>
+      <TextField fullWidth label="Nama*" name="nama" value={nama}
+        onChange={(e) => setNama(e.target.value)}
+        />
       <TextField
         id=""
         select
-        label="Kota*"
-        value={city}
+        label="Kota*" kota="kota"
+        value={kota}
         onChange={handleChange}
         sx={{textAlign: "left"}}
       >
-        {citys.map((option) => (
+        {kotas.map((option) => (
           <MenuItem key={option.value} value={option.value} >
             {option.label}
           </MenuItem>
         ))}
       </TextField>
-      <TextField fullWidth label="Alamat*" multiline rows={4}/>
-      <TextField fullWidth label="No Handphone*" />
+      <TextField fullWidth label="Alamat*" multiline rows={4} value={alamat} onChange={(e) => setAlamat(e.target.value)}/>
+      <TextField fullWidth label="No Handphone*" value={nohp} onChange={(e) => setNohp(e.target.value)}/>
       <Box textAlign="center">
         <Button 
         variant="contained"
@@ -113,7 +171,8 @@ export default function FullWidthTextField() {
           Simpan
         </Button>
       </Box>
+      </Container>
+      
     </Stack>
-    </Container>
   );
 }
