@@ -49,7 +49,7 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 , mx:"auto" , mt:2 , mb:4}}>
+    <Box sx={{ Width: 968, height: 288, left: 236, top: 116, flexGrow: 1 , mx:"auto" , mt:2 , mb:4}}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -62,11 +62,11 @@ function SwipeableTextMobileStepper() {
               <Box
                 component="img"
                 sx={{
-                  height: 255,
+                  height: 288,
                   display: 'block',
-                  maxWidth: 400,
+                  maxWidth: 968,
                   overflow: 'hidden',
-                  width: '100%',
+                  width: 968,
                 }}
                 src={step.imgPath}
                 alt={step.label}
