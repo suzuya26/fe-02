@@ -4,8 +4,6 @@ import Carousel from './components/Carousel/Carousel';
 import Category from './components/Layouts/Category';
 import MahaNavbar from './components/Layouts/MahaNavbar';
 import { Container } from '@mui/system';
-import Inpro from './components/Layouts/InfoProfil';
-import Induk from './components/Layouts/InfoProduk';
 
 
 function App() {
@@ -19,8 +17,6 @@ function App() {
       <Carousel/>
       <Category/>
       <CardList/>
-      <Inpro/>
-      <Induk/>
       </Container>
       </div>
     </div>

@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import SignInSide from './components/auth/SignInSide'
 import RegisterSide from './components/auth/RegisterSide'
+import Profil from './components/pages/Profil';
 
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -25,6 +26,7 @@ root.render(
           <Route path="/register" element ={
             <RegisterSide/>
           } />
+           <Route path="/profil" element ={<Profil />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>
