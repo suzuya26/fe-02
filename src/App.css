@@ -41,3 +41,8 @@
     transform: rotate(360deg);
   }
 }
+
+.Category {
+  display: flex;
+  justify-content: center;
+}

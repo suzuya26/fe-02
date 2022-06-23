@@ -14,10 +14,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function CardList() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} mt={4}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(12)).map((_, index) => (
-          <Grid item xs={12} sm={12} md={3} lg={2} key={index}>
+          <Grid item xs={12} sm={12} md={2} lg={2} key={index}>
             <Item>img</Item>
           </Grid>
         ))}

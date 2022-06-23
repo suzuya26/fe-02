@@ -133,21 +133,13 @@ export default function NavBarGuest() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
           <Search sx={{borderRadius: "16px"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Cari disini.."
-              inputProps={{ "aria-label": "search" }}
+              placeholder="Cari disini.. " 
+              inputProps={{ "aria-label": "search"}}
               color="dark"
             />
           </Search>
