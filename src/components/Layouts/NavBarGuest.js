@@ -124,6 +124,13 @@ export default function NavBarGuest() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{background : "#fafafa" }}>
         <Toolbar>
+        <Box
+      sx={{
+        width: 80,
+        height: 25,
+        backgroundColor: 'secondary.main'
+      }}
+    />
           <Search sx={{borderRadius: "16px"}}>
             <SearchIconWrapper>
               <SearchIcon />

@@ -5,9 +5,6 @@ import Box from "@mui/material/Box";
 function Profil() {
     return (
       <div>
-        <header>
-          <MahaNavbar/>
-        </header>
         <main>
             <InProf/>
         </main>

@@ -49,7 +49,7 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-    <Box sx={{ Width: 968, height: 288, left: 236, top: 116, radius: 20, flexGrow: 1 , mx:"auto" , mt:2 , mb:4}}>
+    <Box sx={{ Width: 968, height: 288, left: 236, top: 116, radius: 20, flexGrow: 1 , ml: 12, my:4}}>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
