@@ -74,8 +74,10 @@ export default function FullWidthTextField() {
   }
 
   async function handleSubmit(e) {
+    console.log("submit data")
     e.preventDefault();
     try {
+      console.log(nama,kota,alamat,nohp,uploadedFileURL)
       await axios.post("http://localhost:8000/api/v1/updateinfo/1", {
         nama: nama,
         kota: kota,
@@ -113,7 +115,6 @@ export default function FullWidthTextField() {
         </Stack>
     </Stack>
     <Stack
-      component="form"
       sx={{
         width: "50%",
         maxWidth: "100%",
@@ -121,9 +122,8 @@ export default function FullWidthTextField() {
       }}
     >
       <Box>
-        {uploadedFileURL && <img src={uploadedFileURL} alt="Uploaded URL" />}
-      </Box>
-      <Box
+        {!uploadedFileURL?(      
+        <Box
         component="form"
         onSubmit={handleUpload}
         sx={{ display: "flex", justifyContent: "center" }}
@@ -173,7 +173,9 @@ export default function FullWidthTextField() {
           upload
         </Button>
         </Stack>
+      </Box>):(<img src={uploadedFileURL} alt="Uploaded URL" />)}
       </Box>
+
       <Stack component="form" spacing={3} mt={2} onSubmit={handleSubmit} >
         <TextField
           fullWidth
