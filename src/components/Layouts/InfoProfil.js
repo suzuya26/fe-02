@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const kotas = [
   {
@@ -103,13 +104,21 @@ export default function FullWidthTextField() {
   };
 
   return (
+  <Container sx={{ display: 'flex', justifyContent: 'center'}}>
+    <Stack>
+       <Stack>
+         <Button sx={{ color: 'text.primary', m:4 }}>
+          <ArrowBackIcon/>
+          </Button>
+        </Stack>
+    </Stack>
     <Stack
+      component="form"
       sx={{
         width: "50%",
         maxWidth: "100%",
-        mt: 4,
+        mt:4
       }}
-      spacing={3}
     >
       <Box>
         {uploadedFileURL && <img src={uploadedFileURL} alt="Uploaded URL" />}
@@ -119,6 +128,7 @@ export default function FullWidthTextField() {
         onSubmit={handleUpload}
         sx={{ display: "flex", justifyContent: "center" }}
       >
+        <Stack>
         <Box
           sx={{
             ...commonStyles,
@@ -157,11 +167,14 @@ export default function FullWidthTextField() {
             </IconButton>
           </label>
         </Box>
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" sx={{  borderRadius: "12px",color:"primary",bgcolor: "text.disabled","&:hover": {
+         bgcolor: 'secondary.main'
+        } }}>
           upload
         </Button>
+        </Stack>
       </Box>
-      <Container component="form" onSubmit={handleSubmit}>
+      <Stack component="form" spacing={3} mt={2} onSubmit={handleSubmit} >
         <TextField
           fullWidth
           label="Nama*"
@@ -217,7 +230,8 @@ export default function FullWidthTextField() {
             Simpan
           </Button>
         </Box>
-      </Container>
+      </Stack>
     </Stack>
+    </Container>
   );
 }

@@ -124,15 +124,6 @@ export default function NavBarGuest() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{background : "#fafafa" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Search sx={{borderRadius: "16px"}}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -140,7 +131,6 @@ export default function NavBarGuest() {
             <StyledInputBase
               placeholder="Cari disini.. " 
               inputProps={{ "aria-label": "search"}}
-              color="dark"
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

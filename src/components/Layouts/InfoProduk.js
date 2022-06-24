@@ -53,9 +53,11 @@ export default function FullWidthTextField() {
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center'}}>
     <Stack>
-    <Button sx={{ color: 'text.primary', m:4 }}>
-      <ArrowBackIcon/>
-    </Button>
+      <Box>
+        <Button sx={{ color: 'text.primary', m:4 }}>
+          <ArrowBackIcon/>
+        </Button>
+      </Box>
     </Stack>
     <Stack
       component="form"
