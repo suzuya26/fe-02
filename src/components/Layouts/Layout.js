@@ -15,6 +15,52 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import AddIcon from '@mui/icons-material/Add';
+import { styled } from "@mui/material/styles";
+
+const categories = [
+  {
+    value: "E",
+    label: "Elektronik"
+  },
+  {
+    value: "H",
+    label: "Kesehatan"
+  },
+  {
+    value: "T",
+    label: "Kendaraan"
+  },
+  {
+    value: "H",
+    label: "Hobi"
+  }
+];
+
+const Input = styled("input")({
+  display: "none"
+});
+
+
+export default function FullWidthTextField() {
+  const [category, setCategory] = React.useState("E");
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
+
+  const commonStyles = {
+    bgcolor: 'background.paper',
+    borderColor: 'text.primary',
+    m: 1,
+    border: 1,
+    width: '5rem',
+    height: '5rem',
+  };
+
 
 function Copyright(props) {
   return (
@@ -36,76 +82,29 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function RegisterSide() {
-  const [nama, setNama] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const [message, setMsg] = useState('');
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const data = new FormData(e.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
-
-  const Register = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:8000/api/v1/register", {
-        nama: nama,
-        email: email,
-        password: password,
-      });
-      navigate('/signin');
-    } catch (error) {
-      if(error.response){
-        console.log(error.response.data)
-      }
-    }
-  };
-
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100vh", flexDirection: { xs: "column-reverse", md: "row"}}}>
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid container sx={{display: "flex", justifyContent: "center"}} xs={12} sm={12} md={12} component={Paper}>
+        <Grid className="G1" item xs={12} md={3} square></Grid>
+        <Grid  className="G2" item xs={12} md={6} square>
+        <Box mt={2}>
+            <Button sx={{ color: 'text.primary' }}>
+              <ArrowBackIcon/>
+            </Button>
+          </Box>
           <Box
             sx={{
-              my: 8,
-              mx: 4,
+              my: 6,
+              mx: 2,
               display: "flex",
+              justifyContent: "center",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
-            <Box component="form" noValidate onSubmit={Register} sx={{ mt: 3 }}>
+            <Box component="form" noValidate sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -114,10 +113,9 @@ export default function RegisterSide() {
                     required
                     fullWidth
                     id="userNama"
-                    label="User Name"
+                    label="Nama Produk"
                     autoFocus
-                    value={nama}
-                    onChange={(e) => setNama(e.target.value)}
+                    color="secondary"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -125,45 +123,91 @@ export default function RegisterSide() {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Harga Produk"
                     name="email"
                     autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="number"
+                    color="secondary"
                   />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                fullWidth
+                id=""
+                select
+                label="Pilih Kategory*"
+                value={category}
+                onChange={handleChange}
+                sx={{textAlign: "left"}}
+                color="secondary"
+              >
+                {categories.map((option) => (
+                  <MenuItem key={option.value} value={option.value} >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     required
                     fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
+                    label="Deskripsi" 
+                    multiline rows={4}
+                    type="string"
                     id="password"
+                    color="secondary"
                     autoComplete="new-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </Grid>
               </Grid>
+              <Grid item xs={12}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                <Box sx={{ ...commonStyles, border: '3px dashed lightgrey' , borderRadius: 4, opacity: [0.7, 0.2, 1],
+                "&:hover": {
+                  bgcolor: 'text.primary', color: 'background.paper',
+                  opacity: [0.9, 0.8, 0.2]
+                  }}}>
+                  <label htmlFor="icon-button-file">
+                  <Input accept="image/*" id="icon-button-file" type="file" />
+                    <IconButton
+                      color="primary"
+                      aria-label="upload picture"
+                      component="span"
+                      sx={{ m: 2 }}
+                    >
+                      <AddIcon sx={{color: 'text.disabled',"&:hover": {
+                        color: "background.paper"
+                        }}}/>
+                  </IconButton>
+                  </label>
+                </Box>
+              </Box>
+              </Grid>
+              <Grid item display="flex" justifyContent="space-between">
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                color="secondary"
+                sx={{ mr: 2, my: 2  , py:1, borderRadius: "12px",}}
+              >
+                Preview
+              </Button>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                color="secondary"
+                sx={{ ml: 2, my: 2 , py:1, borderRadius: "12px",}}
               >
-                Sign Up
+                Terbitkan
               </Button>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link href="signin" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
               </Grid>
             </Box>
-            <Copyright sx={{ mt: 5 }} />
           </Box>
+        </Grid>
+        <Grid  className="G3" item xs={12} md={3} square></Grid>
         </Grid>
       </Grid>
     </ThemeProvider>
