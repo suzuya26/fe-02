@@ -15,59 +15,56 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { bgcolor } from "@mui/system";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-  
-  function Copyright(props) {
-    return (
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        {...props}
-      >
-        {"Copyright © "}
-        <Link color="inherit" href="https://mui.com/">
-          Your Website
-        </Link>{" "}
-        {new Date().getFullYear()}
-        {"."}
-      </Typography>
-    );
-  }
 
-  const theme = createTheme();
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
-export default function SignInSide() {
+const theme = createTheme();
+
+export default function RegisterSide() {
+  const [nama, setNama] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const [message, setMsg] = useState("");
+  const [message, setMsg] = useState('');
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const data = new FormData(e.currentTarget);
   //   console.log({
   //     email: data.get('email'),
   //     password: data.get('password'),
   //   });
   // };
-  const login = async (e) => {
+
+  const Register = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/v1/login", {
+      await axios.post("http://localhost:8000/api/v1/register", {
+        nama: nama,
         email: email,
         password: password,
       });
-      navigate("/");
+      navigate('/signin');
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.message);
+      if(error.response){
+        console.log(error.response.data)
       }
     }
   };
@@ -76,18 +73,27 @@ export default function SignInSide() {
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Grid container xs={12} sm={8} md={12} component={Paper} elevation={6} square sx={{display:"flex", justifyContent:"center"}}>
-          <Grid container xs={1} sm={2} md={3} square mt={6} justifyContent="flex-end">
-          <Grid item>
-          <Button sx={{ color: 'text.primary', m:4 }}>
-            <ArrowBackIcon/>
-          </Button>
-          </Grid>
-        </Grid>
-          <Grid container xs={9} m={1} sm={10} md={8} square>
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,
+              mx: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -99,7 +105,7 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={Register} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -108,9 +114,10 @@ export default function SignInSide() {
                     required
                     fullWidth
                     id="userNama"
-                    label="Nama Produk"
+                    label="User Name"
                     autoFocus
-                    color="secondary"
+                    value={nama}
+                    onChange={(e) => setNama(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -118,43 +125,45 @@ export default function SignInSide() {
                     required
                     fullWidth
                     id="email"
-                    name="Harga"
-                    label="Harga Produk"
-                    type="number"
-                    currencySymbol="Rp."
-                    color="secondary"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                <TextField fullWidth label="Deskripsi*" color="secondary" multiline rows={4}/>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </Grid>
               </Grid>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="outlined"
-                color="secondary"
-                sx={{my: 2 , mr: 2, p: 1, borderRadius: "10px"}}
-              >
-               Preview
-              </Button>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="secondary"
-                sx={{my: 2 ,ml: 2, p: 1,borderRadius: "10px"}}
+                sx={{ mt: 3, mb: 2 }}
               >
-               Terbitkan
+                Sign Up
               </Button>
-              </Box>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link href="signin" variant="body2">
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
+              </Grid>
             </Box>
-            <Copyright sx={{ bottom: 0}} />
+            <Copyright sx={{ mt: 5 }} />
           </Box>
-          </Grid>
         </Grid>
       </Grid>
     </ThemeProvider>
