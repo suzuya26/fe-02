@@ -15,6 +15,7 @@ import Profil from './components/pages/Profil';
 import Produk from './components/pages/Produk';
 import Edfuus from './components/pages/EditFotoUser';
 import Edpro from './components/pages/EditProfil';
+import Cobs from './components/pages/CobaDoang';
 
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -33,6 +34,7 @@ root.render(
            <Route path="/produk" element ={<Produk />} />
            <Route path="/edit-foto-user" element ={<Edfuus />} />
            <Route path="/edit-profil" element ={<Edpro />} />
+           <Route path="/NyobaQaqa" element ={<Cobs />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>
