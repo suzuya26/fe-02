@@ -15,6 +15,10 @@ import IconButton from "@mui/material/IconButton";
 import AddIcon from '@mui/icons-material/Add';
 import { styled } from "@mui/material/styles";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import FlipCameraIosIcon from "@mui/icons-material/FlipCameraIos";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import Stack from "@mui/material/Stack";
 
 const kotas = [
     {
@@ -169,22 +173,30 @@ const theme = createTheme();
               alignItems: "center",
             }}
           >
-             <Box
-            sx={{
-            ...commonStyles,
-            borderRadius: 4,
-            backgroundColor: "secondary.main",
-            opacity: [0.7, 0.2, 1],
-            "&:hover": {
-            bgcolor: "text.primary",
-            color: "background.paper",
-            opacity: [0.9, 0.8, 0.2],
-                },
-            }}
+                  <Box>
+          {!uploadedFileURL ? (
+            <Box
+              component="form"
+              onSubmit={handleUpload}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
-                <label htmlFor="icon-button-file">
-                <Input
-                    accept="image/*"
+              <Stack>
+                <Box
+                  sx={{
+                    ...commonStyles,
+                    borderRadius: 4,
+                    backgroundColor: "secondary.main",
+                    opacity: [0.7, 0.2, 1],
+                    "&:hover": {
+                      bgcolor: "text.primary",
+                      color: "background.paper",
+                      opacity: [0.9, 0.8, 0.2],
+                    },
+                  }}
+                >
+                  <label htmlFor="icon-button-file">
+                    <Input
+                      accept="image/*"
                       id="icon-button-file"
                       type="file"
                       onChange={(e) => setFile(e.target.files[0])}
@@ -207,7 +219,6 @@ const theme = createTheme();
                     </IconButton>
                   </label>
                 </Box>
-                <Box>
                 <Button
                   type="submit"
                   variant="contained"
@@ -222,7 +233,67 @@ const theme = createTheme();
                 >
                   Upload
                 </Button>
+              </Stack>
+            </Box>
+          ) : (
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid>
+                <Card sx={{ maxWidth: 400 }}>
+                  <CardMedia
+                    component="img"
+                    alt="Uploaded User Pic"
+                    image={uploadedFileURL}
+                    width="140"
+                  ></CardMedia>
+                </Card>
+              </Grid>
+              <Grid>
+                <Box 
+                textAlign="center" 
+                sx={{ mt: 1 }}
+                component="form"
+                onSubmit={handleReUpload}>
+                  <Button 
+                  variant="contained"
+                  sx={{
+                    mx:1,
+                    borderRadius: "12px",
+                    color: "primary",
+                    bgcolor: "text.disabled",
+                    "&:hover": {
+                      bgcolor: "secondary.main",
+                    },
+                  }}
+                  startIcon={<FlipCameraIosIcon />}>
+                    <input type="file" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      mx:1,
+                      mt:1,
+                      borderRadius: "12px",
+                      color: "primary",
+                      bgcolor: "text.disabled",
+                      "&:hover": {
+                        bgcolor: "secondary.main",
+                      },
+                    }}
+                  >
+                    Upload Ulang
+                  </Button>
                 </Box>
+              </Grid>
+            </Grid>
+          )}
+        </Box>
+
             <Box component="form" noValidate sx={{ mt: 3 }}  onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
