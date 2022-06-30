@@ -14,6 +14,7 @@ export default function ActionAreaCard() {
           height="140"
           image="https://en.wikipedia.org/wiki/IMG_%28company%29"
           alt="Produk"
+
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

@@ -161,7 +161,7 @@ const theme = createTheme();
                   />
                 </Grid>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} my={2}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
                 <Box sx={{ ...commonStyles, border: '3px dashed lightgrey' , borderRadius: 4, opacity: [0.7, 0.2, 1],
                 "&:hover": {

@@ -16,6 +16,9 @@ import Produk from './components/pages/Produk';
 import Edfuus from './components/pages/EditFotoUser';
 import Edpro from './components/pages/EditProfil';
 import Cobs from './components/pages/CobaDoang';
+import Halpro from './components/pages/HalamanProduk';
+import Dafju from './components/pages/DaftarJual';
+import Inpar from './components/pages/InfoPenawar';
 
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -35,6 +38,9 @@ root.render(
            <Route path="/edit-foto-user" element ={<Edfuus />} />
            <Route path="/edit-profil" element ={<Edpro />} />
            <Route path="/NyobaQaqa" element ={<Cobs />} />
+           <Route path="/halaman-produk" element ={<Halpro />} />
+           <Route path="/daftar-jual" element ={<Dafju />} />
+           <Route path="/info-penawar" element ={<Inpar />} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>
