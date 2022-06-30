@@ -137,7 +137,7 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ py:1, mt: 3, mb: 2, borderRadius: "12px" }}
+                sx={{ py: 1, mt: 3, mb: 2, borderRadius: "12px" }}
                 color="secondary"
               >
                 Sign In
@@ -146,21 +146,21 @@ export default function SignInSide() {
                 <Grid item xs>
                   <Typography variant="body2">
                     Lupa Password? <Link href="#" variant="body2" color="secondary">
-                    Klik Di sini
-                  </Link>
+                      Klik Di sini
+                    </Link>
                   </Typography>
                 </Grid>
                 <Grid item>
                   <Typography variant="body2">
-                  Belum punya akun? <Link href="register" variant="body2" color="secondary">
-                    {" Daftar Disini"}
-                  </Link>
+                    Belum punya akun? <Link href="register" variant="body2" color="secondary">
+                      {" Daftar Disini"}
+                    </Link>
                   </Typography>
                 </Grid>
               </Grid>
               <Typography component="h6" variant="h6">
-              {message}
-            </Typography>
+                {message}
+              </Typography>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
