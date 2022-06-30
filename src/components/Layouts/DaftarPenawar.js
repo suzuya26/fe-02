@@ -15,9 +15,12 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea } from '@mui/material';
 
 const theme = createTheme();
-
 export default function DaftarPenawar() {
 
   return (
@@ -50,23 +53,64 @@ export default function DaftarPenawar() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Daftar Penawar
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
-              
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ py: 1, mt: 3, mb: 2, borderRadius: "12px" }}
-                color="secondary"
-              >
-                Sign In
-              </Button>
+              <Card sx={{ maxWidth: 472 }}>
+                <Grid container display="flex" >
+                  <Grid item  m={3}>
+                    <Avatar>
+                    <CardMedia
+                    component="img"
+                    width="40"
+                    height="40"
+                    image="url(https://source.unsplash.com/random)"
+                    alt="green iguana"
+                  />
+                    </Avatar>
+                  </Grid>
+                  <Grid item>
+                  <CardContent>
+                    <Typography gutterBottom variant="subtitle2" component="div">
+                      Lizard Ranchu
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      Lamongan
+                    </Typography>
+                  </CardContent>
+                  </Grid>
+                </Grid>
+              </Card>
+              <Grid container>
+                <Grid item xs>
+                  <Typography variant="body2" mt={3}>
+                    Ditawar Rp.200.000,00
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Grid item display="flex" justifyContent="space-between">
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="outlined"
+                      color="secondary"
+                      sx={{px:5, mr: 0.5, my: 2, borderRadius: "12px", }}
+                    >
+                      Tolak
+                    </Button>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      sx={{px:5 , ml: 0.5, my: 2, borderRadius: "12px", }}
+                    >
+                      Terima
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Box>
           </Box>
         </Grid>
