@@ -18,7 +18,6 @@ function App() {
       <Category/>
       <CardList/>
       </Container>
-      <List/>
       </div>
     </div>
   );

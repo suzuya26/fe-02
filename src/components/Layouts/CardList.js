@@ -3,6 +3,9 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import Card from "./CardProduct";
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -18,10 +21,15 @@ export default function CardList() {
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
         {Array.from(Array(12)).map((_, index) => (
           <Grid item xs={12} sm={12} md={2} lg={2} key={index}>
-            <Item>img</Item>
+            <Card/>
           </Grid>
         ))}
       </Grid>
+      <Box>
+      <Button variant="contained" color="secondary" px={2} textAlign="center">
+      <AddIcon my={2} />Jual
+        </Button>
+      </Box>
     </Box>
   );
 }
