@@ -112,11 +112,13 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                color="secondary"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
+                color="secondary"
                 required
                 fullWidth
                 name="password"
@@ -135,20 +137,25 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ py:1, mt: 3, mb: 2, borderRadius: "12px" }}
+                color="secondary"
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
+                  <Typography variant="body2">
+                    Lupa Password? <Link href="#" variant="body2" color="secondary">
+                    Klik Di sini
                   </Link>
+                  </Typography>
                 </Grid>
                 <Grid item>
-                  <Link href="register" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Typography variant="body2">
+                  Belum punya akun? <Link href="register" variant="body2" color="secondary">
+                    {" Daftar Disini"}
                   </Link>
+                  </Typography>
                 </Grid>
               </Grid>
               <Typography component="h6" variant="h6">

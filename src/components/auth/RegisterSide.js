@@ -117,6 +117,7 @@ export default function RegisterSide() {
                     label="User Name"
                     autoFocus
                     value={nama}
+                    color="secondary"
                     onChange={(e) => setNama(e.target.value)}
                   />
                 </Grid>
@@ -128,6 +129,7 @@ export default function RegisterSide() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    color="secondary"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -135,6 +137,7 @@ export default function RegisterSide() {
                 <Grid item xs={12}>
                   <TextField
                     required
+                    color="secondary"
                     fullWidth
                     name="password"
                     label="Password"
@@ -150,15 +153,19 @@ export default function RegisterSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{p: 1, mt: 3, mb: 2, borderRadius:"12px" }}
+                color="secondary"
               >
                 Sign Up
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="signin" variant="body2">
-                    Already have an account? Sign in
+                  <Typography variant="body2" >
+                  Sudah punya akun ? 
+                  <Link href="signin" variant="body2" color="secondary">
+                   Masuk di sini
                   </Link>
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>
