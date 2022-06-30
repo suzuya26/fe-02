@@ -54,9 +54,12 @@ export default function DaftarPenawar() {
               alignItems: "center",
             }}
           >
+            <Typography variant="h4">
+              Tawaran untuk "Nama.produk"
+            </Typography>
               <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Card sx={{ mminWidth: 472 }}  display="flex" justifyContent="space-between">
-                <Grid container>
+              <Box sx={{ mminWidth: 472,  boxShadow: 1, borderRadius: "7px" }}>
+                <Grid container display="Flex" justifyContent="Space-between">
                   <Grid item m={3}>
                     <Avatar variant="rounded">
                     <CardMedia
@@ -70,18 +73,26 @@ export default function DaftarPenawar() {
                   </Grid>
                   <Grid item>
                   <CardContent>
-                    <Typography gutterBottom variant="subtitle2" component="div">
-                      Lizard Ranchu
+                  <Typography variant="caption" color="text.secondary">
+                      Penawaran Produk
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      Lamongan
+                    <Typography gutterBottom variant="subtitle1" component="div">
+                        Jam tangan Casio
+                    </Typography>
+                    <Typography gutterBottom variant="subtitle2" component="div">
+                        Rp.250.000
                     </Typography>
                   </CardContent>
                   </Grid>
                 </Grid>
-              </Card>
+                <Grid container>
+                    <Typography gutterBottom variant="caption" component="div">
+                      20 April, 01:12
+                    </Typography>
+                </Grid>
+              </Box>
             </Box>
-            <Typography variant="body1">
+            <Typography variant="body1" mt={5}>
               Daftar Penawar
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
