@@ -43,6 +43,7 @@ export default function DaftarPenawar() {
             backgroundPosition: "center",
           }}
         />
+        
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -53,18 +54,45 @@ export default function DaftarPenawar() {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
+              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Card sx={{ mminWidth: 472 }}  display="flex" justifyContent="space-between">
+                <Grid container>
+                  <Grid item m={3}>
+                    <Avatar variant="rounded">
+                    <CardMedia
+                    component="img"
+                    width="60"
+                    height="60"
+                    image="url(https://source.unsplash.com/random)"
+                    alt="green iguana"
+                  />
+                    </Avatar>
+                  </Grid>
+                  <Grid item>
+                  <CardContent>
+                    <Typography gutterBottom variant="subtitle2" component="div">
+                      Lizard Ranchu
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      Lamongan
+                    </Typography>
+                  </CardContent>
+                  </Grid>
+                </Grid>
+              </Card>
+            </Box>
+            <Typography variant="body1">
               Daftar Penawar
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <Card sx={{ maxWidth: 472 }}>
                 <Grid container display="flex" >
                   <Grid item  m={3}>
-                    <Avatar>
+                    <Avatar variant="rounded">
                     <CardMedia
                     component="img"
-                    width="40"
-                    height="40"
+                    width="60"
+                    height="60"
                     image="url(https://source.unsplash.com/random)"
                     alt="green iguana"
                   />
@@ -88,7 +116,7 @@ export default function DaftarPenawar() {
                     Ditawar Rp.200.000,00
                   </Typography>
                 </Grid>
-                <Grid item>
+                <Grid item ml={2}>
                   <Grid item display="flex" justifyContent="space-between">
                     <Button
                       type="submit"
