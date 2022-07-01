@@ -93,7 +93,7 @@ export default function FullWidthTextField() {
                             <Grid container display="flex" justifyContent="center" xs={12}>
                                 <Box noValidate sx={{ width: 500, mt: 1 }}>
                                     <Grid >
-                                        <Box sx={{ borderBottom: 2, borderColor: 'grey.500', borderRadius: "7px" }}>
+                                        <Box sx={{ borderBottom: 2, borderColor: 'grey.500' }}>
                                             <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">
                                                 <Grid item display="Flex" justifyContent="Space-between">
                                                     <Box my={3} mx={2}>
@@ -177,7 +177,7 @@ export default function FullWidthTextField() {
                                                 fullWidth
                                                 variant="outlined"
                                                 color="secondary"
-                                                sx={{ px: 5, mr: 0.5, my: 2, borderRadius: "12px", }}
+                                                sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px"}}
                                             >
                                                 Tolak
                                             </Button>
@@ -186,7 +186,7 @@ export default function FullWidthTextField() {
                                                 fullWidth
                                                 variant="contained"
                                                 color="secondary"
-                                                sx={{ px: 5, ml: 0.5, my: 2, borderRadius: "12px", }}
+                                                sx={{ px: 5, ml: 0.5, my: 1, borderRadius: "20px" }}
                                             >
                                                 Terima
                                             </Button>
@@ -233,7 +233,7 @@ export default function FullWidthTextField() {
                                                 fullWidth
                                                 variant="outlined"
                                                 color="secondary"
-                                                sx={{ px: 5, mr: 0.5, my: 2, borderRadius: "12px", }}
+                                                sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px"}}
                                             >
                                                 Tolak
                                             </Button>
@@ -242,7 +242,7 @@ export default function FullWidthTextField() {
                                                 fullWidth
                                                 variant="contained"
                                                 color="secondary"
-                                                sx={{ px: 5, ml: 0.5, my: 2, borderRadius: "12px", }}
+                                                sx={{ px: 5, ml: 0.5, my: 1, borderRadius: "20px" }}
                                             >
                                                 Terima
                                             </Button>
