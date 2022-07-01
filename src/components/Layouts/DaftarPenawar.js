@@ -59,7 +59,7 @@ export default function DaftarPenawar() {
             </Typography>
               <Box component="form" noValidate sx={{ mt: 1 }}>
               <Box sx={{ mminWidth: 472,  boxShadow: 1, borderRadius: "7px" }}>
-                <Grid container display="Flex" justifyContent="Space-between">
+                <Grid container fullWidth display="Flex" justifyContent="Space-between">
                   <Grid item m={3}>
                     <Avatar variant="rounded">
                     <CardMedia
