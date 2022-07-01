@@ -91,7 +91,7 @@ export default function FullWidthTextField() {
                             }}
                         >
                             <Grid container display="flex" justifyContent="center" xs={12}>
-                                <Box noValidate sx={{ width: 500, mt: 1 }}>
+                                <Box noValidate sx={{ width: 450, mt: 1 }}>
                                     <Grid >
                                         <Box sx={{ borderBottom: 2, borderColor: 'grey.500' }}>
                                             <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">
@@ -138,7 +138,7 @@ export default function FullWidthTextField() {
                                     </Typography>
                                 </Grid>
                             </Grid>
-                            <Box noValidate sx={{ width: 500, my: 1 }}>
+                            <Box noValidate sx={{ width: 450, my: 1 }}>
                                 <Card sx={{ borderRadius: "15px" }}>
                                     <Grid container display="flex" >
                                         <Grid item m={3}>
@@ -194,7 +194,7 @@ export default function FullWidthTextField() {
                                     </Grid>
                                 </Grid>
                             </Box>
-                            <Box noValidate sx={{ width: 500, my: 1 }}>
+                            <Box noValidate sx={{ width: 450, my: 1 }}>
                                 <Card sx={{ borderRadius: "15px" }}>
                                     <Grid container display="flex" >
                                         <Grid item m={3}>
