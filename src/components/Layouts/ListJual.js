@@ -30,7 +30,7 @@ const [selectedIndex, setSelectedIndex] = React.useState(1);
 
 return (
 <Box mt={8} mb={8} ml={4} mr={4}>
-<Typography style={{ textAlign: "left" }} variant="h5" mb={3}>
+<Typography style={{ textAlign: "left", fontWeight: 'bold'  }} variant="h5" mb={3}>
 Daftar Jual Saya
 </Typography>
 

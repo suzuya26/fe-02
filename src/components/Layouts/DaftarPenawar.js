@@ -27,23 +27,6 @@ export default function DaftarPenawar() {
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -57,67 +40,73 @@ export default function DaftarPenawar() {
             <Typography variant="h4">
               Tawaran untuk "Nama.produk"
             </Typography>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Box sx={{ mminWidth: 472,  boxShadow: 1, borderRadius: "7px" }}>
-                <Grid container fullWidth display="Flex" justifyContent="Space-between">
-                  <Grid item m={3}>
-                    <Avatar variant="rounded">
-                    <CardMedia
-                    component="img"
-                    width="60"
-                    height="60"
-                    image="url(https://source.unsplash.com/random)"
-                    alt="green iguana"
-                  />
-                    </Avatar>
-                  </Grid>
-                  <Grid item>
-                  <CardContent>
-                  <Typography variant="caption" color="text.secondary">
-                      Penawaran Produk
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle1" component="div">
-                        Jam tangan Casio
-                    </Typography>
-                    <Typography gutterBottom variant="subtitle2" component="div">
-                        Rp.250.000
-                    </Typography>
-                  </CardContent>
-                  </Grid>
-                </Grid>
-                <Grid container>
-                    <Typography gutterBottom variant="caption" component="div">
-                      20 April, 01:12
-                    </Typography>
+            <Grid container display="flex" justifyContent="center" xs={12}>
+              <Box noValidate sx={{ mt: 1 }}>
+                <Grid sx={{ maxWidth: 472 }}>
+                  <Box sx={{ borderBottom: 2, borderColor: 'grey.500', borderRadius: "7px" }}>
+                    <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">
+                      <Grid item display="Flex" justifyContent="Space-between">
+                        <Box my={3} mx={2}>
+                          <Avatar variant="rounded">
+                            <CardMedia
+                              component="img"
+                              width="60"
+                              height="60"
+                              image="url(https://source.unsplash.com/random)"
+                              alt="green iguana"
+                            />
+                          </Avatar>
+                        </Box>
+                        <Box my={2}>
+                          <Typography variant="caption" color="text.secondary">
+                            Penawaran Produk
+                          </Typography>
+                          <Typography gutterBottom variant="subtitle1" component="div">
+                            Jam tangan Casio
+                          </Typography>
+                          <Typography gutterBottom variant="subtitle2" component="div">
+                            Rp.250.000
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item>
+                        <CardContent>
+                          <Typography gutterBottom variant="caption" component="div">
+                            20 April, 01:12
+                          </Typography>
+                        </CardContent>
+                      </Grid>
+                    </Grid>
+                  </Box>
                 </Grid>
               </Box>
-            </Box>
+            </Grid>
             <Typography variant="body1" mt={5}>
               Daftar Penawar
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <Card sx={{ maxWidth: 472 }}>
                 <Grid container display="flex" >
-                  <Grid item  m={3}>
+                  <Grid item m={3}>
                     <Avatar variant="rounded">
-                    <CardMedia
-                    component="img"
-                    width="60"
-                    height="60"
-                    image="url(https://source.unsplash.com/random)"
-                    alt="green iguana"
-                  />
+                      <CardMedia
+                        component="img"
+                        width="60"
+                        height="60"
+                        image="url(https://source.unsplash.com/random)"
+                        alt="green iguana"
+                      />
                     </Avatar>
                   </Grid>
                   <Grid item>
-                  <CardContent>
-                    <Typography gutterBottom variant="subtitle2" component="div">
-                      Lizard Ranchu
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      Lamongan
-                    </Typography>
-                  </CardContent>
+                    <CardContent>
+                      <Typography gutterBottom variant="subtitle2" component="div">
+                        Lizard Ranchu
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        Lamongan
+                      </Typography>
+                    </CardContent>
                   </Grid>
                 </Grid>
               </Card>
@@ -134,7 +123,7 @@ export default function DaftarPenawar() {
                       fullWidth
                       variant="outlined"
                       color="secondary"
-                      sx={{px:5, mr: 0.5, my: 2, borderRadius: "12px", }}
+                      sx={{ px: 5, mr: 0.5, my: 2, borderRadius: "12px", }}
                     >
                       Tolak
                     </Button>
@@ -143,7 +132,7 @@ export default function DaftarPenawar() {
                       fullWidth
                       variant="contained"
                       color="secondary"
-                      sx={{px:5 , ml: 0.5, my: 2, borderRadius: "12px", }}
+                      sx={{ px: 5, ml: 0.5, my: 2, borderRadius: "12px", }}
                     >
                       Terima
                     </Button>

@@ -91,7 +91,7 @@ export default function FullWidthTextField() {
                             <Box component="form" noValidate sx={{ mt: 3 }}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
-                                        <Box component="form" noValidate sx={{ mt: 1 }}>
+                                        <Box noValidate sx={{ mt: 1 }}>
                                             <Grid sx={{ maxWidth: 472 }}>
                                                 <Box sx={{ borderBottom: 2, borderColor: 'grey.500', borderRadius: "7px" }}>
                                                     <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">

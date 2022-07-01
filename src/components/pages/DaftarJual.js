@@ -1,4 +1,5 @@
 import MahaNavbar from '../Layouts/MahaNavbar';
+import List from "../Layouts/ListJual";
 
 function DaftarJual() {
     return (
@@ -7,6 +8,7 @@ function DaftarJual() {
             <MahaNavbar/>
         </header>
         <main>
+            <List/>
         </main>
       </div>
     );
