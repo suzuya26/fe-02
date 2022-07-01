@@ -77,72 +77,117 @@ export default function FullWidthTextField() {
                             <Button sx={{ color: 'text.primary' }}>
                                 <ArrowBackIcon />
                             </Button>
+                            <Typography variant="h4" textAlign="center">
+                                Tawaran untuk "Nama.produk"
+                            </Typography>
                         </Box>
                         <Box
                             sx={{
-                                my: 6,
-                                mx: 2,
+                                my: 8,
+                                mx: 4,
                                 display: "flex",
-                                justifyContent: "center",
                                 flexDirection: "column",
                                 alignItems: "center",
                             }}
                         >
-                            <Box component="form" noValidate sx={{ mt: 3 }}>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12}>
-                                        <Box noValidate sx={{ mt: 1 }}>
-                                            <Grid sx={{ maxWidth: 472 }}>
-                                                <Box sx={{ borderBottom: 2, borderColor: 'grey.500', borderRadius: "7px" }}>
-                                                    <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">
-                                                        <Grid item display="Flex" justifyContent="Space-between">
-                                                            <Box my={3} mx={2}>
-                                                                <Avatar variant="rounded">
-                                                                    <CardMedia
-                                                                        component="img"
-                                                                        width="60"
-                                                                        height="60"
-                                                                        image="url(https://source.unsplash.com/random)"
-                                                                        alt="green iguana"
-                                                                    />
-                                                                </Avatar>
-                                                            </Box>
-                                                            <Box my={2}>
-                                                                <Typography variant="caption" color="text.secondary">
-                                                                    Penawaran Produk
-                                                                </Typography>
-                                                                <Typography gutterBottom variant="subtitle1" component="div">
-                                                                    Jam tangan Casio
-                                                                </Typography>
-                                                                <Typography gutterBottom variant="subtitle2" component="div">
-                                                                    Rp.250.000
-                                                                </Typography>
-                                                            </Box>
-                                                        </Grid>
-                                                        <Grid item>
-                                                            <CardContent>
-                                                                <Typography gutterBottom variant="caption" component="div">
-                                                                    20 April, 01:12
-                                                                </Typography>
-                                                            </CardContent>
-                                                        </Grid>
-                                                    </Grid>
-                                                </Box>
+                            <Grid container display="flex" justifyContent="center" xs={12}>
+                                <Box noValidate sx={{ mt: 1 }}>
+                                    <Grid sx={{ maxWidth: 472 }}>
+                                        <Box sx={{ borderBottom: 2, borderColor: 'grey.500', borderRadius: "7px" }}>
+                                            <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">
+                                                <Grid item display="Flex" justifyContent="Space-between">
+                                                    <Box my={3} mx={2}>
+                                                        <Avatar variant="rounded">
+                                                            <CardMedia
+                                                                component="img"
+                                                                width="60"
+                                                                height="60"
+                                                                image="url(https://source.unsplash.com/random)"
+                                                                alt="green iguana"
+                                                            />
+                                                        </Avatar>
+                                                    </Box>
+                                                    <Box my={2}>
+                                                        <Typography variant="caption" color="text.secondary">
+                                                            Penawaran Produk
+                                                        </Typography>
+                                                        <Typography gutterBottom variant="subtitle1" component="div">
+                                                            Jam tangan Casio
+                                                        </Typography>
+                                                        <Typography gutterBottom variant="subtitle2" component="div">
+                                                            Rp.250.000
+                                                        </Typography>
+                                                    </Box>
+                                                </Grid>
+                                                <Grid item>
+                                                    <CardContent>
+                                                        <Typography gutterBottom variant="caption" component="div">
+                                                            20 April, 01:12
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Grid>
                                             </Grid>
                                         </Box>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                </Box>
+                            </Grid>
+                            <Typography variant="body1" mt={5}>
+                                Daftar Penawar
+                            </Typography>
+                            <Box noValidate sx={{ mt: 1 }}>
+                                <Card sx={{ maxWidth: 472 }}>
+                                    <Grid container display="flex" >
+                                        <Grid item m={3}>
+                                            <Avatar variant="rounded">
+                                                <CardMedia
+                                                    component="img"
+                                                    width="60"
+                                                    height="60"
+                                                    image="url(https://source.unsplash.com/random)"
+                                                    alt="green iguana"
+                                                />
+                                            </Avatar>
+                                        </Grid>
+                                        <Grid item>
+                                            <CardContent>
+                                                <Typography gutterBottom variant="subtitle2" component="div">
+                                                    Lizard Ranchu
+                                                </Typography>
+                                                <Typography variant="caption" color="text.secondary">
+                                                    Lamongan
+                                                </Typography>
+                                            </CardContent>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                </Card>
+                                <Grid container>
+                                    <Grid item xs>
+                                        <Typography variant="body2" mt={3}>
+                                            Ditawar Rp.200.000,00
+                                        </Typography>
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid item ml={2}>
+                                        <Grid item display="flex" justifyContent="space-between">
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                variant="outlined"
+                                                color="secondary"
+                                                sx={{ px: 5, mr: 0.5, my: 2, borderRadius: "12px", }}
+                                            >
+                                                Tolak
+                                            </Button>
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                variant="contained"
+                                                color="secondary"
+                                                sx={{ px: 5, ml: 0.5, my: 2, borderRadius: "12px", }}
+                                            >
+                                                Terima
+                                            </Button>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                                <Grid item xs={12} my={2}>
-                                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    </Box>
-                                </Grid>
-                                <Grid item display="flex" justifyContent="space-between">
                                 </Grid>
                             </Box>
                         </Box>
