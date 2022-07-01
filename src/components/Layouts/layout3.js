@@ -91,8 +91,8 @@ export default function FullWidthTextField() {
                             }}
                         >
                             <Grid container display="flex" justifyContent="center" xs={12}>
-                                <Box noValidate sx={{ mt: 1 }}>
-                                    <Grid sx={{ maxWidth: 472 }}>
+                                <Box noValidate sx={{ width: 500, mt: 1 }}>
+                                    <Grid >
                                         <Box sx={{ borderBottom: 2, borderColor: 'grey.500', borderRadius: "7px" }}>
                                             <Grid container sx={{ Width: "800px" }} display="Flex" justifyContent="Space-between">
                                                 <Grid item display="Flex" justifyContent="Space-between">
@@ -131,11 +131,15 @@ export default function FullWidthTextField() {
                                     </Grid>
                                 </Box>
                             </Grid>
-                            <Typography variant="body1" mt={5}>
-                                Daftar Penawar
-                            </Typography>
-                            <Box noValidate sx={{ mt: 1 }}>
-                                <Card sx={{ maxWidth: 472 }}>
+                            <Grid Container display="flex" justifyContent="flex-start">
+                                <Grid item>
+                                    <Typography variant="body2" fontWeight='bold' mt={2} textAlign= 'left'>
+                                            Daftar Penawar
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                            <Box noValidate sx={{ width: 500, my: 1 }}>
+                                <Card sx={{ borderRadius: "15px" }}>
                                     <Grid container display="flex" >
                                         <Grid item m={3}>
                                             <Avatar variant="rounded">
@@ -164,6 +168,62 @@ export default function FullWidthTextField() {
                                     <Grid item xs>
                                         <Typography variant="body2" mt={3}>
                                             Ditawar Rp.200.000,00
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item ml={2}>
+                                        <Grid item display="flex" justifyContent="space-between">
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                variant="outlined"
+                                                color="secondary"
+                                                sx={{ px: 5, mr: 0.5, my: 2, borderRadius: "12px", }}
+                                            >
+                                                Tolak
+                                            </Button>
+                                            <Button
+                                                type="submit"
+                                                fullWidth
+                                                variant="contained"
+                                                color="secondary"
+                                                sx={{ px: 5, ml: 0.5, my: 2, borderRadius: "12px", }}
+                                            >
+                                                Terima
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Box>
+                            <Box noValidate sx={{ width: 500, my: 1 }}>
+                                <Card sx={{ borderRadius: "15px" }}>
+                                    <Grid container display="flex" >
+                                        <Grid item m={3}>
+                                            <Avatar variant="rounded">
+                                                <CardMedia
+                                                    component="img"
+                                                    width="60"
+                                                    height="60"
+                                                    image="url(https://source.unsplash.com/random)"
+                                                    alt="green iguana"
+                                                />
+                                            </Avatar>
+                                        </Grid>
+                                        <Grid item>
+                                            <CardContent>
+                                                <Typography gutterBottom variant="subtitle2" component="div">
+                                                    Suzuya Signora
+                                                </Typography>
+                                                <Typography variant="caption" color="text.secondary">
+                                                    Bukittinggi
+                                                </Typography>
+                                            </CardContent>
+                                        </Grid>
+                                    </Grid>
+                                </Card>
+                                <Grid container>
+                                    <Grid item xs>
+                                        <Typography variant="body2" mt={3}>
+                                            Ditawar Rp.5.000,00
                                         </Typography>
                                     </Grid>
                                     <Grid item ml={2}>
