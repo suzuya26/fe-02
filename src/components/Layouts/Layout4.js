@@ -24,8 +24,24 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import ListCard from "./CardProduct";
+import AddIcon from '@mui/icons-material/Add';
+import { CardActionArea } from "@mui/material";
 
 const theme = createTheme();
+
+const Input = styled("input")({
+    display: "none"
+});
+
+const commonStyles = {
+    bgcolor: 'background.paper',
+    borderColor: 'text.primary',
+    m: 1,
+    border: 1,
+    width: '5rem',
+    height: '5rem',
+};
+
 
 const DaftarJual = () => {
 
@@ -40,7 +56,7 @@ const DaftarJual = () => {
             <Container maxWidth="lg">
                 <Typography variant="h4" fontWeight="Bold" my={3}>Daftar Jual</Typography>
                 <Grid Container spacing={2} my={2}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '16px',boxShadow: 2 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '16px', boxShadow: 2 }}>
                         <Box sx={{ display: "flex" }}>
                             <Box my={3} mx={2}>
                                 <Avatar variant="rounded">
@@ -69,7 +85,7 @@ const DaftarJual = () => {
                 </Grid>
                 <Grid container rowSpacing={2} columnSpacing={5} columns={{ xs: 4, sm: 12, md: 12 }} sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Grid item xs={4}>
-                        <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3}}>
+                        <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3 }}>
                             <CardContent>
                                 <List>
                                     <Typography fontWeight="bold" mx={3}>Kategory</Typography>
@@ -106,9 +122,31 @@ const DaftarJual = () => {
                     <Grid item xs={8}>
                         <Box sx={{ flexGrow: 1 }}>
                             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                                <Grid item xs={2} sm={4} md={4}>
+                                    <Card sx={{ maxWidth: 345, height: 260, borderRadius: "10px", border: "3px dashed lightgrey" }}>
+                                        <CardActionArea>
+                                            
+                                            <label htmlFor="icon-button-file">
+                                                <Input accept="image/*" id="icon-button-file" type="file" />
+                                                <IconButton
+                                                    color="primary"
+                                                    aria-label="upload picture"
+                                                    sx={{ mx: 12, my: 10 }}
+                                                >
+                                                    <AddIcon fontSize="large" sx={{
+                                                        color: 'text.disabled', "&:hover": {
+                                                            color: "background.paper"
+                                                        }
+                                                    }} />
+                                                </IconButton>
+                                            </label>
+                                        </CardActionArea>
+                                    </Card>
+
+                                </Grid>
                                 {Array.from(Array(6)).map((_, index) => (
                                     <Grid item xs={2} sm={4} md={4} key={index}>
-                                       <ListCard sx={{boxShadow: 3}}/>
+                                        <ListCard sx={{ boxShadow: 3 }} />
                                     </Grid>
                                 ))}
                             </Grid>
