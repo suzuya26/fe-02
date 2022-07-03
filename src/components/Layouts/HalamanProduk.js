@@ -10,6 +10,9 @@ import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import CardMedia from '@mui/material/CardMedia';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { CardActionArea } from '@mui/material';
 
 const theme = createTheme();
 
@@ -47,16 +50,20 @@ export default function HalamanProduk() {
                         </Box>
                     </Grid>
                     <Grid item xs={4}>
-                        <Item>
-                            <Typography variant="h6">Jam Tangan Casio</Typography>
-                            <Typography variant="example">Aksesoris</Typography>
-                            <Typography variant="body1" fontWeight="bold">Rp.250.000</Typography>
-                            <Button fullWidth variant="contained" color="secondary">Terbitkan</Button>
-                            <Button fullWidth variant="outlined" color="secondary">Edit</Button>
-                        </Item>
-                        <Item mt={5}>
-                            <Box sx={{ display: "flex" }}>
-                                <Box my={3} mx={2}>
+                        <Card>
+                            <CardActionArea>
+                                <CardContent>
+                                    <Typography variant="h6">Jam Tangan Casio</Typography>
+                                    <Typography variant="example">Aksesoris</Typography>
+                                    <Typography variant="body1" fontWeight="bold">Rp.250.000</Typography>
+                                    <Button fullWidth variant="contained" color="secondary" sx={{ borderRadius: "14px" }}>Terbitkan</Button>
+                                    <Button fullWidth variant="outlined" color="secondary" sx={{ borderRadius: "14px" }}>Edit</Button>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                        <Card mt={10}>
+                            <Grid container display="flex" >
+                                <Grid item m={3}>
                                     <Avatar variant="rounded">
                                         <CardMedia
                                             component="img"
@@ -66,17 +73,19 @@ export default function HalamanProduk() {
                                             alt="green iguana"
                                         />
                                     </Avatar>
-                                </Box>
-                                <Box my={2}>
-                                    <Typography variant="body1" fontWeight="bold" component="div">
-                                        Lizard Ranchu
-                                    </Typography>
-                                    <Typography variant="caption">
-                                        Lamongan
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </Item>
+                                </Grid>
+                                <Grid item>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="subtitle2" component="div">
+                                            Lizard Ranchu
+                                        </Typography>
+                                        <Typography variant="caption" color="text.secondary">
+                                            Lamongan
+                                        </Typography>
+                                    </CardContent>
+                                </Grid>
+                            </Grid>
+                        </Card>
                     </Grid>
                 </Grid>
             </Container>
