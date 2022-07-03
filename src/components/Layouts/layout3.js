@@ -23,6 +23,7 @@ import { styled } from "@mui/material/styles";
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
+import Modal from "./Modal"
 
 const Input = styled("input")({
     display: "none"
@@ -181,15 +182,7 @@ export default function FullWidthTextField() {
                                             >
                                                 Tolak
                                             </Button>
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                color="secondary"
-                                                sx={{ px: 5, ml: 0.5, my: 1, borderRadius: "20px" }}
-                                            >
-                                                Terima
-                                            </Button>
+                                            <Modal />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -237,15 +230,7 @@ export default function FullWidthTextField() {
                                             >
                                                 Tolak
                                             </Button>
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                color="secondary"
-                                                sx={{ px: 5, ml: 0.5, my: 1, borderRadius: "20px" }}
-                                            >
-                                                Terima
-                                            </Button>
+                                            <Modal />
                                         </Grid>
                                     </Grid>
                                 </Grid>
