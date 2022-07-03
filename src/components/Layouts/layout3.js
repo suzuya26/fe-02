@@ -147,7 +147,7 @@ export default function FullWidthTextField() {
                                                     component="img"
                                                     width="60"
                                                     height="60"
-                                                    src="https://source.unsplash.com/random"
+                                                    src="https://source.unsplash.com/random"Typography
                                                     alt="green iguana"
                                                 />
                                             </Avatar>
