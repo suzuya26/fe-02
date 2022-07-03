@@ -1,5 +1,5 @@
 import MahaNavbar from '../Layouts/MahaNavbar';
-import Prof from "../Layouts/Layout2";
+import Halaman from "../Layouts/HalamanProduk";
 
 function HalamanProduk() {
     return (
@@ -8,7 +8,7 @@ function HalamanProduk() {
             <MahaNavbar/>
         </header>
         <main>
-            <Prof/>
+            <Halaman/>
         </main>
       </div>
     );
