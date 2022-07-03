@@ -27,7 +27,7 @@ export default function HalamanProduk() {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="lg">
-                <Grid container rowSpacing={2} columnSpacing={5} columns={{ xs: 4, sm: 12, md: 12 }} sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Grid container mt={3} rowSpacing={2} columnSpacing={5} columns={{ xs: 4, sm: 12, md: 12 }} sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Grid item xs={8}>
                         <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3 }}>
                             <Item>img</Item>
