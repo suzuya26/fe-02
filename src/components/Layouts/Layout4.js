@@ -21,6 +21,9 @@ import Button from '@mui/material/Button';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import ListCard from "./CardProduct";
 
 const theme = createTheme();
 
@@ -35,9 +38,9 @@ const DaftarJual = () => {
     return (
         <ThemeProvider theme={theme}>
             <Container maxWidth="lg">
-                <Typography variant="h4" fontWeight="Bold" my={2}>Daftar Jual</Typography>
-                <Grid Container spacing={2}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', border: 2, borderRadius: '16px', borderColor: "grey.500"}}>
+                <Typography variant="h4" fontWeight="Bold" my={3}>Daftar Jual</Typography>
+                <Grid Container spacing={2} my={2}>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '16px',boxShadow: 2 }}>
                         <Box sx={{ display: "flex" }}>
                             <Box my={3} mx={2}>
                                 <Avatar variant="rounded">
@@ -64,9 +67,9 @@ const DaftarJual = () => {
                         </Box>
                     </Box>
                 </Grid>
-                <Grid Container mt={2}>
-                    <Grid item xs={4} sm={12} sx={{border: 2, borderRadius: '16px', borderColor: "grey.500" }}>
-                        <Box >
+                <Grid container rowSpacing={2} columnSpacing={5} columns={{ xs: 4, sm: 12, md: 12 }} sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Grid item xs={4}>
+                        <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3}}>
                             <CardContent>
                                 <List>
                                     <Typography fontWeight="bold" mx={3}>Kategory</Typography>
@@ -75,7 +78,7 @@ const DaftarJual = () => {
                                         onClick={(event) => handleListItemClick(event, 0)}
                                     >
                                         <IconButton aria-label="category">
-                                            < CheckBoxOutlineBlankIcon/>
+                                            < CheckBoxOutlineBlankIcon />
                                         </IconButton>
                                         <ListItemText primary="Semua Produk" />
                                         <IconButton edge="end" aria-label="arrow"> <ArrowForwardIosIcon /> </IconButton>
@@ -100,8 +103,16 @@ const DaftarJual = () => {
                             </CardContent>
                         </Box>
                     </Grid>
-                    <Grid item xs={8} sm={12} sx={{ maxWidth: 800, border: 2, borderRadius: '16px', color: "grey.500" }}>
-                        <Box ></Box>
+                    <Grid item xs={8}>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                                {Array.from(Array(6)).map((_, index) => (
+                                    <Grid item xs={2} sm={4} md={4} key={index}>
+                                       <ListCard sx={{boxShadow: 3}}/>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Box>
                     </Grid>
                 </Grid>
             </Container>

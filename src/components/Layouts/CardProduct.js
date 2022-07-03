@@ -12,7 +12,7 @@ export default function ActionAreaCard() {
         <CardMedia
           component="img"
           height="140"
-          image="https://en.wikipedia.org/wiki/IMG_%28company%29"
+          src="https://source.unsplash.com/random"
           alt="Produk"
 
         />
