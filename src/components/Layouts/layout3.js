@@ -102,7 +102,7 @@ export default function FullWidthTextField() {
                                                                 component="img"
                                                                 width="60"
                                                                 height="60"
-                                                                image="url(https://source.unsplash.com/random)"
+                                                                src="https://source.unsplash.com/random"
                                                                 alt="green iguana"
                                                             />
                                                         </Avatar>
@@ -147,7 +147,7 @@ export default function FullWidthTextField() {
                                                     component="img"
                                                     width="60"
                                                     height="60"
-                                                    image="url(https://source.unsplash.com/random)"
+                                                    src="https://source.unsplash.com/random"
                                                     alt="green iguana"
                                                 />
                                             </Avatar>
@@ -203,7 +203,7 @@ export default function FullWidthTextField() {
                                                     component="img"
                                                     width="60"
                                                     height="60"
-                                                    image="url(https://source.unsplash.com/random)"
+                                                    src="https://source.unsplash.com/random"
                                                     alt="green iguana"
                                                 />
                                             </Avatar>
