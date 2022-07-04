@@ -9,6 +9,11 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme();
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -49,34 +54,40 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-    <Box sx={{ Width: 968, height: 288, left: 236, top: 116, radius: 20, flexGrow: 1, borderRadius: "16px" , ml: 12, my:4}}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {images.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="img"
-                sx={{
-                  height: 288,
-                  display: 'block',
-                  maxWidth: 968,
-                  overflow: 'hidden',
-                  width: 968,
-                  borderRadius: "16px",
-                }}
-                src={step.imgPath}
-                alt={step.label}
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container>
+        <Box my={2} sx={{borderRadius: "16px" }}>
+          <AutoPlaySwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={activeStep}
+            onChangeIndex={handleStepChange}
+            enableMouseEvents
+          >
+            {images.map((step, index) => (
+              <div key={step.label}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <Box
+                    component="img"
+                    sx={{
+                      height: 288,
+                      maxWidth: "100%",
+                      overflow: 'hidden',
+                      width: 968,
+                      borderRadius: "16px",
+                    }}
+                    src={step.imgPath}
+                    alt={step.label}
+                  />
+                ) : null}
+              </div>
+            ))}
+          </AutoPlaySwipeableViews>
+        </Box>
+      </Container>
+    </ThemeProvider>
+
+
   );
 }
 
