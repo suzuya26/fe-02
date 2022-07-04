@@ -129,13 +129,13 @@ const DaftarJual = () => {
                         <Box sx={{ flexGrow: 1 }}>
                             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                                 <Grid item xs={2} sm={4} md={4}>
-                                    <Box component="form" sx={{ p: 3,borderRadius: "14px", border: '3px dashed lightgrey' }}>
+                                    <Box component="form" display="flex" justifyContent="center"sx={{borderRadius: "14px", border: '3px dashed lightgrey' }}>
                                     <label htmlFor="icon-button-file">
                                                 <Input accept="image/*" id="icon-button-file" type="file" />
                                                 <IconButton
                                                     color="primary"
                                                     aria-label="upload picture"
-                                                    sx={{ mx: 9, my: 10 }}
+                                                    sx={{ px:10, py:14 }}
                                                 >
                                                     <AddIcon path="/produk" element ={<Produk />} fontSize="large" sx={{
                                                         color: 'text.disabled', "&:hover": {
