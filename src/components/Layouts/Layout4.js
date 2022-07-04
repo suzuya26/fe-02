@@ -26,6 +26,12 @@ import Paper from "@mui/material/Paper";
 import ListCard from "./CardProduct";
 import AddIcon from '@mui/icons-material/Add';
 import { CardActionArea } from "@mui/material";
+import Produk from './InfoProduk';
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+  } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -123,25 +129,22 @@ const DaftarJual = () => {
                         <Box sx={{ flexGrow: 1 }}>
                             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                                 <Grid item xs={2} sm={4} md={4}>
-                                    <Card sx={{ maxWidth: 345, height: 260, borderRadius: "10px", border: "3px dashed lightgrey" }}>
-                                        <CardActionArea>
-                                            
-                                            <label htmlFor="icon-button-file">
+                                    <Box component="form" sx={{ p: 3,borderRadius: "14px", border: '3px dashed lightgrey' }}>
+                                    <label htmlFor="icon-button-file">
                                                 <Input accept="image/*" id="icon-button-file" type="file" />
                                                 <IconButton
                                                     color="primary"
                                                     aria-label="upload picture"
-                                                    sx={{ mx: 12, my: 10 }}
+                                                    sx={{ mx: 9, my: 10 }}
                                                 >
-                                                    <AddIcon fontSize="large" sx={{
+                                                    <AddIcon path="/produk" element ={<Produk />} fontSize="large" sx={{
                                                         color: 'text.disabled', "&:hover": {
                                                             color: "background.paper"
                                                         }
                                                     }} />
                                                 </IconButton>
                                             </label>
-                                        </CardActionArea>
-                                    </Card>
+                                    </Box>
 
                                 </Grid>
                                 {Array.from(Array(6)).map((_, index) => (
