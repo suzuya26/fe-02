@@ -3,6 +3,7 @@ import Prof from "../Layouts/Layout2";
 import Layzhang from "../Layouts/Layout4";
 import MahaNavbar from '../Layouts/MahaNavbar';
 import Mobu from "../Layouts/ModalBuyer"
+import Telusuri from "../Layouts/TelusuriKategori"
 
 function CobaDoang() {
     return (
@@ -12,6 +13,7 @@ function CobaDoang() {
         </header>
         <main>
           <Layzhang/>
+          <Telusuri/>
         </main>
       </div>
     );
