@@ -99,11 +99,8 @@ export default function RegisterSide() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
+            <Typography component="h1" variant="h5" fontWeight="bold" textAlign="left">
+              Daftar
             </Typography>
             <Box component="form" noValidate onSubmit={Register} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -156,9 +153,11 @@ export default function RegisterSide() {
                 sx={{p: 1, mt: 3, mb: 2, borderRadius:"12px" }}
                 color="secondary"
               >
-                Sign Up
+               Daftar
               </Button>
-              <Grid container justifyContent="flex-end">
+              <Grid container   direction="column"
+  justifyContent="center"
+  alignItems="center">
                 <Grid item>
                   <Typography variant="body2" >
                   Sudah punya akun ? 

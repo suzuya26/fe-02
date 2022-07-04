@@ -135,19 +135,20 @@ const DaftarJual = () => {
                                                 <IconButton
                                                     color="primary"
                                                     aria-label="upload picture"
-                                                    sx={{ px:10, py:14 }}
+                                                    sx={{ py:14.5 }}
                                                 >
-                                                    <AddIcon path="/produk" element ={<Produk />} fontSize="large" sx={{
+                                                    <AddIcon path="/produk" element ={<Produk />}fontSize="large" sx={{
                                                         color: 'text.disabled', "&:hover": {
                                                             color: "background.paper"
                                                         }
                                                     }} />
                                                 </IconButton>
+                                               
                                             </label>
                                     </Box>
 
                                 </Grid>
-                                {Array.from(Array(6)).map((_, index) => (
+                                {Array.from(Array(8)).map((_, index) => (
                                     <Grid item xs={2} sm={4} md={4} key={index}>
                                         <ListCard sx={{ boxShadow: 3 }} />
                                     </Grid>
