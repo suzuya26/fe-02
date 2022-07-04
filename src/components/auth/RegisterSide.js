@@ -63,7 +63,7 @@ export default function RegisterSide() {
       });
       navigate('/signin');
     } catch (error) {
-      if(error.response){
+      if (error.response) {
         console.log(error.response.data)
       }
     }
@@ -77,7 +77,7 @@ export default function RegisterSide() {
           item
           xs={false}
           sm={4}
-          md={7}
+          md={6}
           sx={{
             backgroundImage: "url(https://source.unsplash.com/random)",
             backgroundRepeat: "no-repeat",
@@ -89,7 +89,7 @@ export default function RegisterSide() {
             backgroundPosition: "center",
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,
@@ -102,7 +102,7 @@ export default function RegisterSide() {
             <Typography component="h1" variant="h5" fontWeight="bold" textAlign="left">
               Daftar
             </Typography>
-            <Box component="form" noValidate onSubmit={Register} sx={{ mt: 3 }}>
+            <Box component="form" noValidate onSubmit={Register} sx={{ mt: 3, mx:10 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -150,20 +150,20 @@ export default function RegisterSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{p: 1, mt: 3, mb: 2, borderRadius:"12px" }}
+                sx={{ p: 1, mt: 3, mb: 2, borderRadius: "12px" }}
                 color="secondary"
               >
-               Daftar
+                Daftar
               </Button>
-              <Grid container   direction="column"
-  justifyContent="center"
-  alignItems="center">
+              <Grid container direction="column"
+                justifyContent="center"
+                alignItems="center">
                 <Grid item>
                   <Typography variant="body2" >
-                  Sudah punya akun ? 
-                  <Link href="signin" variant="body2" color="secondary">
-                   Masuk di sini
-                  </Link>
+                    Sudah punya akun ?
+                    <Link href="signin" variant="body2" color="secondary">
+                      Masuk di sini
+                    </Link>
                   </Typography>
                 </Grid>
               </Grid>
