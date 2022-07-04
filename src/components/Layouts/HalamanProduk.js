@@ -14,6 +14,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { CardActionArea } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
 
 const theme = createTheme();
 
@@ -25,6 +28,58 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
+const itemData = [
+    {
+        img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+        title: 'Breakfast',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+        title: 'Burger',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+        title: 'Camera',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+        title: 'Coffee',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+        title: 'Hats',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+        title: 'Honey',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+        title: 'Basketball',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+        title: 'Fern',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+        title: 'Mushrooms',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
+        title: 'Tomato basil',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
+        title: 'Sea star',
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
+        title: 'Bike',
+    },
+];
+
+
 
 export default function HalamanProduk() {
 
@@ -34,10 +89,20 @@ export default function HalamanProduk() {
                 <Grid container mt={3} rowSpacing={2} columnSpacing={5} columns={{ xs: 4, sm: 12, md: 12 }} sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Grid item xs={8}>
                         <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3 }}>
-                            <Item>img</Item>
-                            <Item></Item>
+                            <ImageList sx={{ width: "fit-conttent", height: 450 }}>
+                                {itemData.map((item) => (
+                                    <ImageListItem key={item.img}>
+                                        <img
+                                            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                                            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                            alt={item.title}
+                                            loading="lazy"
+                                        />
+                                    </ImageListItem>
+                                ))}
+                            </ImageList>
                         </Box>
-                        <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3, my:2,px: 5 }}>
+                        <Box sx={{ borderRadius: '16px', borderColor: "grey.500", boxShadow: 3, my: 2, px: 5, pb: 3 }}>
                             <Typography variant="body1" fontWeight="bold" py={2}> Deskripsi</Typography>
                             <Typography variant="body2" gutterBottom textAlign="justify">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In venenatis sollicitudin ullamcorper. Donec vitae dignissim nulla. Suspendisse potenti. Suspendisse ac erat est. Morbi mattis, magna at euismod eleifend, mauris nisl consectetur eros, at eleifend nisl tortor at felis. Donec sem orci, efficitur vitae ligula eu, vulputate ullamcorper libero. Aenean eget laoreet sem. Suspendisse euismod risus tellus, et congue arcu fermentum vel. Nunc interdum pharetra malesuada. Suspendisse potenti. Fusce tincidunt porta ex, ac pellentesque augue ullamcorper ullamcorper. Nam vestibulum nec libero ut condimentum. Nunc elementum erat a consequat volutpat. Maecenas sit amet pharetra arcu, ac blandit est. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
