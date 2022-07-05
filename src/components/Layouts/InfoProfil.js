@@ -61,7 +61,7 @@ const kotas = [
   
       try {
         const response = await axios.post(
-          "http://localhost:8000/api/v1/updatefotouser",
+          "https://secondhand-kelompok2.herokuapp.com/api/v1/updatefotouser",
           form,
           {
             headers: {
@@ -91,7 +91,7 @@ const kotas = [
       try {
         console.log(uploadedFileName)
         // const response = await axios.post(
-        //   "http://localhost:8000/api/v1/reupdatefotouser",
+        //   "https://secondhand-kelompok2.herokuapp.com/api/v1/reupdatefotouser",
         //   form,
         //   {
         //     headers: {
@@ -101,7 +101,7 @@ const kotas = [
         // );
         const response = await axios({
           method: "post",
-          url :"http://localhost:8000/api/v1/reupdatefotouser",
+          url :"https://secondhand-kelompok2.herokuapp.com/api/v1/reupdatefotouser",
           data : form,
           headers: { "Content-Type": "multipart/form-data" },
         })
@@ -120,7 +120,7 @@ const kotas = [
       e.preventDefault();
       try {
         console.log(nama, kota, alamat, nohp, uploadedFileURL);
-        await axios.post("http://localhost:8000/api/v1/updateinfo/1", {
+        await axios.post("https://secondhand-kelompok2.herokuapp.com/api/v1/updateinfo/1", {
           nama: nama,
           kota: kota,
           alamat: alamat,

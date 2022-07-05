@@ -54,7 +54,7 @@ export default function SignInSide() {
   const login = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/v1/login", {
+      await axios.post("https://secondhand-kelompok2.herokuapp.com/api/v1/login", {
         email: email,
         password: password,
       });
