@@ -1,6 +1,5 @@
-import InProd from "../Layouts/InfoProduk";
+import InfoProduk from "../Layouts/InfoProduk";
 import MahaNavbar from "../Layouts/MahaNavbar";
-
 
 function Produk() {
     return (
@@ -9,7 +8,7 @@ function Produk() {
           <MahaNavbar/>
         </header>
         <main>
-            <InProd/>
+            <InfoProduk/>
         </main>
       </div>
     );

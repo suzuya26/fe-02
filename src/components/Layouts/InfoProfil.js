@@ -1,168 +1,177 @@
 import * as React from "react";
-import { useState, Fragment } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { styled } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Grid from "@mui/material/Grid";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import { styled } from "@mui/material/styles";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import FlipCameraIosIcon from "@mui/icons-material/FlipCameraIos";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import FlipCameraIosIcon from "@mui/icons-material/FlipCameraIos";
+import Stack from "@mui/material/Stack";
 
 const kotas = [
-  {
-    value: "LMG",
-    label: "Lamongan",
-  },
-  {
-    value: "MJK",
-    label: "Mojokerto",
-  },
-  {
-    value: "SBY",
-    label: "Surabaya",
-  },
-  {
-    value: "MDR",
-    label: "Madura",
-  },
-];
-
-const Input = styled("input")({
-  display: "none",
-});
-
-export default function FullWidthTextField() {
-  const [kota, setKota] = React.useState("SBY");
-  const [file, setFile] = useState(null);
-  const [uploadedFileURL, setUploadedFileURL] = useState(null);
-  const [uploadedFileName, setUploadedFileName] = useState(null);
-
-  const [nama, setNama] = useState("");
-  // const [kota, setKota] = useState("");
-  const [alamat, setAlamat] = useState("");
-  const [nohp, setNohp] = useState("");
-
-  async function handleUpload(e) {
-    e.preventDefault();
-
-    const form = new FormData();
-
-    form.append("picture", file);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/updatefotouser",
-        form,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // Kalo di upload langsung di-server
-      console.log(response.data.url);
-      console.log(response.data.namafile);
-      setUploadedFileName(response.data.namafile)
-      setUploadedFileURL(response.data.url);
-    } catch (err) {
-      console.log(err);
-      console.log(err?.responses?.data);
-    }
-  }
-  async function handleReUpload(e) {
-    e.preventDefault();
-
-    const form = new FormData();
-
-    form.append("picture", file);
-    form.append("namafilebaru", uploadedFileName);
-
-    try {
-      console.log(uploadedFileName)
-      // const response = await axios.post(
-      //   "http://localhost:8000/api/v1/reupdatefotouser",
-      //   form,
-      //   {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   },
-      // );
-      const response = await axios({
-        method: "post",
-        url :"http://localhost:8000/api/v1/reupdatefotouser",
-        data : form,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-
-      // Kalo di upload langsung di-server
-      console.log(response.data.url);
-      setUploadedFileURL(response.data.url);
-    } catch (err) {
-      console.log(err);
-      console.log(err?.responses?.data);
-    }
-  }
-
-  async function handleSubmit(e) {
-    console.log("submit data");
-    e.preventDefault();
-    try {
-      console.log(nama, kota, alamat, nohp, uploadedFileURL);
-      await axios.post("http://localhost:8000/api/v1/updateinfo/1", {
-        nama: nama,
-        kota: kota,
-        alamat: alamat,
-        nohp: nohp,
-        profilimg: uploadedFileURL,
-      });
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data);
+    {
+      value: "LMG",
+      label: "Lamongan",
+    },
+    {
+      value: "MJK",
+      label: "Mojokerto",
+    },
+    {
+      value: "SBY",
+      label: "Surabaya",
+    },
+    {
+      value: "MDR",
+      label: "Madura",
+    },
+  ];
+  
+  const Input = styled("input")({
+    display: "none",
+  });
+  
+  export default function FullWidthTextField() {
+    const [kota, setKota] = React.useState("SBY");
+    const [file, setFile] = useState(null);
+    const [uploadedFileURL, setUploadedFileURL] = useState(null);
+    const [uploadedFileName, setUploadedFileName] = useState(null);
+  
+    const [nama, setNama] = useState("");
+    // const [kota, setKota] = useState("");
+    const [alamat, setAlamat] = useState("");
+    const [nohp, setNohp] = useState("");
+  
+    async function handleUpload(e) {
+      e.preventDefault();
+  
+      const form = new FormData();
+  
+      form.append("picture", file);
+  
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/v1/updatefotouser",
+          form,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+  
+        // Kalo di upload langsung di-server
+        console.log(response.data.url);
+        console.log(response.data.namafile);
+        setUploadedFileName(response.data.namafile)
+        setUploadedFileURL(response.data.url);
+      } catch (err) {
+        console.log(err);
+        console.log(err?.responses?.data);
       }
     }
-  }
+    async function handleReUpload(e) {
+      e.preventDefault();
+  
+      const form = new FormData();
+  
+      form.append("picture", file);
+      form.append("namafilebaru", uploadedFileName);
+  
+      try {
+        console.log(uploadedFileName)
+        // const response = await axios.post(
+        //   "http://localhost:8000/api/v1/reupdatefotouser",
+        //   form,
+        //   {
+        //     headers: {
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   },
+        // );
+        const response = await axios({
+          method: "post",
+          url :"http://localhost:8000/api/v1/reupdatefotouser",
+          data : form,
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+  
+        // Kalo di upload langsung di-server
+        console.log(response.data.url);
+        setUploadedFileURL(response.data.url);
+      } catch (err) {
+        console.log(err);
+        console.log(err?.responses?.data);
+      }
+    }
+  
+    async function handleSubmit(e) {
+      console.log("submit data");
+      e.preventDefault();
+      try {
+        console.log(nama, kota, alamat, nohp, uploadedFileURL);
+        await axios.post("http://localhost:8000/api/v1/updateinfo/1", {
+          nama: nama,
+          kota: kota,
+          alamat: alamat,
+          nohp: nohp,
+          profilimg: uploadedFileURL,
+        });
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response.data);
+        }
+      }
+    }
+  
+    const handleChange = (event) => {
+      setKota(event.target.value);
+    };
+  
+    const commonStyles = {
+      bgcolor: "background.paper",
+      borderColor: "text.primary",
+      m: 1,
+      border: 1,
+      width: "5rem",
+      height: "5rem",
+    };
 
-  const handleChange = (event) => {
-    setKota(event.target.value);
-  };
-
-  const commonStyles = {
-    bgcolor: "background.paper",
-    borderColor: "text.primary",
-    m: 1,
-    border: 1,
-    width: "5rem",
-    height: "5rem",
-  };
+const theme = createTheme();
 
   return (
-    <Container sx={{ display: "flex", justifyContent: "center" }}>
-      <Stack>
-        <Stack>
-          <Button sx={{ color: "text.primary", m: 4 }}>
-            <ArrowBackIcon />
-          </Button>
-        </Stack>
-      </Stack>
-      <Stack
-        sx={{
-          width: "50%",
-          maxWidth: "100%",
-          mt: 4,
-        }}
-      >
-        <Box>
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: "100vh", flexDirection: { xs: "column-reverse", md: "row"}}}>
+        <CssBaseline />
+        <Grid container sx={{display: "flex", justifyContent: "center"}} xs={12} sm={12} md={12} component={Paper}>
+        <Grid className="G1" item xs={12} md={3} square></Grid>
+        <Grid  className="G2" item xs={12} md={6} square>
+        <Box mt={2}>
+            <Button sx={{ color: 'text.primary' }}>
+              <ArrowBackIcon/>
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              my: 6,
+              mx: 2,
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+                  <Box>
           {!uploadedFileURL ? (
             <Box
               component="form"
@@ -283,64 +292,79 @@ export default function FullWidthTextField() {
           )}
         </Box>
 
-        <Stack component="form" spacing={3} mt={2} onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            label="Nama*"
-            name="nama"
-            value={nama}
-            onChange={(e) => setNama(e.target.value)}
-          />
-          <TextField
-            id=""
-            select
-            label="Kota*"
-            kota="kota"
-            value={kota}
-            onChange={handleChange}
-            sx={{ textAlign: "left" }}
-          >
+            <Box component="form" noValidate sx={{ mt: 3 }}  onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Nama*"
+                    name="nama"
+                    value={nama}
+                    onChange={(e) => setNama(e.target.value)}
+                    autoFocus
+                    color="secondary"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                fullWidth
+                id=""
+                select
+                label="Kota*"
+                kota="kota"
+                value={kota}
+                onChange={handleChange}
+                sx={{ textAlign: "left" }}
+            >
             {kotas.map((option) => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
           </TextField>
-          <TextField
-            fullWidth
-            label="Alamat*"
-            multiline
-            rows={4}
-            value={alamat}
-            onChange={(e) => setAlamat(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            label="No Handphone*"
-            value={nohp}
-            onChange={(e) => setNohp(e.target.value)}
-          />
-          <Box textAlign="center">
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Alamat*"
+                  multiline
+                  rows={4}
+                  value={alamat}
+                  color="secondary"
+                  onChange={(e) => setAlamat(e.target.value)}
+                />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="No Handphone*"
+                    value={nohp}
+                    onChange={(e) => setNohp(e.target.value)}
+                    color="secondary"
+                  />
+                </Grid>
+              </Grid>
+              <Grid item display="flex" justifyContent="space-between">
             <Button
               type="submit"
               variant="contained"
+              color="secondary"
               sx={{
                 width: "100%",
                 p: 1,
+                mt: 3,
                 borderRadius: "12px",
-                color: "background.paper",
-                "&:hover": {
-                  color: "secondary.main",
-                  bgcolor: "text.primary",
-                },
-              }}
-              color="secondary"
+                }}
             >
               Simpan
             </Button>
+              </Grid>
+            </Box>
           </Box>
-        </Stack>
-      </Stack>
-    </Container>
+        </Grid>
+        <Grid  className="G3" item xs={12} md={3} square></Grid>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 }

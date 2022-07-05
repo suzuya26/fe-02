@@ -20,10 +20,10 @@ export default function ActionAreaCard() {
           <Typography gutterBottom variant="h5" component="div">
             Jam Tangan Casio
           </Typography>
-          <Typography variant="caption" display="block" gutterBottom>
+          <Typography variant="caption">
             Aksesoris
           </Typography>
-          <Typography variant="h6" color="text.secondary">
+          <Typography variant="h6" fontWeight="bold">
             Rp.250.000
           </Typography>
         </CardContent>

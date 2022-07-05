@@ -1,5 +1,5 @@
 import MahaNavbar from '../Layouts/MahaNavbar';
-import List from "../Layouts/ListJual";
+import List from "../Layouts/DaftarJual";
 
 function DaftarJual() {
     return (

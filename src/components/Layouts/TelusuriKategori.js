@@ -48,7 +48,7 @@ export default function TelusuriKategori() {
                 </Box>
             </Container>
             <Box textAlign='center'>
-                <Button variant="contained" color="secondary" startIcon={<AddIcon />} p={2} sx={{
+                <Button variant="contained" color="secondary" href="produk" startIcon={<AddIcon />} p={2} sx={{
                     borderRadius: "8px", position: "fixed",
                     bottom: 10,
                     zIndex: "modal"

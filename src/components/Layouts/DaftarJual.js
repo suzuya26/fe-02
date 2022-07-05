@@ -26,7 +26,7 @@ import Paper from "@mui/material/Paper";
 import ListCard from "./CardProduct";
 import AddIcon from '@mui/icons-material/Add';
 import { CardActionArea } from "@mui/material";
-import Produk from './InfoProduk';
+import Produk from './save/InfoProduk';
 import {
     BrowserRouter,
     Routes,
@@ -135,9 +135,10 @@ const DaftarJual = () => {
                                                 <IconButton
                                                     color="primary"
                                                     aria-label="upload picture"
-                                                    sx={{ py:14.5 }}
+                                                    sx={{ p:14.5 }}
+                                                    href="produk"
                                                 >
-                                                    <AddIcon path="/produk" element ={<Produk />}fontSize="large" sx={{
+                                                    <AddIcon  fontSize="large" sx={{
                                                         color: 'text.disabled', "&:hover": {
                                                             color: "background.paper"
                                                         }

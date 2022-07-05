@@ -1,12 +1,10 @@
-import InProf from "../Layouts/InfoProfil";
-import MahaNavbar from "../Layouts/MahaNavbar";
-import Box from "@mui/material/Box";
+import InfoProfil from "../Layouts/InfoProfil";
 
 function Profil() {
     return (
       <div>
         <main>
-            <InProf/>
+            <InfoProfil/>
         </main>
       </div>
     );

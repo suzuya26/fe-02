@@ -1,5 +1,5 @@
 import MahaNavbar from '../Layouts/MahaNavbar';
-import Laopan from '../Layouts/layout3';
+import Penawar from '../Layouts/DaftarPenawar';
 
 function InfoPenawar() {
     return (
@@ -8,7 +8,7 @@ function InfoPenawar() {
             <MahaNavbar/>
         </header>
         <main>
-          <Laopan/>
+          <Penawar/>
         </main>
       </div>
     );
