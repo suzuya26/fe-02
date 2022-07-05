@@ -24,13 +24,6 @@ function Banner(props) {
   const content = (
     <Grid item xs={12 / totalItems} key="content">
       <CardContent className="Content">
-        <Typography className="Title">{props.item.Name}</Typography>
-
-        <Typography className="Caption">{props.item.Caption}</Typography>
-
-        <Button variant="outlined" className="ViewButton">
-          View Now
-        </Button>
       </CardContent>
     </Grid>
   );
@@ -41,7 +34,6 @@ function Banner(props) {
     const media = (
       <Grid item xs={12 / totalItems} key={item.Name}>
         <CardMedia className="Media" image={item.Image} title={item.Name}>
-          <Typography className="MediaCaption">{item.Name}</Typography>
         </CardMedia>
       </Grid>
     );
@@ -68,13 +60,13 @@ function Banner(props) {
 
 const items = [
   {
-    Name: "Pizza begin",
+    Name: "Macbook Pro",
     Image: "https://source.unsplash.com/featured/?macbook",
-    contentPosition: "left",
     Items: [
       {
-        Name: "Macbook Pro",
-        Image: "https://source.unsplash.com/featured/?macbook"
+
+        Name: "Pizza begin",
+    Image: "https://source.unsplash.com/featured/?macbook"
       },
       {
         Name: "iPhone",
@@ -85,7 +77,6 @@ const items = [
   {
     Name: "Home Appliances",
     Caption: "Say no to manual home labour!",
-    contentPosition: "middle",
     Items: [
       {
         Name: "Washing Machine WX9102",
@@ -100,7 +91,6 @@ const items = [
   {
     Name: "Decoratives",
     Caption: "Give style and color to your living room!",
-    contentPosition: "right",
     Items: [
       {
         Name: "Living Room Lamp",
@@ -175,7 +165,7 @@ class BannerExample extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         <Carousel
           className="Example"
           autoPlay={this.state.autoPlay}

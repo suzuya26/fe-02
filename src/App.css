@@ -50,7 +50,7 @@
 }
 .Banner .Content {
   color: white;
-  background-color: red;
+  background-color: darkGrey;
   height: 100%;
   position: relative;
   cursor: pointer;
@@ -59,12 +59,12 @@
 }
 .Banner .Content:hover,
 .Banner .Content:active {
-  background-color: tomato;
+  background-color: blue;
 }
 .Banner .Content:hover .ViewButton,
 .Banner .Content:active .ViewButton {
   background-color: white;
-  color: red;
+  color: rgb(60, 255, 0);
 }
 .Banner .Content .Title {
   font-size: 42px;
