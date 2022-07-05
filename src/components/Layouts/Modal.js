@@ -114,7 +114,7 @@ export default function MaxWidthDialog() {
                             </Grid>
 
                         </Box>
-                        <Button variant="contained" color="secondary" sx={{borderRadius: "15px", p: 1}} href="https://wa.me/087815584637">Hubungi Via Whatsapp  <WhatsAppIcon/></Button>
+                        <Button variant="contained" color="secondary" sx={{borderRadius: "15px", p: 1}} href="https://wa.me/087815584637" startIcon={<WhatsAppIcon/>}>Hubungi Via Whatsapp </Button>
                     </Box>
                 </DialogContent>
                 <DialogActions>
