@@ -1,5 +1,4 @@
 import InfoProfil from "../Layouts/InfoProfil";
-
 function Profil() {
     return (
       <div>

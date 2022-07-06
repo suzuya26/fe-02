@@ -15,6 +15,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import Cookies from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -80,6 +82,17 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = (e) => {
+    e.preventDefault()
+    Cookies.remove('jwt')
+    window.location.reload();
+   }
+ 
+   const token = Cookies.get('jwt')
+   console.log(token)
+   const decoded = jwtDecode(token);
+   console.log(decoded)
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -97,8 +110,12 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem onClick={handleMenuClose}>
+        {decoded.nama}
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onclick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -155,18 +172,9 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="">
+    <Box sx={{ flexGrow: 1, boxShadow: 2 }}>
+      <AppBar position="static" color="inherit">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="secondary"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Box
             sx={{
               width: 50,
@@ -191,7 +199,7 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
-                <MailIcon />
+              <MenuIcon />
               </Badge>
             </IconButton>
             <IconButton
