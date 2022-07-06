@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState , useEffect} from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -36,136 +36,138 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+async function doLogin ({ email, password }) {
+  const response = await axios.post("https://secondhand-kelompok2.herokuapp.com/api/v1/login", {
+    email: email,
+    password: password,
+  });
+  const data = await response.data
+  return data.token;
+};
 export default function SignInSide() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [message, setMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const token = localStorage.getItem("token");
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
-  const login = async (e) => {
+  useEffect(() => {
+    setIsLoggedIn(!!token);
+  }, [token]);
+
+  const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    try {
-      await axios.post("https://secondhand-kelompok2.herokuapp.com/api/v1/login", {
-        email: email,
-        password: password,
-      });
-      navigate("/");
-    } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.message);
-      }
-    }
+    doLogin({ email, password })
+    .then((token) => localStorage.setItem("token", token))
+    .catch((err) => console.log(err.message))
+    .finally(() => setIsLoading(false));
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={6}
-          sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-
-            <Typography component="h1" variant="h5" fontWeight="bold">
-              Masuk
-            </Typography>
-            <Box component="form" noValidate onSubmit={login} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                color="secondary"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+    <React.Fragment>
+      {!isLoggedIn?(
+            <ThemeProvider theme={theme}>
+            <Grid container component="main" sx={{ height: "100vh" }}>
+              <CssBaseline />
+              <Grid
+                item
+                xs={false}
+                sm={4}
+                md={6}
+                sx={{
+                  backgroundImage: "url(https://source.unsplash.com/random)",
+                  backgroundRepeat: "no-repeat",
+                  backgroundColor: (t) =>
+                    t.palette.mode === "light"
+                      ? t.palette.grey[50]
+                      : t.palette.grey[900],
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
               />
-              <TextField
-                margin="normal"
-                color="secondary"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ py: 1, mt: 3, mb: 2, borderRadius: "12px" }}
-                color="secondary"
-              >
-                Masuk
-              </Button>
-              <Grid container spacing={2} direction="column"
-                justifyContent="center"
-                alignItems="center">
-                <Grid item xs>
-                  <Typography variant="body2">
-                    Lupa Password? <Link href="#" variant="body2" color="secondary">
-                      Klik Di sini
-                    </Link>
+              <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+                <Box
+                  sx={{
+                    my: 8,
+                    mx: 4,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+      
+                  <Typography component="h1" variant="h5" fontWeight="bold">
+                    Masuk
                   </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body2">
-                    Belum punya akun? <Link href="register" variant="body2" color="secondary">
-                      {" Daftar Disini"}
-                    </Link>
-                  </Typography>
-                </Grid>
+                  <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                      autoFocus
+                      color="secondary"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <TextField
+                      margin="normal"
+                      color="secondary"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox value="remember" color="primary" />}
+                      label="Remember me"
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ py: 1, mt: 3, mb: 2, borderRadius: "12px" }}
+                      color="secondary"
+                    >
+                      {isLoading ? "Loading" : "Masuk"}
+                    </Button>
+                    <Grid container spacing={2} direction="column"
+                      justifyContent="center"
+                      alignItems="center">
+                      <Grid item xs>
+                        <Typography variant="body2">
+                          Lupa Password? <Link href="#" variant="body2" color="secondary">
+                            Klik Di sini
+                          </Link>
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="body2">
+                          Belum punya akun? <Link href="register" variant="body2" color="secondary">
+                            {" Daftar Disini"}
+                          </Link>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Copyright sx={{ mt: 5 }} />
+                  </Box>
+                </Box>
               </Grid>
-              <Typography component="h6" variant="h6">
-                {message}
-              </Typography>
-              <Copyright sx={{ mt: 5 }} />
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
-    </ThemeProvider>
+            </Grid>
+          </ThemeProvider>
+      ):(
+        <Navigate to="/"/>
+      )}
+    </React.Fragment>
   );
 }

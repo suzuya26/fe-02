@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import axios from "axios";
+import jwtDecode from 'jwt-decode';
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -120,8 +121,11 @@ const kotas = [
       console.log("submit data");
       e.preventDefault();
       try {
+        const token = localStorage.getItem("token");
+        const decoded = jwtDecode(token);
+        const iduser = decoded.id
         console.log(nama, kota, alamat, nohp, uploadedFileURL);
-        await axios.post("https://secondhand-kelompok2.herokuapp.com/api/v1/updateinfo/1", {
+        await axios.post(`https://secondhand-kelompok2.herokuapp.com/api/v1/updateinfo/${iduser}`, {
           nama: nama,
           kota: kota,
           alamat: alamat,

@@ -19,6 +19,9 @@ import Cobs from './components/pages/CobaDoang';
 import Halpro from './components/pages/HalamanProduk';
 import Dafju from './components/pages/DaftarJual';
 import Inpar from './components/pages/InfoPenawar';
+import Protected from './components/services/Protected';
+import CheckProfile from './components/services/CheckProfile';
+import CheckLogin from './components/services/CheckLogin';
 
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,10 +34,10 @@ root.render(
             <SignInSide/>
           } />
           <Route path="/register" element ={
-            <RegisterSide/>
+            <CheckLogin><RegisterSide/></CheckLogin>
           } />
            <Route path="/lengkapi-profil" element ={<Profil />} />
-           <Route path="/produk" element ={<Produk />} />
+           <Route path="/produk" element ={<Protected><CheckProfile><Produk /></CheckProfile></Protected>} />
            <Route path="/edit-foto-user" element ={<Edfuus />} />
            <Route path="/edit-profil" element ={<Edpro />} />
            <Route path="/NyobaQaqa" element ={<Cobs />} />

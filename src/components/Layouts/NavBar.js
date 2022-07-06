@@ -89,14 +89,13 @@ export default function NavBar() {
 
   const handleLogout = (e) => {
    e.preventDefault()
-   Cookies.remove('jwt')
+   localStorage.removeItem("token");
    window.location.reload();
   }
 
 
   // //nganu token
-  const token = Cookies.get('jwt')
-  console.log(token)
+  const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
   console.log(decoded)
 
