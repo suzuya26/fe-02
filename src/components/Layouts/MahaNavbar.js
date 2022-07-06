@@ -5,10 +5,10 @@ import NavBar from './NavBar';
 
 function MahaNavbar() {
     
-    const token = Cookies.get('jwt')
+    const token = localStorage.getItem("token");
     console.log(token)
 
-    if(token===undefined){
+    if(!token){
         return (
             <NavBarGuest/>
           )
