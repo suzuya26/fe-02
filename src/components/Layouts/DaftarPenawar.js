@@ -66,6 +66,7 @@ export default function FullWidthTextField() {
     }
 
     const theme = createTheme();
+    let navigate = useNavigate();
 
     return (
         <ThemeProvider theme={theme}>
@@ -75,7 +76,7 @@ export default function FullWidthTextField() {
                     <Grid className="G1" item xs={12} md={3} square></Grid>
                     <Grid className="G2" item xs={12} md={6} square>
                         <Box mt={2}>
-                            <Button sx={{ color: 'text.primary' }}>
+                            <Button sx={{ color: 'text.primary' }} onClick={() => navigate(-1)}>
                                 <ArrowBackIcon />
                             </Button>
                             <Typography variant="h4" textAlign="center">

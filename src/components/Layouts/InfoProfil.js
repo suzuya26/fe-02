@@ -17,6 +17,7 @@ import FlipCameraIosIcon from "@mui/icons-material/FlipCameraIos";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 const kotas = [
     {
@@ -149,6 +150,7 @@ const kotas = [
 
 const theme = createTheme();
 
+let navigate = useNavigate();
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh", flexDirection: { xs: "column-reverse", md: "row"}}}>
@@ -157,8 +159,8 @@ const theme = createTheme();
         <Grid className="G1" item xs={12} md={3} square></Grid>
         <Grid  className="G2" item xs={12} md={6} square>
         <Box mt={2}>
-            <Button sx={{ color: 'text.primary' }}>
-              <ArrowBackIcon/>
+            <Button sx={{ color: 'text.primary' }} onClick={() => navigate(-1)}>
+              <ArrowBackIcon />
             </Button>
           </Box>
           <Box
