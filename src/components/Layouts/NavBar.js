@@ -21,6 +21,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Notif from './Notif'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -155,7 +156,7 @@ export default function NavBar() {
           color="inherit"
         >
           <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+            <Notif />
           </Badge>
         </IconButton>
         <p>Notifications</p>

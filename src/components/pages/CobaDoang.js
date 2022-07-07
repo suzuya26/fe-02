@@ -1,4 +1,5 @@
 import MahaNavbar from '../Layouts/MahaNavbar';
+import Notif from "../Layouts/Notif"
 
 function CobaDoang() {
     return (
@@ -7,6 +8,7 @@ function CobaDoang() {
           <MahaNavbar/>
         </header>
         <main>
+          <Notif/>
         </main>
       </div>
     );
