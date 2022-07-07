@@ -36,14 +36,14 @@ root.render(
           <Route path="/register" element ={
             <CheckLogin><RegisterSide/></CheckLogin>
           } />
-           <Route path="/lengkapi-profil" element ={<Profil />} />
+           <Route path="/lengkapi-profil" element ={<Protected><Profil /></Protected>} />
            <Route path="/produk" element ={<Protected><CheckProfile><Produk /></CheckProfile></Protected>} />
-           <Route path="/edit-foto-user" element ={<Edfuus />} />
-           <Route path="/edit-profil" element ={<Edpro />} />
+           <Route path="/edit-foto-user" element ={<Protected><CheckProfile> <Edfuus /> </CheckProfile></Protected>} />
+           <Route path="/edit-profil" element ={<Protected><CheckProfile><Edpro /> </CheckProfile></Protected>} />
            <Route path="/NyobaQaqa" element ={<Cobs />} />
-           <Route path="/halaman-produk" element ={<Halpro />} />
-           <Route path="/daftar-jual" element ={<Dafju />} />
-           <Route path="/info-penawar" element ={<Inpar />} />
+           <Route path="/halaman-produk" element ={<Protected><Halpro /></Protected>} />
+           <Route path="/daftar-jual" element ={<Protected><Dafju /></Protected>} />
+           <Route path="/info-penawar" element ={<Protected><Inpar /></Protected>} />
         </Routes>
       </BrowserRouter>
   </React.StrictMode>

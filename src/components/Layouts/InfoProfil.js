@@ -116,6 +116,7 @@ const kotas = [
         console.log(err?.responses?.data);
       }
     }
+
   
     async function handleSubmit(e) {
       console.log("submit data");
@@ -124,14 +125,18 @@ const kotas = [
         const token = localStorage.getItem("token");
         const decoded = jwtDecode(token);
         const iduser = decoded.id
-        console.log(nama, kota, alamat, nohp, uploadedFileURL);
+        console.log(nama, kota, alamat, nohp, uploadedFileURL,uploadedFileName);
         await axios.post(`https://secondhand-kelompok2.herokuapp.com/api/v1/updateinfo/${iduser}`, {
           nama: nama,
           kota: kota,
           alamat: alamat,
           nohp: nohp,
           profilimg: uploadedFileURL,
+          namaprofilimg:uploadedFileName,
         });
+        //nanti disini pakai alert untuk logoutnya
+        localStorage.removeItem("token");
+        window.location.reload();
       } catch (error) {
         if (error.response) {
           console.log(error.response.data);
