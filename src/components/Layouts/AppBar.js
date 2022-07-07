@@ -17,6 +17,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
+import Notif from './Notif'
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,17 +85,18 @@ export default function PrimarySearchAppBar() {
 
   const handleLogout = (e) => {
     e.preventDefault()
-    Cookies.remove('jwt')
+    localStorage.removeItem("token");
     window.location.reload();
    }
  
-   const token = Cookies.get('jwt')
-   console.log(token)
+ 
+   // //nganu token
+   const token = localStorage.getItem("token");
    const decoded = jwtDecode(token);
    console.log(decoded)
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
+ 
+   const menuId = 'primary-search-account-menu';
+   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
@@ -208,7 +210,7 @@ export default function PrimarySearchAppBar() {
               color="inherit"
             >
               <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+                <Notif />
               </Badge>
             </IconButton>
             <IconButton
