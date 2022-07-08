@@ -94,11 +94,25 @@ const items = [
     Items: [
       {
         Name: "Living Room Lamp",
-        Image: "https://source.unsplash.com/featured/?lamp"
+        Image: "https://images.unsplash.com/photo-1616679063640-603332e632cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fGFwcGxlJTIwd2F0Y2h8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
       },
       {
         Name: "Floral Vase",
-        Image: "https://source.unsplash.com/featured/?vase"
+        Image: "https://images.unsplash.com/photo-1616680450981-fc471a4b681c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGFwcGxlJTIwd2F0Y2h8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+      }
+    ]
+  },
+  {
+    Name: "Decoratives",
+    Caption: "Give style and color to your living room!",
+    Items: [
+      {
+        Name: "Living Room Lamp",
+        Image: "https://images.unsplash.com/photo-1624096104992-9b4fa3a279dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXBwbGUlMjB3YXRjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+      },
+      {
+        Name: "Floral Vase",
+        Image: "https://images.unsplash.com/photo-1544117519-31a4b719223d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YXBwbGUlMjB3YXRjaHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
       }
     ]
   }
