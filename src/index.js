@@ -37,9 +37,9 @@ root.render(
             <CheckLogin><RegisterSide/></CheckLogin>
           } />
            <Route path="/lengkapi-profil" element ={<Protected><Profil /></Protected>} />
-           <Route path="/produk" element ={<Protected><CheckProfile><Produk /></CheckProfile></Protected>} />
-           <Route path="/edit-foto-user" element ={<Protected><CheckProfile> <Edfuus /> </CheckProfile></Protected>} />
-           <Route path="/edit-profil" element ={<Protected><CheckProfile><Edpro /> </CheckProfile></Protected>} />
+           <Route path="/produk" element ={<Protected><Produk /></Protected>} />
+           <Route path="/edit-foto-user" element ={<Protected><Edfuus /></Protected>} />
+           <Route path="/edit-profil" element ={<Protected><Edpro /></Protected>} />
            <Route path="/NyobaQaqa" element ={<Cobs />} />
            <Route path="/halaman-produk" element ={<Protected><Halpro /></Protected>} />
            <Route path="/daftar-jual" element ={<Protected><Dafju /></Protected>} />
