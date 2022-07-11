@@ -1,4 +1,4 @@
-import * as React from 'react';
+/*import * as React from 'react';
 import '../../App.css';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -20,14 +20,28 @@ const theme = createTheme({
 
 export default function BasicButtons() {
   return (
-    <Box>
-    <Stack spacing={4} direction="row">
-      <Button variant="contained" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Semua</Button>
-      <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Hobi</Button>
-      <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Productivity</Button>
-      <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Electronic</Button>
-      <Button variant="outlined" sx={{borderRadius: "10px"}} startIcon={<SearchIcon />} color="secondary">Transportation</Button>
-    </Stack>
-    </Box>
+    <Box sx={{ flexGrow: 1 }} my={3}>
+    <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 8, sm: 12, md: 40 }}
+    >
+        {listProductResult ? (
+            listProductResult.map((product) => {
+                return (
+                    <Grid item xs={2} sm={4} md={4} >
+                        <Button variant="contained" sx={{ borderRadius: "10px" }} startIcon={<SearchIcon />} color="secondary" active>{product.kategori}</Button>
+                    </Grid>
+                );
+            })
+        ) : listProductLoading ? (
+            <p>Loading . . . </p>
+        ) : (
+            <p>{listProductError ? listProductError : "Data Kosong"}</p>
+        )}
+    </Grid>
+</Box>s
   );
 }
+
+*/

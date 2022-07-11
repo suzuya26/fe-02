@@ -3,7 +3,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Card from "./CardProduct";
+import Card from "../CardProduct";
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
