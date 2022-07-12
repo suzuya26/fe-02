@@ -2,6 +2,7 @@ import React from 'react'
 import Cookies from 'js-cookie';
 import NavBarGuest from './NavBarGuest';
 import NavBar from './NavBar';
+import Nav from "../Layouts/AppBar"
 
 function MahaNavbar() {
     
@@ -13,7 +14,7 @@ function MahaNavbar() {
             <NavBarGuest/>
           )
     } else {
-        return (<NavBar/>)
+        return (<Nav/>)
     }
 
 }

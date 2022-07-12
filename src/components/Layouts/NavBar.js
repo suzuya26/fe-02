@@ -89,6 +89,7 @@ export default function NavBar() {
   };
 
   const handleLogout = (e) => {
+    console.log("kliked")
    e.preventDefault()
    localStorage.removeItem("token");
    window.location.reload();

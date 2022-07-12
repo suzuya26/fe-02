@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,6 +18,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Cookies from 'js-cookie';
 import jwtDecode from 'jwt-decode';
 import Notif from './Notif'
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,7 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   }
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Nav() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -84,6 +85,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const handleLogout = (e) => {
+    console.log("kliked")
     e.preventDefault()
     localStorage.removeItem("token");
     window.location.reload();
@@ -93,7 +95,6 @@ export default function PrimarySearchAppBar() {
    // //nganu token
    const token = localStorage.getItem("token");
    const decoded = jwtDecode(token);
-   console.log(decoded)
  
    const menuId = 'primary-search-account-menu';
    const renderMenu = (
@@ -117,7 +118,7 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onclick={handleLogout}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
