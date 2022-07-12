@@ -16,6 +16,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getListProduct } from "../../actions/productAction";
+import { Link } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -32,9 +33,13 @@ function TelusuriKategori() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Typography variant="h6" fontWeight="bold">Tambah Katogeri</Typography>
-  
-                <Box sx={{ flexGrow: 1 }}>
+                <Typography variant="h6" fontWeight="bold">Telusuri Kategori</Typography>
+                <Grid item xs={2} sm={4} md={4} >
+                    <Button variant="contained" sx={{ borderRadius: "10px" , mx:1 }} startIcon={<SearchIcon />} color="secondary" active> Semua </Button>
+                    <Button variant="contained" sx={{ borderRadius: "10px" , mx:1}} startIcon={<SearchIcon />} color="secondary" active> Semua </Button>
+                    <Button variant="contained" sx={{ borderRadius: "10px" , mx:1}} startIcon={<SearchIcon />} color="secondary" active> Semua </Button>
+                </Grid>
+                <Box sx={{ flexGrow: 1 , my : 2}}>
                     <Grid
                         container
                         spacing={{ xs: 2, md: 3 }}
@@ -44,12 +49,13 @@ function TelusuriKategori() {
                             listProductResult.map((product) => {
                                 return (
                                     <Grid item xs={2} sm={2} md={2}>
+                                        <Link to={'/halaman-produk/'+product.id} style={{ textDecoration: 'none' }}>
                                         <Card sx={{ maxWidth: 345 }}>
                                             <CardActionArea>
                                                 <CardMedia
                                                     component="img"
                                                     height="140"
-                                                    src={product.image}
+                                                    src={product.foto1}
                                                     alt="Produk"
 
                                                 />
@@ -61,11 +67,12 @@ function TelusuriKategori() {
                                                         {product.kategori}
                                                     </Typography>
                                                     <Typography variant="h6" fontWeight="bold">
-                                                        {product.hargaproduk}
+                                                        Rp. {product.hargaproduk}
                                                     </Typography>
                                                 </CardContent>
                                             </CardActionArea>
                                         </Card>
+                                        </Link>
                                     </Grid>
                                 );
                             })

@@ -23,19 +23,19 @@ import { styled } from "@mui/material/styles";
 
 const categories = [
   {
-    value: "E",
+    value: "Elektronik",
     label: "Elektronik"
   },
   {
-    value: "H",
+    value: "Kesehatan",
     label: "Kesehatan"
   },
   {
-    value: "T",
+    value: "Kendaraan",
     label: "Kendaraan"
   },
   {
-    value: "H",
+    value: "Hobi",
     label: "Hobi"
   }
 ];

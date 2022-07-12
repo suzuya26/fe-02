@@ -35,7 +35,7 @@ function App() {
            <Route path="/edit-foto-user" element ={<Protected><Edfuus /></Protected>} />
            <Route path="/edit-profil" element ={<Protected><Edpro /></Protected>} />
            <Route path="/NyobaQaqa" element ={<Protected><CheckProfile><Cobs /></CheckProfile></Protected>} />
-           <Route path="/halaman-produk" element ={<Protected><Halpro /></Protected>} />
+           <Route path="/halaman-produk/:id" element ={<Protected><Halpro /></Protected>} />
            <Route path="/daftar-jual" element ={<Protected><Dafju /></Protected>} />
            <Route path="/info-penawar" element ={<Protected><Inpar /></Protected>} />
         </Routes>

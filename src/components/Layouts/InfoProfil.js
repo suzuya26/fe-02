@@ -22,19 +22,19 @@ import { useNavigate } from "react-router-dom";
 
 const kotas = [
   {
-    value: "LMG",
+    value: "Lamongan",
     label: "Lamongan",
   },
   {
-    value: "MJK",
+    value: "Mojokerto",
     label: "Mojokerto",
   },
   {
-    value: "SBY",
+    value: "Surabaya",
     label: "Surabaya",
   },
   {
-    value: "MDR",
+    value: "Madura",
     label: "Madura",
   },
 ];
