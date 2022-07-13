@@ -116,8 +116,6 @@ export default function Nav() {
       <MenuItem onClick={handleMenuClose}>
         {decoded.nama}
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
