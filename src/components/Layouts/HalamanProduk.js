@@ -31,31 +31,32 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function HalamanProduk() {
-  const { id } = useParams();
-  const url = `https://secondhand-kelompok2.herokuapp.com/api/v1/getproduk/${id}`;
-
   const [produk, setProduk] = useState([]);
-  const getProdukById = () => {
-    //fetch some data
-    axios
-      .get(`${url}`)
-      .then((response) => {
-        const produkById = response.data;
-        setProduk(produkById);
-      })
-      .catch((error) => setProduk(null));
-  };
-  useEffect(()=> getProdukById(),[])
-  console.log(produk)
-  if(produk === null){
-    return (
-        <p>produk tidak ditemukan euy</p>
-    )
-  }   
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const url = `https://secondhand-kelompok2.herokuapp.com/api/v1/getproduk/${id}`;
+    function getProdukById() {
+      //fetch some data
+      axios
+        .get(`${url}`)
+        .then((response) => {
+          const produkById = response.data;
+          setProduk(produkById);
+        })
+        .catch((error) => setProduk(null));
+    }
+    getProdukById();
+  }, [id]);
+  console.log(produk);
+  if (produk === null) {
+    return <p>produk tidak ditemukan euy</p>;
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg">
-      <Grid
+        <Grid
           container
           mt={3}
           rowSpacing={2}
@@ -154,5 +155,4 @@ export default function HalamanProduk() {
       </Container>
     </ThemeProvider>
   );
-
 }

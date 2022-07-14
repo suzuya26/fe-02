@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,52 +16,151 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
 
 const categories = [
   {
     value: "Elektronik",
-    label: "Elektronik"
+    label: "Elektronik",
   },
   {
     value: "Kesehatan",
-    label: "Kesehatan"
+    label: "Kesehatan",
   },
   {
     value: "Kendaraan",
-    label: "Kendaraan"
+    label: "Kendaraan",
   },
   {
     value: "Hobi",
-    label: "Hobi"
-  }
+    label: "Hobi",
+  },
 ];
 
 const Input = styled("input")({
-  display: "none"
+  display: "none",
 });
 
-
 export default function FullWidthTextField() {
-  const [category, setCategory] = React.useState("E");
+  const [category, setCategory] = React.useState("Elektronik");
+  const [namaproduk, setNamaproduk] = React.useState("");
+  const [hargaproduk, setHargaproduk] = React.useState("");
+  const [deskripsi, setDeskripsi] = React.useState("");
+
+  const [uploadedFileURL, setUploadedFileURL] = useState(null);
+  const [uploadedFileName, setUploadedFileName] = useState(null);
+
+  const [filesatu, setFilesatu] = useState(null);
+  const [filedua, setFiledua] = useState(null);
+  const [filetiga, setFiletiga] = useState(null);
+  const [fileempat, setFileempat] = useState(null);
+
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+  const idpenjual = decoded.id;
+
+  async function handleUploadSatu(e) {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("picture", filesatu);
+
+    try {
+      const response = await axios.post(
+        "https://secondhand-kelompok2.herokuapp.com/api/v1/fotoproduksatu",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Kalo di upload langsung di-server
+      console.log(response.data.url);
+      console.log(response.data.namafile);
+      setUploadedFileName(response.data.namafile);
+      setUploadedFileURL(response.data.url);
+    } catch (err) {
+      console.log(err);
+      console.log(err?.responses?.data);
+    }
+  }
+
+  async function handleReUploadSatu(e) {
+    e.preventDefault();
+
+    const form = new FormData();
+
+    form.append("picture", filesatu);
+    form.append("namafilebaru", uploadedFileName);
+
+    try {
+      console.log(uploadedFileName);
+      const response = await axios({
+        method: "post",
+        url: "https://secondhand-kelompok2.herokuapp.com/api/v1/refotoproduksatu",
+        data: form,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      // Kalo di upload langsung di-server
+      console.log(response.data.url);
+      setUploadedFileURL(response.data.url);
+    } catch (err) {
+      console.log(err);
+      console.log(err?.responses?.data);
+    }
+  }
+
+  async function handleSubmit(e) {
+    console.log("submit data");
+    e.preventDefault();
+    try {
+      await axios.post(
+        `https://secondhand-kelompok2.herokuapp.com/api/v1/refotoproduksatu`,
+        {
+          namaproduk: namaproduk,
+          hargaproduk: hargaproduk,
+          kategori: category,
+          idseller: idpenjual,
+          deskripsi: deskripsi,
+          foto1: uploadedFileURL,
+          namafoto1: uploadedFileName,
+          foto2: uploadedFileURL,
+          namafoto2: uploadedFileName,
+          foto3: uploadedFileURL,
+          namafoto3: uploadedFileName,
+          foto4: uploadedFileURL,
+          namafoto4: uploadedFileName,
+        }
+      );
+      //nanti disini pakai alert untuk logoutnya
+      localStorage.removeItem("token");
+      window.location.reload();
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+      }
+    }
+  }
 
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
 
   const commonStyles = {
-    bgcolor: 'background.paper',
-    borderColor: 'text.primary',
+    bgcolor: "background.paper",
+    borderColor: "text.primary",
     m: 1,
     border: 1,
-    width: '5rem',
-    height: '5rem',
+    width: "5rem",
+    height: "5rem",
   };
-
 
   function Copyright(props) {
     return (
@@ -85,13 +185,30 @@ export default function FullWidthTextField() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh", flexDirection: { xs: "column-reverse", md: "row" } }}>
+      <Grid
+        container
+        component="main"
+        sx={{
+          height: "100vh",
+          flexDirection: { xs: "column-reverse", md: "row" },
+        }}
+      >
         <CssBaseline />
-        <Grid container sx={{ display: "flex", justifyContent: "center" }} xs={12} sm={12} md={12} component={Paper}>
+        <Grid
+          container
+          sx={{ display: "flex", justifyContent: "center" }}
+          xs={12}
+          sm={12}
+          md={12}
+          component={Paper}
+        >
           <Grid className="G1" item xs={12} md={3} square></Grid>
           <Grid className="G2" item xs={12} md={6} square>
             <Box mt={2}>
-              <Button sx={{ color: 'text.primary' }} onClick={() => navigate(-1)}>
+              <Button
+                sx={{ color: "text.primary" }}
+                onClick={() => navigate(-1)}
+              >
                 <ArrowBackIcon />
               </Button>
             </Box>
@@ -143,7 +260,7 @@ export default function FullWidthTextField() {
                       color="secondary"
                     >
                       {categories.map((option) => (
-                        <MenuItem key={option.value} value={option.value} >
+                        <MenuItem key={option.value} value={option.value}>
                           {option.label}
                         </MenuItem>
                       ))}
@@ -154,7 +271,8 @@ export default function FullWidthTextField() {
                       required
                       fullWidth
                       label="Deskripsi"
-                      multiline rows={4}
+                      multiline
+                      rows={4}
                       type="string"
                       id="password"
                       color="secondary"
@@ -163,31 +281,67 @@ export default function FullWidthTextField() {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} my={2}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Box sx={{
-                      ...commonStyles, border: '3px dashed lightgrey', borderRadius: 4, opacity: [0.7, 0.2, 1],
-                      "&:hover": {
-                        bgcolor: 'text.primary', color: 'background.paper',
-                        opacity: [0.9, 0.8, 0.2]
-                      }
-                    }}>
-                      <label htmlFor="icon-button-file">
-                        <Input accept="image/*" id="icon-button-file" type="file" />
-                        <IconButton
-                          color="primary"
-                          aria-label="upload picture"
-                          component="span"
-                          sx={{ m: 2 }}
+                    <Box component="form" onSubmit={handleUploadSatu}
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
+                    <Grid>
+                      <Grid item>
+                      <Box
+                        sx={{
+                          ...commonStyles,
+                          border: "3px dashed lightgrey",
+                          borderRadius: 4,
+                          opacity: [0.7, 0.2, 1],
+                          "&:hover": {
+                            bgcolor: "text.primary",
+                            color: "background.paper",
+                            opacity: [0.9, 0.8, 0.2],
+                          },
+                        }}
+                      >
+                        <label htmlFor="icon-button-file">
+                          <Input
+                            accept="image/*"
+                            id="icon-button-file"
+                            type="file"
+                            onChange={(e) => setFilesatu(e.target.files[0])}
+                          />
+                          <IconButton
+                            color="primary"
+                            aria-label="upload picture"
+                            component="span"
+                            sx={{ m: 2 }}
+                          >
+                            <AddIcon
+                              sx={{
+                                color: "text.disabled",
+                                "&:hover": {
+                                  color: "background.paper",
+                                },
+                              }}
+                            />
+                          </IconButton>
+                        </label>
+                      </Box>
+                      </Grid>
+                      <Grid item>
+                      <Button
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            borderRadius: "12px",
+                            color: "primary",
+                            bgcolor: "text.disabled",
+                            "&:hover": {
+                              bgcolor: "secondary.main",
+                            },
+                          }}
                         >
-                          <AddIcon sx={{
-                            color: 'text.disabled', "&:hover": {
-                              color: "background.paper"
-                            }
-                          }} />
-                        </IconButton>
-                      </label>
+                          Upload
+                        </Button>
+                      </Grid>
+                    </Grid>
                     </Box>
-                  </Box>
                 </Grid>
                 <Grid item display="flex" justifyContent="space-between">
                   <Button
@@ -195,7 +349,7 @@ export default function FullWidthTextField() {
                     fullWidth
                     variant="outlined"
                     color="secondary"
-                    sx={{ mr: 2, my: 2, py: 1, borderRadius: "12px", }}
+                    sx={{ mr: 2, my: 2, py: 1, borderRadius: "12px" }}
                   >
                     Preview
                   </Button>
@@ -204,7 +358,7 @@ export default function FullWidthTextField() {
                     fullWidth
                     variant="contained"
                     color="secondary"
-                    sx={{ ml: 2, my: 2, py: 1, borderRadius: "12px", }}
+                    sx={{ ml: 2, my: 2, py: 1, borderRadius: "12px" }}
                   >
                     Terbitkan
                   </Button>

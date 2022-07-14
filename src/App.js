@@ -31,7 +31,7 @@ function App() {
             <CheckLogin><RegisterSide/></CheckLogin>
           } />
            <Route path="/lengkapi-profil" element ={<Protected><Profil /></Protected>} />
-           <Route path="/produk" element ={<Protected><Produk /></Protected>} />
+           <Route path="/jual-produk" element ={<Protected><Produk /></Protected>} />
            <Route path="/edit-foto-user" element ={<Protected><Edfuus /></Protected>} />
            <Route path="/edit-profil" element ={<Protected><Edpro /></Protected>} />
            <Route path="/NyobaQaqa" element ={<Protected><CheckProfile><Cobs /></CheckProfile></Protected>} />
