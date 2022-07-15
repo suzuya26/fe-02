@@ -19,6 +19,7 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageProduk from "./ImageProduk";
 import { useParams } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const theme = createTheme();
 
@@ -32,6 +33,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function HalamanProduk() {
   const [produk, setProduk] = useState([]);
+  const [penjual,setPenjual]= useState([]);
+  const [role,setRole] = useState("ngebeli");
 
   const { id } = useParams();
 
@@ -43,13 +46,23 @@ export default function HalamanProduk() {
         .get(`${url}`)
         .then((response) => {
           const produkById = response.data;
+          const si_penjual = response.data.user
           setProduk(produkById);
+          setPenjual(si_penjual)
         })
         .catch((error) => setProduk(null));
     }
+    function chekRole(){
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+      const idpenjual = decoded.id;
+      if(produk.id === idpenjual){
+        return setRole(true)
+      } setRole(false)
+    }
     getProdukById();
-  }, [id]);
-  console.log(produk);
+    chekRole()
+  }, [id, produk.id]);
   if (produk === null) {
     return <p>produk tidak ditemukan euy</p>;
   }
@@ -102,14 +115,34 @@ export default function HalamanProduk() {
                   {produk.hargaproduk}
                 </Typography>
               </Stack>
+              {role?(
               <Stack m={2} p={2} spacing={2}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                sx={{ borderRadius: "14px" }}
+              >
+                Terbitkan
+              </Button>
+              <Button
+                fullWidth
+                variant="outlined"
+                color="secondary"
+                sx={{ borderRadius: "14px" }}
+              >
+                Edit
+              </Button>
+            </Stack>
+              ) : ( 
+                <Stack m={2} p={2} spacing={2}>
                 <Button
                   fullWidth
                   variant="contained"
                   color="secondary"
                   sx={{ borderRadius: "14px" }}
                 >
-                  Terbitkan
+                  Tawar
                 </Button>
                 <Button
                   fullWidth
@@ -117,9 +150,10 @@ export default function HalamanProduk() {
                   color="secondary"
                   sx={{ borderRadius: "14px" }}
                 >
-                  Edit
+                  Beli Langsung
                 </Button>
               </Stack>
+              )}
             </Box>
             <Box my={2} boxShadow={2} borderRadius="14px">
               <Grid container display="flex">
@@ -141,10 +175,10 @@ export default function HalamanProduk() {
                       variant="subtitle2"
                       component="div"
                     >
-                      Lizard Ranchu
+                      {penjual.nama}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
-                      Lamongan
+                      {penjual.kota}
                     </Typography>
                   </CardContent>
                 </Grid>
