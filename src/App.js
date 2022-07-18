@@ -18,28 +18,45 @@ import Inpar from './components/pages/InfoPenawar';
 import Protected from './components/services/Protected';
 import CheckProfile from './components/services/CheckProfile';
 import CheckLogin from './components/services/CheckLogin';
+import Form from './components/Layouts/FormProfil';
 
 function App() {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/signin" element ={
-            <SignInSide/>
-          } />
-          <Route path="/register" element ={
-            <CheckLogin><RegisterSide/></CheckLogin>
-          } />
-           <Route path="/lengkapi-profil" element ={<Protected><Profil /></Protected>} />
-           <Route path="/jual-produk" element ={<Protected><Produk /></Protected>} />
-           <Route path="/edit-foto-user" element ={<Protected><Edfuus /></Protected>} />
-           <Route path="/edit-profil" element ={<Protected><Edpro /></Protected>} />
-           <Route path="/NyobaQaqa" element ={<Protected><CheckProfile><Cobs /></CheckProfile></Protected>} />
-           <Route path="/halaman-produk/:id" element ={<Protected><Halpro /></Protected>} />
-           <Route path="/daftar-jual" element ={<Protected><Dafju /></Protected>} />
-           <Route path="/info-penawar" element ={<Protected><Inpar /></Protected>} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signin" element={
+          <SignInSide />
+        } />
+        <Route path="/register" element={
+          <CheckLogin><RegisterSide /></CheckLogin>
+        } />
+        <Route path="/lengkapi-profil" element={<Protected>
+          <Profil />
+          </Protected>} />
+        <Route path="/jual-produk" element={<Protected>
+          <Produk />
+          </Protected>} />
+        <Route path="/edit-foto-user" element={<Protected>
+          <Edfuus />
+          </Protected>} />
+        <Route path="/edit-profil" element={<Protected>
+          <Edpro />
+          </Protected>} />
+        <Route path="/NyobaQaqa" element={<Protected>
+          <CheckProfile><Cobs /></CheckProfile><Form/>
+          </Protected>} />
+        <Route path="/halaman-produk/:id" element={<Protected>
+          <Halpro />
+          </Protected>} />
+        <Route path="/daftar-jual" element={<Protected>
+          <Dafju />
+          </Protected>} />
+        <Route path="/info-penawar" element={<Protected>
+          <Inpar />
+          </Protected>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

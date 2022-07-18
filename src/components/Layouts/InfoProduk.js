@@ -281,7 +281,9 @@ export default function FullWidthTextField() {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} my={2}>
-                    <Box component="form" onSubmit={handleUploadSatu}
+                    <Box 
+                    component="form"
+                    onSubmit={handleUploadSatu}
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
                     <Grid>
@@ -358,6 +360,7 @@ export default function FullWidthTextField() {
                     fullWidth
                     variant="contained"
                     color="secondary"
+                    onClick={{handleSubmit}}
                     sx={{ ml: 2, my: 2, py: 1, borderRadius: "12px" }}
                   >
                     Terbitkan
