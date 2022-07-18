@@ -204,11 +204,6 @@ class BannerExample extends React.Component {
               `OnChange User Callback: Now displaying child${now}. Previously displayed child${previous}`
             )
           }
-          // fullHeightHover={false}
-          // navButtonsProps={{style: {backgroundColor: 'cornflowerblue', borderRadius: 0}}}
-          // navButtonsWrapperProps={{style: {bottom: '0', top: 'unset', }}}
-          // indicatorContainerProps={{style: {margin: "20px"}}}
-          // NextIcon='next'
         >
           {items.map((item, index) => {
             return (

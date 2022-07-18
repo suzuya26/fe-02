@@ -76,8 +76,7 @@ function SwipeableTextMobileStepper() {
                       width: 968,
                       borderRadius: "16px",
                     }}
-                    src={step.imgPath}
-                    alt={step.label}
+
                   />
                 ) : null}
               </div>
