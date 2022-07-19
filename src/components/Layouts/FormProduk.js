@@ -22,34 +22,31 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 
-const categories = [
-  {
-    value: "Elektronik",
-    label: "Elektronik",
-  },
-  {
-    value: "Kesehatan",
-    label: "Kesehatan",
-  },
-  {
-    value: "Kendaraan",
-    label: "Kendaraan",
-  },
-  {
-    value: "Hobi",
-    label: "Hobi",
-  },
-];
-
 const Input = styled("input")({
   display: "none",
 });
 
+
+
 export default function FullWidthTextField() {
-  const [category, setCategory] = React.useState("Elektronik");
+  const [category, setCategory] = React.useState('');
   const [namaproduk, setNamaproduk] = React.useState("");
   const [hargaproduk, setHargaproduk] = React.useState("");
   const [deskripsi, setDeskripsi] = React.useState("");
+  const [categories, setCategories] = React.useState([]);
+
+  React.useEffect(()=>{
+    function getKategori() {
+      axios.get(`https://secondhand-kelompok2.herokuapp.com/api/v1/getkategori`)
+      .then((response)=>{
+        const kategorih = response.data
+        console.log(kategorih)
+        setCategories(kategorih)
+      })
+      .catch((error)=>setCategories(null))
+    }
+    getKategori()
+  },[])
 
   const [uploadedFileURLsatu, setUploadedFileURLsatu] = useState(null);
   const [uploadedFileNamesatu, setUploadedFileNamesatu] = useState(null);
@@ -231,8 +228,8 @@ export default function FullWidthTextField() {
             sx={{ textAlign: "left" }}
           >
             {categories.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
+              <MenuItem key={option.id} value={option.namakategori}>
+                {option.namakategori}
               </MenuItem>
             ))}
           </TextField>

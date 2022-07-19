@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -14,12 +14,13 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getListKategori } from "../../actions/kategoriAction";
-import {Link} from "react-router-dom";
+import { useParams , Link , NavLink} from "react-router-dom";
 
-export default function ListHomeKategori() {
+
+export default function ListPerKategori() {
   const { listKategoriResult, listKategoriLoading, listKategoriError } =useSelector((state) => state.kategoriReducer);
-
   const dispatch = useDispatch();
+  const { category } = useParams();
 
   useEffect(() => {
     console.log("1. use effect component did mount")
@@ -31,7 +32,7 @@ export default function ListHomeKategori() {
       <Grid item xs={2} sm={4} md={4}>
       <Link to={'/'} style={{ textDecoration: 'none' }}>
       <Button
-                variant="contained"
+                variant="outlined"
                 sx={{ borderRadius: "10px", mx: 1 }}
                 startIcon={<SearchIcon />}
                 color="secondary"
@@ -43,9 +44,9 @@ export default function ListHomeKategori() {
           listKategoriResult.map((kategori) => {
             return (
               <Link to={'/per/'+kategori.kategori} style={{ textDecoration: 'none' }}>
-             <Button
+              <Button
                 key={kategori.id}
-                variant="outlined"
+                variant={kategori.kategori === category ? ("contained") : ("outlined")}
                 sx={{ borderRadius: "10px", mx: 1 }}
                 startIcon={<SearchIcon />}
                 color="secondary"

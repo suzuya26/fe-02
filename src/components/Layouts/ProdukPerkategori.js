@@ -15,26 +15,32 @@ import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getListProduct } from "../../actions/productAction";
 import { Link } from 'react-router-dom'
-import ListHomeKategori from "./ListHomeKategori"
+import ListperKategori from './ListPerKategori'
+import { useParams } from "react-router-dom";
 
 const theme = createTheme();
 
-function TelusuriKategori() {
+function ProdukPerkategori() {
     const { listProductResult, listProductLoading, listProductError } = useSelector((state) => state.productReducer);
     
     const dispatch = useDispatch();
+
+        const { category } = useParams();
+    console.log(category)
 
     useEffect(() => {
         console.log("1. use effect component did mount")
         dispatch(getListProduct());
     }, [dispatch])
 
+
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container maxWidth="lg">
                 <Typography variant="h6" fontWeight="bold">Telusuri Kategori</Typography>
-                <ListHomeKategori/>
+                <ListperKategori/>
                 <Box sx={{ flexGrow: 1 , my : 2}}>
                     <Grid
                         container
@@ -81,7 +87,7 @@ function TelusuriKategori() {
                 </Box>
             </Container>
             <Box textAlign='center'>
-                <Button variant="contained" color="secondary" component={Link} to="jual-produk" startIcon={<AddIcon />} p={2} sx={{
+                <Button variant="contained" color="secondary" href="jual-produk" startIcon={<AddIcon />} p={2} sx={{
                     borderRadius: "8px", position: "fixed",
                     bottom: 10,
                     zIndex: "modal"
@@ -91,4 +97,4 @@ function TelusuriKategori() {
         </ThemeProvider>
     );
 }
-export default TelusuriKategori;
+export default ProdukPerkategori;

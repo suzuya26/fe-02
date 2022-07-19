@@ -45,6 +45,7 @@ export default function HalamanProduk() {
   const [role, setRole] = useState("ngebeli");
 
   const { id } = useParams();
+  console.log(id)
 
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 

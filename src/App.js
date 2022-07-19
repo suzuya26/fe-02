@@ -19,12 +19,14 @@ import Protected from './components/services/Protected';
 import CheckProfile from './components/services/CheckProfile';
 import CheckLogin from './components/services/CheckLogin';
 import Form from './components/Layouts/FormProduk';
+import Perkategori from './components/pages/Perkategori'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/per/:category" element={<Perkategori />} />
         <Route path="/signin" element={
           <SignInSide />
         } />
