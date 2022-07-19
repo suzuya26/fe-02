@@ -18,7 +18,7 @@ import Inpar from './components/pages/InfoPenawar';
 import Protected from './components/services/Protected';
 import CheckProfile from './components/services/CheckProfile';
 import CheckLogin from './components/services/CheckLogin';
-import Form from './components/Layouts/FormProfil';
+import Form from './components/Layouts/FormProduk';
 
 function App() {
   return (

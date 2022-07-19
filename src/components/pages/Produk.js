@@ -1,5 +1,6 @@
 import InfoProduk from "../Layouts/InfoProduk";
 import MahaNavbar from "../Layouts/MahaNavbar";
+import FormProduk from '../Layouts/FormProduk'
 
 function Produk() {
     return (
@@ -8,7 +9,7 @@ function Produk() {
           <MahaNavbar/>
         </header>
         <main>
-            <InfoProduk/>
+            <FormProduk/>
         </main>
       </div>
     );

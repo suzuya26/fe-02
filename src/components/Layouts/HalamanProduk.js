@@ -20,6 +20,12 @@ import ImageListItem from "@mui/material/ImageListItem";
 import ImageProduk from "./ImageProduk";
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { useTheme } from "@mui/material/styles";
+import MobileStepper from "@mui/material/MobileStepper";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 
 const theme = createTheme();
 
@@ -33,10 +39,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function HalamanProduk() {
   const [produk, setProduk] = useState([]);
-  const [penjual,setPenjual]= useState([]);
-  const [role,setRole] = useState("ngebeli");
+  const [penjual, setPenjual] = useState([]);
+  const [galery,setGalery] = useState([]);
+  const [formtawar, setFormtawar] = useState(false)
+  const [role, setRole] = useState("ngebeli");
 
   const { id } = useParams();
+
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+
 
   useEffect(() => {
     const url = `https://secondhand-kelompok2.herokuapp.com/api/v1/getproduk/${id}`;
@@ -46,24 +58,70 @@ export default function HalamanProduk() {
         .get(`${url}`)
         .then((response) => {
           const produkById = response.data;
-          const si_penjual = response.data.user
+          const si_penjual = response.data.user;
           setProduk(produkById);
-          setPenjual(si_penjual)
+          setPenjual(si_penjual);
         })
         .catch((error) => setProduk(null));
     }
-    function chekRole(){
+    function chekRole() {
       const token = localStorage.getItem("token");
       const decoded = jwtDecode(token);
       const idpenjual = decoded.id;
-      if(produk.id === idpenjual){
-        return setRole(true)
-      } setRole(false)
+      if (produk.idseller === idpenjual) {
+        return setRole(true);
+      }
+      setRole(false);
     }
+
     getProdukById();
-    chekRole()
-  }, [id, produk.id]);
-  if (produk === null) {
+    chekRole();
+  }, [id,produk.idseller]);
+
+  const images = [
+    {
+      label: 'San Francisco – Oakland Bay Bridge, United States',
+      imgPath:
+        'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+    },
+    {
+      label: 'Bird',
+      imgPath:
+        'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+    },
+    {
+      label: 'Bali, Indonesia',
+      imgPath:
+        'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
+    },
+    {
+      label: 'Goč, Serbia',
+      imgPath:
+        'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+    },
+  ];
+
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = images.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+
+  const handleFormtawar = (e) =>{
+    e.preventDefault();
+    setFormtawar(!formtawar)
+  }
+
+  if (produk === null && penjual === null) {
     return <p>produk tidak ditemukan euy</p>;
   }
   return (
@@ -85,7 +143,78 @@ export default function HalamanProduk() {
                 boxShadow: 3,
               }}
             >
-              <ImageProduk />
+              <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+                <Paper
+                  square
+                  elevation={0}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    height: 50,
+                    pl: 2,
+                    bgcolor: "background.default",
+                  }}
+                >
+                </Paper>
+                <AutoPlaySwipeableViews
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents
+                >
+                  {images.map((step, index) => (
+                    <div key={step.label}>
+                      {Math.abs(activeStep - index) <= 2 ? (
+                        <Box
+                          component="img"
+                          sx={{
+                            height: 255,
+                            display: "block",
+                            maxWidth: 400,
+                            overflow: "hidden",
+                            width: "100%",
+                          }}
+                          src={step.imgPath}
+                          alt={step.label}
+                        />
+                      ) : null}
+                    </div>
+                  ))}
+                </AutoPlaySwipeableViews>
+                <MobileStepper
+                  steps={maxSteps}
+                  position="static"
+                  activeStep={activeStep}
+                  nextButton={
+                    <Button
+                      size="small"
+                      onClick={handleNext}
+                      disabled={activeStep === maxSteps - 1}
+                    >
+                      Next
+                      {theme.direction === "rtl" ? (
+                        <KeyboardArrowLeft />
+                      ) : (
+                        <KeyboardArrowRight />
+                      )}
+                    </Button>
+                  }
+                  backButton={
+                    <Button
+                      size="small"
+                      onClick={handleBack}
+                      disabled={activeStep === 0}
+                    >
+                      {theme.direction === "rtl" ? (
+                        <KeyboardArrowRight />
+                      ) : (
+                        <KeyboardArrowLeft />
+                      )}
+                      Back
+                    </Button>
+                  }
+                />
+              </Box>
             </Box>
             <Box
               sx={{
@@ -115,44 +244,51 @@ export default function HalamanProduk() {
                   {produk.hargaproduk}
                 </Typography>
               </Stack>
-              {role?(
-              <Stack m={2} p={2} spacing={2}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="secondary"
-                sx={{ borderRadius: "14px" }}
-              >
-                Terbitkan
-              </Button>
-              <Button
-                fullWidth
-                variant="outlined"
-                color="secondary"
-                sx={{ borderRadius: "14px" }}
-              >
-                Edit
-              </Button>
-            </Stack>
-              ) : ( 
+              {role ? (
                 <Stack m={2} p={2} spacing={2}>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  sx={{ borderRadius: "14px" }}
-                >
-                  Tawar
-                </Button>
-                <Button
-                  fullWidth
-                  variant="outlined"
-                  color="secondary"
-                  sx={{ borderRadius: "14px" }}
-                >
-                  Beli Langsung
-                </Button>
-              </Stack>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    sx={{ borderRadius: "14px" }}
+                  >
+                    Terbitkan
+                  </Button>
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    color="secondary"
+                    sx={{ borderRadius: "14px" }}
+                  >
+                    Edit
+                  </Button>
+                </Stack>
+              ) : (
+                <Stack m={2} p={2} spacing={2}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleFormtawar}
+                    sx={{ borderRadius: "14px" }}
+                  >
+                    Tawar
+                  </Button>
+                  {formtawar?(
+                    <p>aing muncul yak</p>
+                  ) : (
+                    <></>
+                  )
+                  }
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    color="secondary"
+                    sx={{ borderRadius: "14px" }}
+                  >
+                    Beli Langsung
+                  </Button>
+                </Stack>
               )}
             </Box>
             <Box my={2} boxShadow={2} borderRadius="14px">

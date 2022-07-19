@@ -3,6 +3,7 @@ import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import autoBind from "auto-bind";
 import '../../App.css';
+import { useParams } from "react-router-dom";
 
 import {
   Card,
@@ -14,6 +15,7 @@ import {
 } from "@mui/material/";
 
 function Banner(props) {
+
   if (props.newProp) console.log(props.newProp);
   const contentPosition = props.contentPosition
     ? props.contentPosition

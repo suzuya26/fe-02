@@ -136,9 +136,7 @@ export default function FullWidthTextField() {
           namaprofilimg: uploadedFileName,
         }
       );
-      //nanti disini pakai alert untuk logoutnya
-      localStorage.removeItem("token");
-      window.location.reload();
+      //pindah ke halaman trakhir.
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
