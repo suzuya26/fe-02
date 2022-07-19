@@ -94,3 +94,12 @@
     margin:0;
   }
 }
+
+.carousel-indicators {
+opacity: 0;
+}
+
+.container-fluid {
+  width: "600";
+  height: "436";
+}

@@ -1,5 +1,6 @@
 import React from "react";
-import Carousel from "react-material-ui-carousel";
+import { Carousel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import autoBind from "auto-bind";
 import '../../App.css';
 
@@ -179,43 +180,45 @@ class BannerExample extends React.Component {
 
   render() {
     return (
-      <div >
-        <Carousel
-          className="Example"
-          autoPlay={this.state.autoPlay}
-          animation={this.state.animation}
-          indicators={this.state.indicators}
-          timeout={this.state.timeout}
-          cycleNavigation={this.state.cycleNavigation}
-          navButtonsAlwaysVisible={this.state.navButtonsAlwaysVisible}
-          navButtonsAlwaysInvisible={this.state.navButtonsAlwaysInvisible}
-          next={(now, previous) =>
-            console.log(
-              `Next User Callback: Now displaying child${now}. Previously displayed child${previous}`
-            )
-          }
-          prev={(now, previous) =>
-            console.log(
-              `Prev User Callback: Now displaying child${now}. Previously displayed child${previous}`
-            )
-          }
-          onChange={(now, previous) =>
-            console.log(
-              `OnChange User Callback: Now displaying child${now}. Previously displayed child${previous}`
-            )
-          }
-        >
-          {items.map((item, index) => {
-            return (
-              <Banner
-                item={item}
-                key={index}
-                contentPosition={item.contentPosition}
-              />
-            );
-          })}
-        </Carousel>
-      </div>
+      <div>
+<div className='container-fluid' >
+<div className="row">
+<div className="col-sm-12">
+</div>
+</div>
+<div className="row">
+<div className="col-12">
+<Carousel>
+<Carousel.Item 
+>
+<img
+className="first slide"
+style={{ height: 436 }}
+src="https://picsum.photos/500/300?img=1"
+alt="First slide"
+/>
+</Carousel.Item>
+<Carousel.Item>
+<img
+className="second slide"
+style={{ height: 436 }}
+src="https://picsum.photos/500/300?img=2"
+alt="Second slide"
+/>
+</Carousel.Item>
+<Carousel.Item>
+<img
+className="third slide"
+style={{ height: 436 }}
+src="https://picsum.photos/500/300?img=3"
+alt="Third slide"
+/>
+</Carousel.Item>
+</Carousel>
+</div>
+</div>
+</div>
+</div>
     );
   }
 }
