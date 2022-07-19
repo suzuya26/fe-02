@@ -7,8 +7,6 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography'
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -17,11 +15,13 @@ import { CardActionArea } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getListProduct } from "../../actions/productAction";
 import { Link } from 'react-router-dom'
+import ListHomeKategori from "./ListHomeKategori"
 
 const theme = createTheme();
 
 function TelusuriKategori() {
     const { listProductResult, listProductLoading, listProductError } = useSelector((state) => state.productReducer);
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,11 +34,7 @@ function TelusuriKategori() {
             <CssBaseline />
             <Container maxWidth="lg">
                 <Typography variant="h6" fontWeight="bold">Telusuri Kategori</Typography>
-                <Grid item xs={2} sm={4} md={4} >
-                    <Button variant="contained" sx={{ borderRadius: "10px" , mx:1 }} startIcon={<SearchIcon />} color="secondary" active> Semua </Button>
-                    <Button variant="contained" sx={{ borderRadius: "10px" , mx:1}} startIcon={<SearchIcon />} color="secondary" active> Semua </Button>
-                    <Button variant="contained" sx={{ borderRadius: "10px" , mx:1}} startIcon={<SearchIcon />} color="secondary" active> Semua </Button>
-                </Grid>
+                <ListHomeKategori/>
                 <Box sx={{ flexGrow: 1 , my : 2}}>
                     <Grid
                         container
