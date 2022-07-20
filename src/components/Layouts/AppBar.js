@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,25 +15,26 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
-import Notif from './Notif'
-
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+import Notif from "./Notif";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentNotif } from "../../actions/totalnotifAction";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto"
-  }
+    width: "auto",
+  },
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -43,7 +44,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -55,12 +56,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch"
-    }
-  }
+      width: "20ch",
+    },
+  },
 }));
 
 export default function Nav() {
+  const { listTotalNotifResult, listTotalNotifLoading, listTotalNotifError } =
+    useSelector((state) => state.totalnotifReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("1. use effect component did mount");
+    dispatch(getCurrentNotif());
+  }, [dispatch]);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -85,37 +94,34 @@ export default function Nav() {
   };
 
   const handleLogout = (e) => {
-    console.log("kliked")
-    e.preventDefault()
+    console.log("kliked");
+    e.preventDefault();
     localStorage.removeItem("token");
     window.location.reload();
-   }
- 
- 
-   // //nganu token
-   const token = localStorage.getItem("token");
-   const decoded = jwtDecode(token);
- 
-   const menuId = 'primary-search-account-menu';
-   const renderMenu = (
+  };
+
+  // //nganu token
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        {decoded.nama}
-      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>{decoded.nama}</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -126,13 +132,13 @@ export default function Nav() {
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -152,7 +158,7 @@ export default function Nav() {
           color="inherit"
         >
           <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+            <Notif />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -180,7 +186,7 @@ export default function Nav() {
             sx={{
               width: 50,
               height: 20,
-              backgroundColor: "secondary.main"
+              backgroundColor: "secondary.main",
             }}
           />
           <Search>
@@ -200,17 +206,25 @@ export default function Nav() {
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
-              <MenuIcon />
+                <MenuIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <Notif />
-              </Badge>
+              {listTotalNotifResult ? (
+                <Badge badgeContent={listTotalNotifResult.total} color="error">
+                  <Notif />
+                </Badge>
+              ) : listTotalNotifLoading ? (
+                <Badge badgeContent={0} color="error">
+                </Badge>
+              ) : (
+                <Badge badgeContent={0} color="error">
+                  <NotificationsIcon />
+                </Badge>
+              )}
             </IconButton>
             <IconButton
               size="large"
