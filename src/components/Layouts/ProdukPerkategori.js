@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -17,21 +17,27 @@ import { getListProduct } from "../../actions/productAction";
 import { Link } from 'react-router-dom'
 import ListperKategori from './ListPerKategori'
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const theme = createTheme();
 
 function ProdukPerkategori() {
-    const { listProductResult, listProductLoading, listProductError } = useSelector((state) => state.productReducer);
+    const [prokat,setProkat] = useState([])
     
-    const dispatch = useDispatch();
 
-        const { category } = useParams();
-    console.log(category)
+    const { category } = useParams();
 
     useEffect(() => {
         console.log("1. use effect component did mount")
-        dispatch(getListProduct());
-    }, [dispatch])
+
+        function getProdukPerKategori(){
+            axios.get(`https://secondhand-kelompok2.herokuapp.com/api/v1/getprodukbykategori/${category}`).then((response)=>{
+                const produkPerKategori = response.data
+                setProkat(produkPerKategori)
+            }).catch((error) => setProkat(null))
+        }
+        getProdukPerKategori()
+    }, [category])
 
 
 
@@ -47,8 +53,8 @@ function ProdukPerkategori() {
                         spacing={{ xs: 2, md: 3 }}
                         columns={{ xs: 4, sm: 8, md: 12 }}
                     >
-                        {listProductResult ? (
-                            listProductResult.map((product) => {
+                        {
+                            prokat.map((product) => {
                                 return (
                                     <Grid item xs={2} sm={2} md={2}>
                                         <Link to={'/halaman-produk/'+product.id} style={{ textDecoration: 'none' }}>
@@ -76,13 +82,9 @@ function ProdukPerkategori() {
                                         </Card>
                                         </Link>
                                     </Grid>
-                                );
+                                )
                             })
-                        ) : listProductLoading ? (
-                            <p>Loading . . . </p>
-                        ) : (
-                            <p>{listProductError ? listProductError : "Data Kosong"}</p>
-                        )}
+                        }
                     </Grid>
                 </Box>
             </Container>
