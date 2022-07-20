@@ -25,6 +25,7 @@ import MobileStepper from "@mui/material/MobileStepper";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
+import TextField from "@mui/material/TextField";
 import { autoPlay } from "react-swipeable-views-utils";
 
 const theme = createTheme();
@@ -40,16 +41,16 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function HalamanProduk() {
   const [produk, setProduk] = useState([]);
   const [penjual, setPenjual] = useState([]);
-  const [galery,setGalery] = useState([]);
-  const [formtawar, setFormtawar] = useState(false)
+  const [galery, setGalery] = useState([]);
+  const [formtawar, setFormtawar] = useState(false);
   const [role, setRole] = useState("ngebeli");
+  const [hargatawar, setHargatawar] = useState("");
+  const [chektawar, setChektawar] = useState(false);
 
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
 
   const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-
 
   useEffect(() => {
     const url = `https://secondhand-kelompok2.herokuapp.com/api/v1/getproduk/${id}`;
@@ -74,31 +75,49 @@ export default function HalamanProduk() {
       }
       setRole(false);
     }
+    function chekTawar() {
+      const token = localStorage.getItem("token");
+      const decoded = jwtDecode(token);
+      const idpenawar = decoded.id;
+      const kondisi = `${idpenawar}--${id}`;
+      console.log(kondisi)
+
+      axios
+        .get(
+          `https://secondhand-kelompok2.herokuapp.com/api/v1/cheksudahditawar/${kondisi}`
+        )
+        .then((response) => {
+          if (response.data === "sudah ditawar") {
+            setChektawar(true);
+          }
+        });
+    }
 
     getProdukById();
     chekRole();
-  }, [id,produk.idseller]);
+    chekTawar();
+  }, [id, produk.id, produk.idseller]);
 
   const images = [
     {
-      label: 'San Francisco – Oakland Bay Bridge, United States',
+      label: "San Francisco – Oakland Bay Bridge, United States",
       imgPath:
-        'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+        "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
     },
     {
-      label: 'Bird',
+      label: "Bird",
       imgPath:
-        'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+        "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
     },
     {
-      label: 'Bali, Indonesia',
+      label: "Bali, Indonesia",
       imgPath:
-        'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250",
     },
     {
-      label: 'Goč, Serbia',
+      label: "Goč, Serbia",
       imgPath:
-        'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+        "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
     },
   ];
 
@@ -117,9 +136,37 @@ export default function HalamanProduk() {
     setActiveStep(step);
   };
 
-  const handleFormtawar = (e) =>{
+  const handleFormtawar = (e) => {
     e.preventDefault();
-    setFormtawar(!formtawar)
+    setFormtawar(!formtawar);
+  };
+
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+  const idpenawar = decoded.id;
+
+  async function handleSubmitTawar(e) {
+    console.log("kirim tawar");
+    e.preventDefault();
+    try {
+      await axios.post(
+        `https://secondhand-kelompok2.herokuapp.com/api/v1/createpenawaran`,
+        {
+          idbuyer: idpenawar,
+          idproduk: produk.id,
+          namaproduk: produk.namaproduk,
+          hargaproduk: produk.hargaproduk,
+          idseller: produk.idseller,
+          hargatawar: hargatawar,
+          statustawar: "menawar",
+        }
+      );
+      window.location.reload();
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+      }
+    }
   }
 
   if (produk === null && penjual === null) {
@@ -155,8 +202,7 @@ export default function HalamanProduk() {
                     pl: 2,
                     bgcolor: "background.default",
                   }}
-                >
-                </Paper>
+                ></Paper>
                 <AutoPlaySwipeableViews
                   axis={theme.direction === "rtl" ? "x-reverse" : "x"}
                   index={activeStep}
@@ -253,34 +299,54 @@ export default function HalamanProduk() {
                     color="secondary"
                     sx={{ borderRadius: "14px" }}
                   >
-                    Terbitkan
-                  </Button>
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    color="secondary"
-                    sx={{ borderRadius: "14px" }}
-                  >
                     Edit
                   </Button>
                 </Stack>
               ) : (
                 <Stack m={2} p={2} spacing={2}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleFormtawar}
-                    sx={{ borderRadius: "14px" }}
-                  >
-                    Tawar
-                  </Button>
-                  {formtawar?(
-                    <p>aing muncul yak</p>
+                  {!chektawar ? (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleFormtawar}
+                      sx={{ borderRadius: "14px" }}
+                    >
+                      Tawar
+                    </Button>
+                  ) : (
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      sx={{ borderRadius: "14px" }}
+                      disabled
+                    >
+                      Sudah Ditawar
+                    </Button>
+                  )}
+                  {formtawar ? (
+                    <Box component="form" onSubmit={handleSubmitTawar}>
+                      <TextField
+                        fullWidth
+                        label="Harga Tawar*"
+                        name="hargatawar"
+                        value={hargatawar}
+                        onChange={(e) => setHargatawar(e.target.value)}
+                      />
+                      <Button
+                        fullWidth
+                        type="submit"
+                        variant="outlined"
+                        color="secondary"
+                        sx={{ borderRadius: "14px", mt: 2 }}
+                      >
+                        Kirim
+                      </Button>
+                    </Box>
                   ) : (
                     <></>
-                  )
-                  }
+                  )}
                   <Button
                     fullWidth
                     variant="outlined"
