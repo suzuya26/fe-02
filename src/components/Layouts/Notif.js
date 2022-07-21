@@ -6,8 +6,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import axios from "axios";
 import jwtDecode from 'jwt-decode';
-import { useDispatch, useSelector } from "react-redux";
-import { getIsiNotif } from "../../actions/notifikasiAction";
 
 const ITEM_HEIGHT = 48;
 
@@ -35,10 +33,8 @@ export default function LongMenu() {
     function getUserNotifikasi(){
         axios.get(`https://secondhand-kelompok2.herokuapp.com/api/v1/getsemuapenawaran/${idcurrent}`).then((response)=>{
             const notiff = response.data
-            const vembeli = response.data.pembeli
             console.log(notiff)
             setNotifikasi(notiff)
-            setSingbeli(vembeli)
         }).catch((error) => console.log(error))
     }
     getUserNotifikasi()
@@ -71,7 +67,15 @@ export default function LongMenu() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>ANuuu daze</MenuItem>
+        {
+          notifikasi?(
+            notifikasi.map((nott) => {
+              return(
+                <MenuItem key={nott.index} onClick={handleClose}>Ada Yang nawar {nott.namaproduk}, dengan harga :{nott.hargatawar}</MenuItem>
+              )
+            })
+          ) : (<MenuItem onClick={handleClose}>Tidak ada penawaran</MenuItem>)
+        }
       </Menu>
     </div>
   );
