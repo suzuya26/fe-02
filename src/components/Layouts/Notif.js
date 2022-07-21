@@ -1,31 +1,24 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
-const options = [
-  "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel"
-];
+import axios from "axios";
+import jwtDecode from 'jwt-decode';
+import { useDispatch, useSelector } from "react-redux";
+import { getIsiNotif } from "../../actions/notifikasiAction";
 
 const ITEM_HEIGHT = 48;
 
 export default function LongMenu() {
+
+  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [notifikasi, setNotifikasi] = React.useState(null);
+  const [singbeli, setSingbeli] = React.useState(null);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -33,6 +26,23 @@ export default function LongMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const idcurrent = decoded.id
+
+    function getUserNotifikasi(){
+        axios.get(`https://secondhand-kelompok2.herokuapp.com/api/v1/getsemuapenawaran/${idcurrent}`).then((response)=>{
+            const notiff = response.data
+            const vembeli = response.data.pembeli
+            console.log(notiff)
+            setNotifikasi(notiff)
+            setSingbeli(vembeli)
+        }).catch((error) => console.log(error))
+    }
+    getUserNotifikasi()
+}, [])
 
   return (
     <div>
@@ -49,7 +59,7 @@ export default function LongMenu() {
       <Menu
         id="long-menu"
         MenuListProps={{
-          "aria-labelledby": "long-button"
+          "aria-labelledby": "long-button",
         }}
         anchorEl={anchorEl}
         open={open}
@@ -57,19 +67,11 @@ export default function LongMenu() {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch"
-          }
+            width: "20ch",
+          },
         }}
       >
-        {options.map((option) => (
-          <MenuItem
-            key={option}
-            selected={option === "Pyxis"}
-            onClick={handleClose}
-          >
-            {option}
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleClose}>ANuuu daze</MenuItem>
       </Menu>
     </div>
   );

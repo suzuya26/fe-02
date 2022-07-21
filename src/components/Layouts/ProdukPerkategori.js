@@ -28,7 +28,6 @@ function ProdukPerkategori() {
     const { category } = useParams();
 
     useEffect(() => {
-        console.log("1. use effect component did mount")
 
         function getProdukPerKategori(){
             axios.get(`https://secondhand-kelompok2.herokuapp.com/api/v1/getprodukbykategori/${category}`).then((response)=>{

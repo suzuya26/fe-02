@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 
 export const GET_USER_NOTIF = "GET_CURRENT_USER";
 
-export const getCurrentNotif = () => {
+export const getIsiNotif = () => {
     const token = localStorage.getItem("token");
     const decoded = jwtDecode(token);
     const idcurrent = decoded.id
@@ -24,7 +24,7 @@ export const getCurrentNotif = () => {
         // dipanggil saat get data
         axios({
             method: 'GET',
-            url: `https://secondhand-kelompok2.herokuapp.com/api/v1/gettotalpenawaran/${idcurrent}`,
+            url: `https://secondhand-kelompok2.herokuapp.com/api/v1/getsemuapenawaran/${idcurrent}`,
             headers:{Authorization: 'Bearer ' + token},
             timeout: 120000
         }).then((response) => {
