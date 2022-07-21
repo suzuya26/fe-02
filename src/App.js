@@ -51,7 +51,7 @@ function App() {
         <Route path="/halaman-produk/:id" element={<Protected>
           <Halpro />
           </Protected>} />
-        <Route path="/daftar-jual" element={<Protected>
+        <Route path="/daftar-jual/:idseller" element={<Protected>
           <Dafju />
           </Protected>} />
         <Route path="/info-penawar" element={<Protected>

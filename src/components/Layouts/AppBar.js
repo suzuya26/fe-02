@@ -20,6 +20,7 @@ import jwtDecode from "jwt-decode";
 import Notif from "./Notif";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentNotif } from "../../actions/totalnotifAction";
+import { Link } from 'react-router-dom'
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -122,6 +123,9 @@ export default function Nav() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>{decoded.nama}</MenuItem>
+      <Link to={'/daftar-jual/'+decoded.id} style={{ color: 'inherit',textDecoration: 'none' }}>
+      <MenuItem >Jualanku</MenuItem>
+      </Link>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );

@@ -17,7 +17,6 @@ import { CardActionArea } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import ImageProduk from "./ImageProduk";
 import { useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useTheme } from "@mui/material/styles";

@@ -81,11 +81,13 @@ function TelusuriKategori() {
                 </Box>
             </Container>
             <Box textAlign='center'>
-                <Button variant="contained" color="secondary" component={Link} to="jual-produk" startIcon={<AddIcon />} p={2} sx={{
+            <Link to={'/jual-produk'} style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="secondary" startIcon={<AddIcon />} p={2} sx={{
                     borderRadius: "8px", position: "fixed",
                     bottom: 10,
                     zIndex: "modal"
                 }} >Jual</Button>
+            </Link>
             </Box>
 
         </ThemeProvider>
