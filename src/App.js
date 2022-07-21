@@ -20,6 +20,9 @@ import CheckProfile from './components/services/CheckProfile';
 import CheckLogin from './components/services/CheckLogin';
 import Form from './components/Layouts/FormProduk';
 import Perkategori from './components/pages/Perkategori'
+import DaftarJualSemua from './components/Layouts/DaftarJualSemua';
+import DaftarJualFavorit from './components/Layouts/DaftarJualFavorit';
+import DaftarJualTerjual from './components/Layouts/DaftarJualTerjual';
 
 function App() {
   return (
@@ -52,7 +55,13 @@ function App() {
           <Halpro />
           </Protected>} />
         <Route path="/daftar-jual/:idseller" element={<Protected>
-          <Dafju />
+          <Dafju /> <DaftarJualSemua/>
+          </Protected>} />
+        <Route path="/daftar-jual/favorit/:idseller" element={<Protected>
+          <Dafju /> <DaftarJualFavorit/>
+          </Protected>} />
+        <Route path="/daftar-jual/terjual/:idseller" element={<Protected>
+          <Dafju /> <DaftarJualTerjual/>
           </Protected>} />
         <Route path="/info-penawar" element={<Protected>
           <Inpar />

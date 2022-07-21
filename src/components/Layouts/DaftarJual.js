@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -28,7 +28,10 @@ import AddIcon from "@mui/icons-material/Add";
 import { CardActionArea } from "@mui/material";
 import Produk from "./save/InfoProduk";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import jwtDecode from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../../actions/userAction";
+import DaftarJualSemua from "./DaftarJualSemua";
 
 const theme = createTheme();
 
@@ -46,6 +49,16 @@ const commonStyles = {
 };
 
 const DaftarJual = () => {
+  const { listUserResult, listUserLoading, listUserError } = useSelector(
+    (state) => state.userReducer
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("1. use effect component did mount");
+    dispatch(getCurrentUser());
+  }, [dispatch]);
+
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleListItemClick = (event, index) => {
@@ -54,7 +67,7 @@ const DaftarJual = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" sx={{my:2}}>
+      <Container maxWidth="lg" sx={{ my: 2 }}>
         <Typography variant="h4" fontWeight="Bold" my={3}>
           Daftar Jual
         </Typography>
@@ -67,25 +80,71 @@ const DaftarJual = () => {
               boxShadow: 2,
             }}
           >
-            <Box sx={{ display: "flex" }}>
-              <Box my={3} mx={2}>
-                <Avatar variant="rounded">
-                  <CardMedia
-                    component="img"
-                    width="60"
-                    height="60"
-                    src="https://source.unsplash.com/random"
-                    alt="green iguana"
-                  />
-                </Avatar>
+            {listUserResult ? (
+              <Box sx={{ display: "flex" }}>
+                <Box my={3} mx={2}>
+                  <Avatar variant="rounded">
+                    <CardMedia
+                      component="img"
+                      width="60"
+                      height="60"
+                      src={listUserResult.profilimg}
+                      alt="green iguana"
+                    />
+                  </Avatar>
+                </Box>
+                <Box my={2}>
+                  <Typography variant="body1" fontWeight="bold" component="div">
+                    {listUserResult.nama}
+                  </Typography>
+                  <Typography variant="caption">
+                    {listUserResult.kota}
+                  </Typography>
+                </Box>
               </Box>
-              <Box my={2}>
-                <Typography variant="body1" fontWeight="bold" component="div">
-                  Lizard Ranchu
-                </Typography>
-                <Typography variant="caption">Lamongan</Typography>
+            ) : listUserLoading ? (
+              <Box sx={{ display: "flex" }}>
+                <Box my={3} mx={2}>
+                  <Avatar variant="rounded">
+                    <CardMedia
+                      component="img"
+                      width="60"
+                      height="60"
+                      src="https://source.unsplash.com/random"
+                      alt="green iguana"
+                    />
+                  </Avatar>
+                </Box>
+                <Box my={2}>
+                  <Typography variant="body1" fontWeight="bold" component="div">
+                    Loading...
+                  </Typography>
+                  <Typography variant="caption">Loading...</Typography>
+                </Box>
               </Box>
-            </Box>
+            ) : listUserError ? (
+              <Box sx={{ display: "flex" }}>
+                <Box my={3} mx={2}>
+                  <Avatar variant="rounded">
+                    <CardMedia
+                      component="img"
+                      width="60"
+                      height="60"
+                      src="https://source.unsplash.com/random"
+                      alt="green iguana"
+                    />
+                  </Avatar>
+                </Box>
+                <Box my={2}>
+                  <Typography variant="body1" fontWeight="bold" component="div">
+                    Error...
+                  </Typography>
+                  <Typography variant="caption">Error...</Typography>
+                </Box>
+              </Box>
+            ) : (
+              <p>ntahla</p>
+            )}
             <Box m={3}>
               <Button
                 variant="outlined"
@@ -96,144 +155,6 @@ const DaftarJual = () => {
               </Button>
             </Box>
           </Box>
-        </Grid>
-        <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={5}
-          columns={{ xs: 4, sm: 12, md: 12 }}
-          sx={{ display: "flex", justifyContent: "space-between" }}
-        >
-          <Grid item xs={4}>
-            <Box
-              sx={{
-                borderRadius: "16px",
-                borderColor: "grey.500",
-                boxShadow: 3,
-              }}
-            >
-              <CardContent>
-                <List>
-                  <Typography fontWeight="bold" mx={3}>
-                    Kategory
-                  </Typography>
-                  <ListItemButton
-                    selected={selectedIndex === 0}
-                    onClick={(event) => handleListItemClick(event, 0)}
-                  >
-                    <IconButton aria-label="category">
-                      <CheckBoxOutlineBlankIcon />
-                    </IconButton>
-                    <ListItemText primary="Semua Produk" />
-                    <IconButton edge="end" aria-label="arrow">
-                      {" "}
-                      <ArrowForwardIosIcon />{" "}
-                    </IconButton>
-                  </ListItemButton>
-                  <Divider component="li" />
-                  <ListItemButton
-                    selected={selectedIndex === 1}
-                    onClick={(event) => handleListItemClick(event, 1)}
-                  >
-                    <IconButton aria-label="favorite">
-                      <FavoriteBorderOutlinedIcon />
-                    </IconButton>
-                    <ListItemText primary="Diminati" />
-                    <IconButton edge="end" aria-label="arrow">
-                      {" "}
-                      <ArrowForwardIosIcon />{" "}
-                    </IconButton>
-                  </ListItemButton>
-                  <Divider component="li" />
-                  <ListItemButton
-                    selected={selectedIndex === 2}
-                    onClick={(event) => handleListItemClick(event, 2)}
-                  >
-                    <IconButton aria-label="money">
-                      <AttachMoneyOutlinedIcon />
-                    </IconButton>
-                    <ListItemText primary="Terjual" />
-                    <IconButton edge="end" aria-label="arrow">
-                      {" "}
-                      <ArrowForwardIosIcon />{" "}
-                    </IconButton>
-                  </ListItemButton>
-                </List>
-              </CardContent>
-            </Box>
-          </Grid>
-          <Grid item xs={8}>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid
-                container
-                spacing={{ xs: 2, md: 3 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
-              >
-                <Grid item xs={2} sm={4} md={4}>
-                  <Link
-                    to={"/jual-produk"}
-                    style={{ color: "inherit", textDecoration: "none" }}
-                  >
-                    <Box
-                      component="form"
-                      display="flex"
-                      justifyContent="center"
-                      sx={{
-                        borderRadius: "14px",
-                        border: "3px dashed lightgrey",
-                      }}
-                    >
-                      <label htmlFor="icon-button-file">
-                        <Input
-                          accept="image/*"
-                          id="icon-button-file"
-                          type="file"
-                        />
-                        <IconButton
-                          color="primary"
-                          aria-label="upload picture"
-                          sx={{ p: 14.5 }}
-                        >
-                          <AddIcon
-                            fontSize="large"
-                            sx={{
-                              color: "text.disabled",
-                              "&:hover": {
-                                color: "background.paper",
-                              },
-                            }}
-                          />
-                        </IconButton>
-                      </label>
-                    </Box>
-                  </Link>
-                </Grid>
-                {Array.from(Array(8)).map((_, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
-                    <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          height="140"
-                          src="https://source.unsplash.com/random"
-                          alt="Produk"
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            Jam Tangan Casio
-                          </Typography>
-                          <Typography variant="caption">Aksesoris</Typography>
-                          <Typography variant="h6" fontWeight="bold">
-                            Rp.250.000
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-          </Grid>
         </Grid>
       </Container>
     </ThemeProvider>
