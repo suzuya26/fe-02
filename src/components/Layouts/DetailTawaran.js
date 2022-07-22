@@ -26,6 +26,7 @@ import Card from "@mui/material/Card";
 import Modal from "./Modal";
 import { useParams } from "react-router-dom";
 
+
 const Input = styled("input")({
   display: "none",
 });
@@ -36,6 +37,8 @@ export default function DetailTawaran() {
   const [sipenawar, setSipenawar] = useState([]);
   const [notifterima, setNotifterima] = useState(false);
   const [notiftolak, setNotiftolak] = useState(false);
+
+  let navigate = useNavigate();
 
   const { zaparam } = useParams();
   const arrayzaparam = zaparam.split("--");
@@ -91,6 +94,27 @@ export default function DetailTawaran() {
     setNotiftolak(!notiftolak);
     setNotifterima(false);
   };
+
+  async function handleTolakPenawaran (e){
+    e.preventDefault();
+    try {
+      const penawaran_id = penawaran.id
+      await axios.post(
+        `https://secondhand-kelompok2.herokuapp.com/api/v1/updatepenawaran/${penawaran_id}`,
+        {
+          statustawar: "ditolak",
+          idbuyer:sipenawar.id,
+          idproduk:produk.id
+        }
+      )
+      navigate('/info-penawar/'+produk.id);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data)
+      }
+    }
+  }
+
   const commonStyles = {
     bgcolor: "background.paper",
     borderColor: "text.primary",
@@ -119,7 +143,7 @@ export default function DetailTawaran() {
   }
 
   const theme = createTheme();
-  let navigate = useNavigate();
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -316,8 +340,7 @@ export default function DetailTawaran() {
                 {notiftolak ? (
                   <Box>
                     <Grid item md>
-                      Dengan menekan menolak tawaran ini record mengenai
-                      tawarannya akan dihapus <br />
+                      Dengan menekan tombol yakin penawaran ini akan ditolak, <br />
                       apa kamu yakin untuk melanjutkannya?
                     </Grid>
                     <Grid item md>
@@ -334,7 +357,7 @@ export default function DetailTawaran() {
                         fullWidth
                         variant="contained"
                         color="secondary"
-                        onClick={handleNotiftolak}
+                        onClick={handleTolakPenawaran}
                         sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px" }}
                       >
                         Yakin
