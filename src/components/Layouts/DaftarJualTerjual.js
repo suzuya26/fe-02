@@ -29,6 +29,8 @@ import { CardActionArea } from "@mui/material";
 import Produk from "./save/InfoProduk";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { getListTerjual } from "../../actions/terjualAction";
 
 const theme = createTheme();
 
@@ -49,6 +51,15 @@ const DaftarJualTerjual = () => {
   const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
   const idseller = decoded.id;
+
+  const { listTerjualResult, listTerjualLoading, listTerjualError } = useSelector((state) => state.terjualReducer);
+    
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      console.log("1. use effect component did mount")
+      dispatch(getListTerjual());
+  }, [dispatch])
 
   const [selectedIndex, setSelectedIndex] = React.useState(2);
 
@@ -148,47 +159,35 @@ const DaftarJualTerjual = () => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
-                <Grid item xs={2} sm={4} md={4}>
-                  <Link
-                    to={"/jual-produk"}
-                    style={{ color: "inherit", textDecoration: "none" }}
-                  >
-                    <Box
-                      component="form"
-                      display="flex"
-                      justifyContent="center"
-                      sx={{
-                        borderRadius: "14px",
-                        border: "3px dashed lightgrey",
-                      }}
-                    >
-                      <label htmlFor="icon-button-file">
-                        <Input
-                          accept="image/*"
-                          id="icon-button-file"
-                          type="file"
-                        />
-                        <IconButton
-                          color="primary"
-                          aria-label="upload picture"
-                          sx={{ p: 14.5 }}
-                        >
-                          <AddIcon
-                            fontSize="large"
-                            sx={{
-                              color: "text.disabled",
-                              "&:hover": {
-                                color: "background.paper",
-                              },
-                            }}
-                          />
-                        </IconButton>
-                      </label>
-                    </Box>
-                  </Link>
-                </Grid>
-                {Array.from(Array(8)).map((_, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+                {
+                  listTerjualResult ? (
+                    listTerjualResult.map((tjual)=>{
+                      return(
+                        <Grid item xs={2} sm={4} md={4} key={tjual.index}>
+                        <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
+                          <CardActionArea>
+                            <CardMedia
+                              component="img"
+                              height="140"
+                              src={tjual.foto1}
+                              alt={tjual.namafoto1}
+                            />
+                            <CardContent>
+                              <Typography gutterBottom variant="h5" component="div">
+                                {tjual.namaproduk}
+                              </Typography>
+                              <Typography variant="caption">{tjual.kategori}</Typography>
+                              <Typography variant="h6" fontWeight="bold">
+                                {tjual.hargaproduk}
+                              </Typography>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                      </Grid>
+                      )
+                    })
+                  ) : listTerjualLoading ? (
+                    <Grid item xs={2} sm={4} md={4}>
                     <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
                       <CardActionArea>
                         <CardMedia
@@ -199,17 +198,20 @@ const DaftarJualTerjual = () => {
                         />
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="div">
-                            Jam Tangan Casio
+                            Loading...
                           </Typography>
-                          <Typography variant="caption">Aksesoris</Typography>
+                          <Typography variant="caption">Loading...</Typography>
                           <Typography variant="h6" fontWeight="bold">
-                            Rp.250.000
+                            Loading...
                           </Typography>
                         </CardContent>
                       </CardActionArea>
                     </Card>
                   </Grid>
-                ))}
+                  ) :(
+                    <p>{listTerjualError ? listTerjualError: 'data kosong'}</p>
+                  )
+                }
               </Grid>
             </Box>
           </Grid>

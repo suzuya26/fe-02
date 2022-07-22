@@ -29,6 +29,8 @@ import { CardActionArea } from "@mui/material";
 import Produk from "./save/InfoProduk";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { getListDijual } from "../../actions/dijualAction";
 
 const theme = createTheme();
 
@@ -49,6 +51,15 @@ const DaftarJualSemua = () => {
   const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
   const idseller = decoded.id;
+
+  const { listDijualResult, listDijualLoading, listDijualError } = useSelector((state) => state.dijualReducer);
+    
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      console.log("1. use effect component did mount")
+      dispatch(getListDijual());
+  }, [dispatch])
 
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -187,8 +198,35 @@ const DaftarJualSemua = () => {
                     </Box>
                   </Link>
                 </Grid>
-                {Array.from(Array(8)).map((_, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+                {
+                  listDijualResult ? (
+                    listDijualResult.map((jual)=>{
+                      return(
+                        <Grid item xs={2} sm={4} md={4} key={jual.index}>
+                        <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
+                          <CardActionArea>
+                            <CardMedia
+                              component="img"
+                              height="140"
+                              src={jual.foto1}
+                              alt={jual.namafoto1}
+                            />
+                            <CardContent>
+                              <Typography gutterBottom variant="h5" component="div">
+                                {jual.namaproduk}
+                              </Typography>
+                              <Typography variant="caption">{jual.kategori}</Typography>
+                              <Typography variant="h6" fontWeight="bold">
+                                {jual.hargaproduk}
+                              </Typography>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                      </Grid>
+                      )
+                    })
+                  ) : listDijualLoading ? (
+                    <Grid item xs={2} sm={4} md={4}>
                     <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
                       <CardActionArea>
                         <CardMedia
@@ -199,17 +237,20 @@ const DaftarJualSemua = () => {
                         />
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="div">
-                            Jam Tangan Casio
+                            Loading...
                           </Typography>
-                          <Typography variant="caption">Aksesoris</Typography>
+                          <Typography variant="caption">Loading...</Typography>
                           <Typography variant="h6" fontWeight="bold">
-                            Rp.250.000
+                            Loading...
                           </Typography>
                         </CardContent>
                       </CardActionArea>
                     </Card>
                   </Grid>
-                ))}
+                  ) :(
+                    <p>{listDijualError ? listDijualError: 'data kosong'}</p>
+                  )
+                }
               </Grid>
             </Box>
           </Grid>

@@ -29,6 +29,9 @@ import { CardActionArea } from "@mui/material";
 import Produk from "./save/InfoProduk";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { getListFavorit } from "../../actions/favoritAction";
+import CardActions from "@mui/material/CardActions";
 
 const theme = createTheme();
 
@@ -49,6 +52,16 @@ const DaftarJualFavorit = () => {
   const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
   const idseller = decoded.id;
+
+  const { listFavoritResult, listFavoritLoading, listFavoritError } =
+    useSelector((state) => state.favoritReducer);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("1. use effect component did mount");
+    dispatch(getListFavorit());
+  }, [dispatch]);
 
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
@@ -80,7 +93,7 @@ const DaftarJualFavorit = () => {
                     Kategory
                   </Typography>
                   <Link
-                    to={"/daftar-jual/"+idseller}
+                    to={"/daftar-jual/" + idseller}
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
                     <ListItemButton
@@ -100,7 +113,7 @@ const DaftarJualFavorit = () => {
 
                   <Divider component="li" />
                   <Link
-                    to={"/daftar-jual/favorit/"+idseller}
+                    to={"/daftar-jual/favorit/" + idseller}
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
                     <ListItemButton
@@ -120,7 +133,7 @@ const DaftarJualFavorit = () => {
 
                   <Divider component="li" />
                   <Link
-                    to={"/daftar-jual/terjual/"+idseller}
+                    to={"/daftar-jual/terjual/" + idseller}
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
                     <ListItemButton
@@ -148,47 +161,43 @@ const DaftarJualFavorit = () => {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
-                <Grid item xs={2} sm={4} md={4}>
-                  <Link
-                    to={"/jual-produk"}
-                    style={{ color: "inherit", textDecoration: "none" }}
-                  >
-                    <Box
-                      component="form"
-                      display="flex"
-                      justifyContent="center"
-                      sx={{
-                        borderRadius: "14px",
-                        border: "3px dashed lightgrey",
-                      }}
-                    >
-                      <label htmlFor="icon-button-file">
-                        <Input
-                          accept="image/*"
-                          id="icon-button-file"
-                          type="file"
-                        />
-                        <IconButton
-                          color="primary"
-                          aria-label="upload picture"
-                          sx={{ p: 14.5 }}
-                        >
-                          <AddIcon
-                            fontSize="large"
-                            sx={{
-                              color: "text.disabled",
-                              "&:hover": {
-                                color: "background.paper",
-                              },
-                            }}
-                          />
-                        </IconButton>
-                      </label>
-                    </Box>
-                  </Link>
-                </Grid>
-                {Array.from(Array(8)).map((_, index) => (
-                  <Grid item xs={2} sm={4} md={4} key={index}>
+                {listFavoritResult ? (
+                  listFavoritResult.map((fav) => {
+                    return (
+                      <Grid item xs={2} sm={4} md={4} key={fav.index}>
+                        <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
+                          <CardActionArea>
+                            <CardMedia
+                              component="img"
+                              height="140"
+                              src={fav.foto1}
+                              alt={fav.namafoto1}
+                            />
+                            <CardContent>
+                              <Typography
+                                gutterBottom
+                                variant="h5"
+                                component="div"
+                              >
+                                {fav.namaproduk}
+                              </Typography>
+                              <Typography variant="caption">
+                                {fav.kategori}
+                              </Typography>
+                              <Typography variant="h6" fontWeight="bold">
+                                {fav.hargaproduk}
+                              </Typography>
+                            </CardContent>
+                            <CardActions>
+                              <Button size="small">Lihat Penawaran</Button>
+                            </CardActions>
+                          </CardActionArea>
+                        </Card>
+                      </Grid>
+                    );
+                  })
+                ) : listFavoritLoading ? (
+                  <Grid item xs={2} sm={4} md={4}>
                     <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
                       <CardActionArea>
                         <CardMedia
@@ -199,17 +208,19 @@ const DaftarJualFavorit = () => {
                         />
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="div">
-                            Jam Tangan Casio
+                            Loading...
                           </Typography>
-                          <Typography variant="caption">Aksesoris</Typography>
+                          <Typography variant="caption">Loading...</Typography>
                           <Typography variant="h6" fontWeight="bold">
-                            Rp.250.000
+                            Loading...
                           </Typography>
                         </CardContent>
                       </CardActionArea>
                     </Card>
                   </Grid>
-                ))}
+                ) : (
+                  <p>{listFavoritError ? listFavoritError : "data kosong"}</p>
+                )}
               </Grid>
             </Box>
           </Grid>
