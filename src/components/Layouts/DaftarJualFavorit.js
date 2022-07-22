@@ -189,7 +189,9 @@ const DaftarJualFavorit = () => {
                               </Typography>
                             </CardContent>
                             <CardActions>
+                            <Link to={'/info-penawar/'+fav.id} style={{ textDecoration: 'none' }}>
                               <Button size="small">Lihat Penawaran</Button>
+                            </Link>
                             </CardActions>
                           </CardActionArea>
                         </Card>

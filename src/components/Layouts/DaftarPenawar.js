@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
@@ -24,6 +24,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import Modal from "./Modal"
+import { useParams } from "react-router-dom";
 
 const Input = styled("input")({
     display: "none"
@@ -31,6 +32,37 @@ const Input = styled("input")({
 
 
 export default function FullWidthTextField() {
+    const [produk, setProduk] = useState([]);
+    const [penawaran, setPenawaran] = useState([])
+
+    const { idproduk } = useParams();
+    const today = Date.now();
+
+    useEffect(() => {
+        const url = `https://secondhand-kelompok2.herokuapp.com/api/v1/getproduk/${idproduk}`;
+        function getProdukById() {
+          //fetch some data
+          axios
+            .get(`${url}`)
+            .then((response) => {
+              const produkById = response.data;
+              const si_penjual = response.data.user;
+              setProduk(produkById);
+            })
+            .catch((error) => setProduk(null));
+        }
+        function getListPenawaran(){
+            axios.get(`https://secondhand-kelompok2.herokuapp.com/api/v1/getpenawaran/${idproduk}`).then((response) => {
+                const listPenawaran = response.data
+                console.log(listPenawaran)
+                setPenawaran(listPenawaran)
+            }).catch((error)=>setPenawaran(null))
+        }
+    
+        getProdukById();
+        getListPenawaran();
+      }, [idproduk]);
+
     const [category, setCategory] = React.useState("E");
 
     const handleChange = (event) => {
@@ -80,7 +112,7 @@ export default function FullWidthTextField() {
                                 <ArrowBackIcon />
                             </Button>
                             <Typography variant="h4" textAlign="center">
-                                Tawaran untuk "Nama.produk"
+                                Tawaran untuk {produk.namaproduk}
                             </Typography>
                         </Box>
                         <Box
@@ -104,8 +136,8 @@ export default function FullWidthTextField() {
                                                                 component="img"
                                                                 width="60"
                                                                 height="60"
-                                                                src="https://source.unsplash.com/random"
-                                                                alt="green iguana"
+                                                                src={produk.foto1}
+                                                                alt={produk.namafoto1}
                                                             />
                                                         </Avatar>
                                                     </Box>
@@ -114,17 +146,17 @@ export default function FullWidthTextField() {
                                                             Penawaran Produk
                                                         </Typography>
                                                         <Typography gutterBottom variant="subtitle1" component="div">
-                                                            Jam tangan Casio
+                                                            {produk.namaproduk}
                                                         </Typography>
                                                         <Typography gutterBottom variant="subtitle2" component="div">
-                                                            Rp.250.000
+                                                            {produk.hargaproduk}
                                                         </Typography>
                                                     </Box>
                                                 </Grid>
                                                 <Grid item>
                                                     <CardContent>
                                                         <Typography gutterBottom variant="caption" component="div">
-                                                            20 April, 01:12
+                                                            Update : {Date(produk.updatedAt)}
                                                         </Typography>
                                                     </CardContent>
                                                 </Grid>
@@ -140,102 +172,58 @@ export default function FullWidthTextField() {
                                     </Typography>
                                 </Grid>
                             </Grid>
-                            <Box noValidate sx={{ width: 450, my: 1 }}>
-                                <Card sx={{ borderRadius: "15px" }}>
-                                    <Grid container display="flex" >
-                                        <Grid item m={3}>
-                                            <Avatar variant="rounded">
-                                                <CardMedia
-                                                    component="img"
-                                                    width="60"
-                                                    height="60"
-                                                    src="https://source.unsplash.com/random"Typography
-                                                    alt="green iguana"
-                                                />
-                                            </Avatar>
+                            {penawaran.map((tawar) => {
+                                return (
+                                    <Box noValidate sx={{ width: 450, my: 1 }}>
+                                    <Card key={tawar.index} sx={{ borderRadius: "15px" }}>
+                                        <Grid container display="flex" >
+                                            <Grid item m={3}>
+                                                <Avatar variant="rounded">
+                                                    <CardMedia
+                                                        component="img"
+                                                        width="60"
+                                                        height="60"
+                                                        src={tawar.pembeli.profilimg}
+                                                        alt={tawar.pembeli.namaprofilimg}
+                                                    />
+                                                </Avatar>
+                                            </Grid>
+                                            <Grid item>
+                                                <CardContent>
+                                                    <Typography gutterBottom variant="subtitle2" component="div">
+                                                        {tawar.pembeli.nama}
+                                                    </Typography>
+                                                    <Typography variant="caption" color="text.secondary">
+                                                        {tawar.pembeli.kota}
+                                                    </Typography>
+                                                </CardContent>
+                                            </Grid>
                                         </Grid>
-                                        <Grid item>
-                                            <CardContent>
-                                                <Typography gutterBottom variant="subtitle2" component="div">
-                                                    Lizard Ranchu
-                                                </Typography>
-                                                <Typography variant="caption" color="text.secondary">
-                                                    Lamongan
-                                                </Typography>
-                                            </CardContent>
+                                    </Card>
+                                    <Grid container>
+                                        <Grid item xs>
+                                            <Typography variant="body2" mt={3}>
+                                                Ditawar Rp {tawar.hargatawar}
+                                            </Typography>
                                         </Grid>
-                                    </Grid>
-                                </Card>
-                                <Grid container>
-                                    <Grid item xs>
-                                        <Typography variant="body2" mt={3}>
-                                            Ditawar Rp.200.000,00
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item ml={2}>
-                                        <Grid item display="flex" justifyContent="space-between">
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="outlined"
-                                                color="secondary"
-                                                sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px"}}
-                                            >
-                                                Tolak
-                                            </Button>
-                                            <Modal />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                            <Box noValidate sx={{ width: 450, my: 1 }}>
-                                <Card sx={{ borderRadius: "15px" }}>
-                                    <Grid container display="flex" >
-                                        <Grid item m={3}>
-                                            <Avatar variant="rounded">
-                                                <CardMedia
-                                                    component="img"
-                                                    width="60"
-                                                    height="60"
-                                                    src="https://source.unsplash.com/random"
-                                                    alt="green iguana"
-                                                />
-                                            </Avatar>
-                                        </Grid>
-                                        <Grid item>
-                                            <CardContent>
-                                                <Typography gutterBottom variant="subtitle2" component="div">
-                                                    Suzuya Signora
-                                                </Typography>
-                                                <Typography variant="caption" color="text.secondary">
-                                                    Bukittinggi
-                                                </Typography>
-                                            </CardContent>
+                                        <Grid item ml={2}>
+                                            <Grid item display="flex" justifyContent="space-between">
+                                                <Button
+                                                    type="submit"
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    color="secondary"
+                                                    sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px"}}
+                                                >
+                                                    Tolak
+                                                </Button>
+                                                <Modal />
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                </Card>
-                                <Grid container>
-                                    <Grid item xs>
-                                        <Typography variant="body2" mt={3}>
-                                            Ditawar Rp.5.000,00
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item ml={2}>
-                                        <Grid item display="flex" justifyContent="space-between">
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="outlined"
-                                                color="secondary"
-                                                sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px"}}
-                                            >
-                                                Tolak
-                                            </Button>
-                                            <Modal />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                            </Box>
+                                </Box>
+                                )
+                            })}
                         </Box>
                     </Grid>
                     <Grid className="G3" item xs={12} md={3} square></Grid>

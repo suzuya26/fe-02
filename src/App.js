@@ -63,7 +63,7 @@ function App() {
         <Route path="/daftar-jual/terjual/:idseller" element={<Protected>
           <Dafju /> <DaftarJualTerjual/>
           </Protected>} />
-        <Route path="/info-penawar" element={<Protected>
+        <Route path="/info-penawar/:idproduk" element={<Protected>
           <Inpar />
           </Protected>} />
       </Routes>
