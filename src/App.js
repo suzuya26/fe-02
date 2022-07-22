@@ -23,6 +23,7 @@ import Perkategori from './components/pages/Perkategori'
 import DaftarJualSemua from './components/Layouts/DaftarJualSemua';
 import DaftarJualFavorit from './components/Layouts/DaftarJualFavorit';
 import DaftarJualTerjual from './components/Layouts/DaftarJualTerjual';
+import DetailTawaran from './components/pages/DetailTawaran';
 
 function App() {
   return (
@@ -65,6 +66,9 @@ function App() {
           </Protected>} />
         <Route path="/info-penawar/:idproduk" element={<Protected>
           <Inpar />
+          </Protected>} />
+        <Route path="/detail-tawaran/:zaparam" element={<Protected>
+          <DetailTawaran />
           </Protected>} />
       </Routes>
     </BrowserRouter>

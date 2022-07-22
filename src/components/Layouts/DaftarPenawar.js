@@ -8,7 +8,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -24,7 +23,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import Modal from "./Modal"
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 
 const Input = styled("input")({
     display: "none"
@@ -208,16 +207,16 @@ export default function FullWidthTextField() {
                                         </Grid>
                                         <Grid item ml={2}>
                                             <Grid item display="flex" justifyContent="space-between">
+                                            <Link to={'/detail-tawaran/'+produk.id+'--'+tawar.id} style={{ textDecoration: 'none' }}>
                                                 <Button
-                                                    type="submit"
                                                     fullWidth
                                                     variant="outlined"
                                                     color="secondary"
                                                     sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px"}}
                                                 >
-                                                    Tolak
+                                                    Detail
                                                 </Button>
-                                                <Modal />
+                                            </Link>
                                             </Grid>
                                         </Grid>
                                     </Grid>

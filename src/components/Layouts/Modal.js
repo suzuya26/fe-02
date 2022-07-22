@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -19,7 +20,8 @@ export default function MaxWidthDialog() {
     const [open, setOpen] = React.useState(false);
     const [fullWidth] = React.useState(true);
     const [maxWidth] = React.useState("xs");
-
+    const [tes, setTes] = useState(false)
+ 
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -27,6 +29,7 @@ export default function MaxWidthDialog() {
     const handleClose = () => {
         setOpen(false);
     };
+
 
     return (
         <React.Fragment>
