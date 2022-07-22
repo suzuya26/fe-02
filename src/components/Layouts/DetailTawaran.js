@@ -325,7 +325,7 @@ export default function DetailTawaran() {
                         fullWidth
                         variant="outlined"
                         color="secondary"
-                        onClick={handleNotifterima}
+                        onClick={handleNotiftolak}
                         sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px" }}
                       >
                         Tidak
@@ -334,7 +334,7 @@ export default function DetailTawaran() {
                         fullWidth
                         variant="contained"
                         color="secondary"
-                        onClick={handleNotifterima}
+                        onClick={handleNotiftolak}
                         sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px" }}
                       >
                         Yakin
