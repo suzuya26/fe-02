@@ -8,7 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -25,7 +25,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Card from "@mui/material/Card";
 import Modal from "./Modal";
 import { useParams } from "react-router-dom";
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import CloseIcon from "@mui/icons-material/Close";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const Input = styled("input")({
   display: "none",
@@ -78,10 +84,25 @@ export default function DetailTawaran() {
     getListPenawaran();
   }, [idproduk]);
 
-  const [category, setCategory] = React.useState("E");
+  const [open, setOpen] = React.useState(false);
+  const [fullWidth] = React.useState(true);
+  const [maxWidth] = React.useState("xs");
 
-  const handleChange = (event) => {
-    setCategory(event.target.value);
+  const handleClickOpen = () => {
+    const penawaran_id = penawaran.id;
+    axios.post(
+      `https://secondhand-kelompok2.herokuapp.com/api/v1/updatepenawaran/${penawaran_id}`,
+      {
+        statustawar: "diterima",
+        idbuyer: sipenawar.id,
+        idproduk: produk.id,
+      }
+    );
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    navigate("/info-penawar/" + produk.id);
   };
 
   const handleNotifterima = (e) => {
@@ -95,22 +116,22 @@ export default function DetailTawaran() {
     setNotifterima(false);
   };
 
-  async function handleTolakPenawaran (e){
+  async function handleTolakPenawaran(e) {
     e.preventDefault();
     try {
-      const penawaran_id = penawaran.id
+      const penawaran_id = penawaran.id;
       await axios.post(
         `https://secondhand-kelompok2.herokuapp.com/api/v1/updatepenawaran/${penawaran_id}`,
         {
           statustawar: "ditolak",
-          idbuyer:sipenawar.id,
-          idproduk:produk.id
+          idbuyer: sipenawar.id,
+          idproduk: produk.id,
         }
-      )
-      navigate('/info-penawar/'+produk.id);
+      );
+      navigate("/info-penawar/" + produk.id);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data)
+        console.log(error.response.data);
       }
     }
   }
@@ -143,7 +164,6 @@ export default function DetailTawaran() {
   }
 
   const theme = createTheme();
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -316,7 +336,7 @@ export default function DetailTawaran() {
                     <Grid>
                       <Grid item md>
                         Dengan menerima tawaran ini semua penawaran lain akan
-                        dihapus,
+                        ditolak,
                         <br />
                         apakah kamu yakin untuk melanjutkan?
                       </Grid>
@@ -330,7 +350,148 @@ export default function DetailTawaran() {
                         >
                           Tidak
                         </Button>
-                        <Modal />
+                        <Button
+                          variant="contained"
+                          fullWidth
+                          color="secondary"
+                          sx={{ px: 5, ml: 0.5, my: 1, borderRadius: "20px" }}
+                          onClick={handleClickOpen}
+                        >
+                          Yakin dan Terima
+                        </Button>
+                        <Dialog
+                          fullWidth={fullWidth}
+                          maxWidth={maxWidth}
+                          open={open}
+                          disableBackdropClick
+                          borderRadius={50}
+                        >
+                          <DialogContent>
+                            <Typography fontWeight="bold">
+                              yeay kamu berhasil mendapatkan harga yang sesuai.
+                            </Typography>
+                            <DialogContentText variant="caption">
+                              Segera hubungi pembeli melalui whatsapp untuk
+                              transaksi selanjutnya
+                            </DialogContentText>
+                            <Box
+                              noValidate
+                              component="form"
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                m: "auto",
+                                width: "fit-content",
+                              }}
+                            >
+                              <Box
+                                my={2}
+                                sx={{
+                                  width: 300,
+                                  height: "fit-content",
+                                  borderRadius: "10px",
+                                  backgroundColor: "grey.300",
+                                }}
+                              >
+                                <Typography mx={11} my={1} fontWeight="bold">
+                                  Product Match
+                                </Typography>
+                                <Box sx={{ display: "flex" }}>
+                                  <Box my={3} mx={2}>
+                                    <Avatar variant="rounded">
+                                      <CardMedia
+                                        component="img"
+                                        width="60"
+                                        height="60"
+                                        src={sipenawar.profilimg}
+                                        alt={sipenawar.namaprofilimg}
+                                      />
+                                    </Avatar>
+                                  </Box>
+                                  <Box my={2}>
+                                    <Typography
+                                      variant="body1"
+                                      fontWeight="bold"
+                                      component="div"
+                                    >
+                                      {sipenawar.nama}
+                                    </Typography>
+                                    <Typography variant="caption">
+                                      {sipenawar.kota}
+                                    </Typography>
+                                  </Box>
+                                </Box>
+
+                                <Grid item display="Flex">
+                                  <Box my={3} mx={2}>
+                                    <Avatar variant="rounded">
+                                      <CardMedia
+                                        component="img"
+                                        width="60"
+                                        height="60"
+                                        src={produk.foto1}
+                                        alt={produk.namafoto1}
+                                      />
+                                    </Avatar>
+                                  </Box>
+                                  <Box my={2}>
+                                    <Typography
+                                      gutterBottom
+                                      variant="subtitle1"
+                                      component="div"
+                                    >
+                                      {produk.namaproduk}
+                                    </Typography>
+                                    <Typography
+                                      gutterBottom
+                                      variant="subtitle2"
+                                      component="div"
+                                      sx={{ textDecoration: "line-through" }}
+                                    >
+                                      Rp.{produk.hargaproduk}
+                                    </Typography>
+                                    <Typography
+                                      gutterBottom
+                                      variant="subtitle2"
+                                      component="div"
+                                    >
+                                      Ditawar Rp.{penawaran.hargatawar}
+                                    </Typography>
+                                  </Box>
+                                </Grid>
+                              </Box>
+                              <a
+                                href={"https://wa.me/" + sipenawar.nohp}
+                                target="_blank"
+                                style={{ textDecoration: "none" }}
+                              >
+                                <Button
+                                  fullWidth
+                                  variant="contained"
+                                  color="secondary"
+                                  sx={{ borderRadius: "15px", p: 1 }}
+                                  startIcon={<WhatsAppIcon />}
+                                >
+                                  Hubungi Via Whatsapp
+                                </Button>
+                              </a>
+                            </Box>
+                          </DialogContent>
+                          <DialogActions>
+                            <IconButton
+                              aria-label="close"
+                              onClick={handleClose}
+                              sx={{
+                                position: "absolute",
+                                right: 8,
+                                top: 8,
+                                color: (theme) => theme.palette.grey[500],
+                              }}
+                            >
+                              <CloseIcon />
+                            </IconButton>
+                          </DialogActions>
+                        </Dialog>
                       </Grid>
                     </Grid>
                   </Box>
@@ -340,7 +501,8 @@ export default function DetailTawaran() {
                 {notiftolak ? (
                   <Box>
                     <Grid item md>
-                      Dengan menekan tombol yakin penawaran ini akan ditolak, <br />
+                      Dengan menekan tombol yakin penawaran ini akan ditolak,{" "}
+                      <br />
                       apa kamu yakin untuk melanjutkannya?
                     </Grid>
                     <Grid item md>
@@ -360,7 +522,7 @@ export default function DetailTawaran() {
                         onClick={handleTolakPenawaran}
                         sx={{ px: 5, mr: 0.5, my: 1, borderRadius: "20px" }}
                       >
-                        Yakin
+                        Yakin dan Tolak
                       </Button>
                     </Grid>
                   </Box>

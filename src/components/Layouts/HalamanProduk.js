@@ -26,6 +26,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import TextField from "@mui/material/TextField";
 import { autoPlay } from "react-swipeable-views-utils";
+import ModalStatus from "./ModalStatus"
 
 const theme = createTheme();
 
@@ -292,14 +293,32 @@ export default function HalamanProduk() {
               </Stack>
               {role ? (
                 <Stack m={2} p={2} spacing={2}>
-                  <Button
+                  {produk.deletedAt === null ? (<>
+                    {produk.statusproduk === "reserved" ? (
+                      <ModalStatus/>
+                    ):(
+                      <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      sx={{ borderRadius: "14px" }}
+                    >
+                      Edit
+                    </Button>
+                    )}
+                  </>
+
+                  ):(
+                    <Button
                     fullWidth
                     variant="contained"
                     color="secondary"
                     sx={{ borderRadius: "14px" }}
+                    disabled
                   >
-                    Edit
+                    Terjual
                   </Button>
+                  )}
                 </Stack>
               ) : (
                 <Stack m={2} p={2} spacing={2}>
@@ -365,8 +384,8 @@ export default function HalamanProduk() {
                       component="img"
                       width="60"
                       height="60"
-                      src="https://source.unsplash.com/random"
-                      alt="green iguana"
+                      src={penjual.profilimg}
+                      alt={penjual.namaprofilimg}
                     />
                   </Avatar>
                 </Grid>
