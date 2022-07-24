@@ -37,6 +37,7 @@ const kotas = [
     value: "Madura",
     label: "Madura",
   },
+  
 ];
 
 const Input = styled("input")({
@@ -136,6 +137,7 @@ export default function FullWidthTextField() {
           namaprofilimg: uploadedFileName,
         }
       );
+      navigate('/daftar-jual/'+iduser);
       //pindah ke halaman trakhir.
     } catch (error) {
       if (error.response) {

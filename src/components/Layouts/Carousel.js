@@ -20,19 +20,15 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const images = [
   {
     imgPath:
-      'https://cdn.discordapp.com/attachments/969271495513763870/1000653095619010560/47582374_1548213105313747_1762762517461053593_n.jpg',
+      'https://res.cloudinary.com/drakr4vtu/image/upload/v1658673684/secondhand/products/Gambar%20Produk%201658673684885.png',
   },
   {
     imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+    'https://res.cloudinary.com/drakr4vtu/image/upload/v1658673689/secondhand/products/Gambar%20Produk%201658673689449.png',
   },
   {
     imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
-  },
-  {
-    imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+    'https://res.cloudinary.com/drakr4vtu/image/upload/v1658673696/secondhand/products/Gambar%20Produk%201658673696185.png',
   },
 ];
 
@@ -57,7 +53,7 @@ function SwipeableTextMobileStepper() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container>
-        <Box my={2} sx={{borderRadius: "16px" }}>
+        <Box my={2} sx={{ maxWidth: "auto", flexGrow: 1 ,borderRadius: "16px" }}>
           <AutoPlaySwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
             index={activeStep}
@@ -71,12 +67,14 @@ function SwipeableTextMobileStepper() {
                     component="img"
                     sx={{
                       height: 288,
-                      maxWidth: "100%",
-                      overflow: 'hidden',
-                      width: 968,
-                      borderRadius: "16px",
+                      maxWidth: "auto",
+                      display: "block",
+                      overflow: "hidden",
+                      width: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center",
                     }}
-
+                    src={step.imgPath}
                   />
                 ) : null}
               </div>

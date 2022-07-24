@@ -26,7 +26,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import TextField from "@mui/material/TextField";
 import { autoPlay } from "react-swipeable-views-utils";
-import ModalStatus from "./ModalStatus"
+import ModalStatus from "./ModalStatus";
 
 const theme = createTheme();
 
@@ -61,6 +61,9 @@ export default function HalamanProduk() {
         .then((response) => {
           const produkById = response.data;
           const si_penjual = response.data.user;
+          console.log("produk nih");
+          console.log(produkById);
+          console.log("produk nih");
           setProduk(produkById);
           setPenjual(si_penjual);
         })
@@ -80,7 +83,7 @@ export default function HalamanProduk() {
       const decoded = jwtDecode(token);
       const idpenawar = decoded.id;
       const kondisi = `${idpenawar}--${id}`;
-      console.log(kondisi)
+      console.log(kondisi);
 
       axios
         .get(
@@ -191,76 +194,170 @@ export default function HalamanProduk() {
                 boxShadow: 3,
               }}
             >
-              <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
-                <Paper
-                  square
-                  elevation={0}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    height: 50,
-                    pl: 2,
-                    bgcolor: "background.default",
-                  }}
-                ></Paper>
-                <AutoPlaySwipeableViews
-                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                  index={activeStep}
-                  onChangeIndex={handleStepChange}
-                  enableMouseEvents
-                >
-                  {images.map((step, index) => (
-                    <div key={step.label}>
-                      {Math.abs(activeStep - index) <= 2 ? (
-                        <Box
-                          component="img"
-                          sx={{
-                            height: 255,
-                            display: "block",
-                            maxWidth: 400,
-                            overflow: "hidden",
-                            width: "100%",
-                          }}
-                          src={step.imgPath}
-                          alt={step.label}
-                        />
-                      ) : null}
-                    </div>
-                  ))}
-                </AutoPlaySwipeableViews>
-                <MobileStepper
-                  steps={maxSteps}
-                  position="static"
-                  activeStep={activeStep}
-                  nextButton={
-                    <Button
-                      size="small"
-                      onClick={handleNext}
-                      disabled={activeStep === maxSteps - 1}
-                    >
-                      Next
-                      {theme.direction === "rtl" ? (
-                        <KeyboardArrowLeft />
-                      ) : (
-                        <KeyboardArrowRight />
-                      )}
-                    </Button>
-                  }
-                  backButton={
-                    <Button
-                      size="small"
-                      onClick={handleBack}
-                      disabled={activeStep === 0}
-                    >
-                      {theme.direction === "rtl" ? (
-                        <KeyboardArrowRight />
-                      ) : (
-                        <KeyboardArrowLeft />
-                      )}
-                      Back
-                    </Button>
-                  }
-                />
+              <Box>
+                {produk.foto2 === null ? (
+                  <Grid>
+                    <Grid item>
+                      <Box
+                        component="img"
+                        sx={{
+                          height: 400,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto1}
+                      />
+                    </Grid>
+                  </Grid>
+                ) : produk.foto3 === null ? (
+                  <Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto1}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto2}
+                      />
+                    </Grid>
+                  </Grid>
+                ) : produk.foto4 === null ? (
+                  <Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto1}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto2}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto3}
+                      />
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto1}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto2}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto3}
+                      />
+                    </Grid>
+                    <Grid item md={3}>
+                    <Box
+                        component="img"
+                        sx={{
+                          height: 200,
+                          maxWidth: "auto",
+                          display: "block",
+                          overflow: "hidden",
+                          width: "100%",
+                          objectFit: "cover",
+                          objectPosition: "left",
+                        }}
+                        src={produk.foto4}
+                      />
+                    </Grid>
+                  </Grid>
+                )}
               </Box>
             </Box>
             <Box
@@ -293,31 +390,31 @@ export default function HalamanProduk() {
               </Stack>
               {role ? (
                 <Stack m={2} p={2} spacing={2}>
-                  {produk.deletedAt === null ? (<>
-                    {produk.statusproduk === "reserved" ? (
-                      <ModalStatus/>
-                    ):(
-                      <Button
+                  {produk.deletedAt === null ? (
+                    <>
+                      {produk.statusproduk === "reserved" ? (
+                        <ModalStatus />
+                      ) : (
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          color="secondary"
+                          sx={{ borderRadius: "14px" }}
+                        >
+                          Edit
+                        </Button>
+                      )}
+                    </>
+                  ) : (
+                    <Button
                       fullWidth
                       variant="contained"
                       color="secondary"
                       sx={{ borderRadius: "14px" }}
+                      disabled
                     >
-                      Edit
+                      Terjual
                     </Button>
-                    )}
-                  </>
-
-                  ):(
-                    <Button
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    sx={{ borderRadius: "14px" }}
-                    disabled
-                  >
-                    Terjual
-                  </Button>
                   )}
                 </Stack>
               ) : (

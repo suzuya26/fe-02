@@ -153,7 +153,6 @@ export default function Nav() {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
-            <Hamburgeur />
           </Badge>
         </IconButton>
         <p>Menu</p>
@@ -189,6 +188,7 @@ export default function Nav() {
     <Box sx={{ flexGrow: 1, boxShadow: 2 }}>
       <AppBar position="static" color="inherit">
         <Toolbar>
+          <Link to="/">
           <Box
             sx={{
               width: 50,
@@ -196,17 +196,7 @@ export default function Nav() {
               backgroundColor: "secondary.main",
             }}
           />
-          <Search>
-            <Box style={{ marginLeft:"1em", backgroundColor: "lightgrey", borderRadius: "15px" }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />          </Box>
-          </Search>
-
+          </Link>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -217,7 +207,6 @@ export default function Nav() {
               aria-haspopup="true"
               color="inherit"
             >
-              <Hamburgeur />
             </IconButton>
             <IconButton
               size="large"
