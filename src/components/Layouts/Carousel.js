@@ -20,7 +20,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const images = [
   {
     imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+      'https://cdn.discordapp.com/attachments/969271495513763870/1000653095619010560/47582374_1548213105313747_1762762517461053593_n.jpg',
   },
   {
     imgPath:

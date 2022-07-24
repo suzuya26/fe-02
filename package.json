@@ -24,6 +24,7 @@
     "react-swipeable-views": "^0.14.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "sass": "^1.54.0",
     "swiper": "^8.3.1",
     "web-vitals": "^2.1.0"
   },

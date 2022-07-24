@@ -32,7 +32,7 @@ export default function ListHomeKategori() {
       <Link to={'/'} style={{ textDecoration: 'none' }}>
       <Button
                 variant="contained"
-                sx={{ borderRadius: "10px", mx: 1 }}
+                sx={{ borderRadius: "10px", m: 1 }}
                 startIcon={<SearchIcon />}
                 color="secondary"
               >
@@ -46,7 +46,7 @@ export default function ListHomeKategori() {
              <Button
                 key={kategori.id}
                 variant="outlined"
-                sx={{ borderRadius: "10px", mx: 1 }}
+                sx={{ borderRadius: "10px", m: 1 }}
                 startIcon={<SearchIcon />}
                 color="secondary"
                 active

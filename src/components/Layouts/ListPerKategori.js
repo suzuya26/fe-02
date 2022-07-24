@@ -33,7 +33,7 @@ export default function ListPerKategori() {
       <Link to={'/'} style={{ textDecoration: 'none' }}>
       <Button
                 variant="outlined"
-                sx={{ borderRadius: "10px", mx: 1 }}
+                sx={{ borderRadius: "10px", m: 1 }}
                 startIcon={<SearchIcon />}
                 color="secondary"
               >
@@ -47,7 +47,7 @@ export default function ListPerKategori() {
               <Button
                 key={kategori.id}
                 variant={kategori.kategori === category ? ("contained") : ("outlined")}
-                sx={{ borderRadius: "10px", mx: 1 }}
+                sx={{ borderRadius: "10px", m: 1 }}
                 startIcon={<SearchIcon />}
                 color="secondary"
                 active
