@@ -164,6 +164,8 @@ const DaftarJualTerjual = () => {
                     listTerjualResult.map((tjual)=>{
                       return(
                         <Grid item xs={2} sm={4} md={4} key={tjual.index}>
+                          <Link to={'/halaman-produk/'+tjual.id} style={{ textDecoration: 'none' }}>
+
                         <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
                           <CardActionArea>
                             <CardMedia
@@ -183,6 +185,7 @@ const DaftarJualTerjual = () => {
                             </CardContent>
                           </CardActionArea>
                         </Card>
+                          </Link>
                       </Grid>
                       )
                     })

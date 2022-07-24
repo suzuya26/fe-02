@@ -226,7 +226,7 @@ export default function Nav() {
                 </Badge>
               ) : (
                 <Badge badgeContent={0} color="error">
-                  <NotificationsIcon />
+                  <Notif />
                 </Badge>
               )}
             </IconButton>

@@ -165,6 +165,7 @@ const DaftarJualFavorit = () => {
                   listFavoritResult.map((fav) => {
                     return (
                       <Grid item xs={2} sm={4} md={4} key={fav.index}>
+                        <Link to={'/halaman-produk/'+fav.id} style={{ textDecoration: 'none' }}>
                         <Card sx={{ boxShadow: 3, maxWidth: 345 }}>
                           <CardActionArea>
                             <CardMedia
@@ -195,6 +196,7 @@ const DaftarJualFavorit = () => {
                             </CardActions>
                           </CardActionArea>
                         </Card>
+                        </Link>
                       </Grid>
                     );
                   })

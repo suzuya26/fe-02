@@ -20,7 +20,6 @@ export default function MaxWidthDialog() {
     const [open, setOpen] = React.useState(false);
     const [fullWidth] = React.useState(true);
     const [maxWidth] = React.useState("xs");
-    const [tes, setTes] = useState(false)
  
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,7 +39,7 @@ export default function MaxWidthDialog() {
                 fullWidth={fullWidth}
                 maxWidth={maxWidth}
                 open={open}
-                onClose={handleClose}
+                disableBackdropClick
                 borderRadius={50}
             >
                 <DialogContent>

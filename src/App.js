@@ -53,7 +53,7 @@ function App() {
           <CheckProfile><Cobs /></CheckProfile><Form/>
           </Protected>} />
         <Route path="/halaman-produk/:id" element={<Protected>
-          <Halpro />
+          <CheckProfile><Halpro /></CheckProfile>
           </Protected>} />
         <Route path="/daftar-jual/:idseller" element={<Protected>
           <Dafju /> <DaftarJualSemua/>

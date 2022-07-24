@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -19,11 +19,25 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import jwtDecode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 export default function MaxWidthDialog() {
     const [open, setOpen] = React.useState(false);
     const [fullWidth] = React.useState(true);
     const [maxWidth] = React.useState("xs");
+    const [status, setStatus] = useState('berhasil')
+
+    const navigate = useNavigate();
+
+    const { id } = useParams();
+    console.log("ini param dari modal cuyy :"+id);
+
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const idseller = decoded.id
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -32,11 +46,34 @@ export default function MaxWidthDialog() {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleChange = (e) => {
+        setStatus(e.target.value);
+      }
+    console.log('iki state e kini : '+status)
+
+    async function handleUbahStatus (e){
+        e.preventDefault()
+        try {
+            if (status == 'berhasil'){
+                await axios.delete(`https://secondhand-kelompok2.herokuapp.com/api/v1/deleteproduk/${id}`)
+                navigate('/daftar-jual/terjual/'+idseller);
+            } else {
+                await axios.post(`https://secondhand-kelompok2.herokuapp.com/api/v1/bataltransaksi/${id}`)
+                navigate('/daftar-jual/'+idseller);
+            }
+
+        } catch (error) {
+                  if (error.response) {
+        console.log(error.response.data)
+      }
+        }
+    }
+
 
     return (
         <React.Fragment>
             <Button variant="contained" fullWidth color="secondary" sx={{ px: 5, ml: 0.5, my: 1, borderRadius: "20px" }} onClick={handleClickOpen}>
-                Terima
+                Edit Status
             </Button>
             <Dialog
                 fullWidth={fullWidth}
@@ -78,13 +115,13 @@ export default function MaxWidthDialog() {
                                 defaultValue="female"
                                 name="radio-buttons-group"
                             >
-                                <FormControlLabel value="female" control={<Radio color="secondary" />} label="Berhasil Terjual"/>
+                                <FormControlLabel value="berhasil" onChange={handleChange} checked={status === 'berhasil'} control={<Radio color="secondary" />} label="Berhasil Terjual"/>
                                 <Typography variant="caption">Kamu telah sepakat menjual produk ini kepada pembeli</Typography>
-                                <FormControlLabel value="male" control={<Radio color="secondary"/>} label="Batalkan Transaksi" />
+                                <FormControlLabel value="batal" onChange={handleChange} checked={status === 'batal'} control={<Radio color="secondary"/>} label="Batalkan Transaksi" />
                                 <Typography variant="caption">Kamu membatalkan transaksi produk ini dengan pembeli</Typography>
                             </RadioGroup>
                         </FormControl>
-                        <Button variant="contained" color="secondary" sx={{ borderRadius: "15px", p: 1, mt: 2 }} >Kirim</Button>
+                        <Button variant="contained" color="secondary" onClick={handleUbahStatus} sx={{ borderRadius: "15px", p: 1, mt: 2 }} >Kirim</Button>
                     </Box>
                 </DialogContent>
             </Dialog>
