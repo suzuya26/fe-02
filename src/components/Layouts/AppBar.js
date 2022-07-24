@@ -4,23 +4,22 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import Notif from "./Notif";
+import Hamburgeur from "./Hamburgeur";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentNotif } from "../../actions/totalnotifAction";
 import { Link } from 'react-router-dom'
+import LogoutIcon from '@mui/icons-material/Logout';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -81,6 +80,10 @@ export default function Nav() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleWebMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -122,11 +125,11 @@ export default function Nav() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>{decoded.nama}</MenuItem>
-      <Link to={'/daftar-jual/'+decoded.id} style={{ color: 'inherit',textDecoration: 'none' }}>
-      <MenuItem >Jualanku</MenuItem>
+      <MenuItem onClick={handleMenuClose}><PermIdentityIcon/>{decoded.nama}</MenuItem>
+      <Link to={'/daftar-jual/' + decoded.id} style={{ color: 'inherit', textDecoration: 'none' }}>
+        <MenuItem ><StorefrontIcon/>Jualanku</MenuItem>
       </Link>
-      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}><LogoutIcon/>Logout</MenuItem>
     </Menu>
   );
 
@@ -150,10 +153,10 @@ export default function Nav() {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
-            <MailIcon />
+            <Hamburgeur />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Menu</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -194,24 +197,27 @@ export default function Nav() {
             }}
           />
           <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
+            <Box style={{ marginLeft:"1em", backgroundColor: "lightgrey", borderRadius: "15px" }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />          </Box>
           </Search>
+
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
               color="inherit"
             >
-              <Badge badgeContent={4} color="error">
-                <MenuIcon />
-              </Badge>
+              <Hamburgeur />
             </IconButton>
             <IconButton
               size="large"

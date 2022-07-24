@@ -1,7 +1,7 @@
 import MahaNavbar from '../Layouts/MahaNavbar';
 import Notif from "../Layouts/Notif"
 import Nav from "../Layouts/AppBar"
-import Swiper from "../Layouts/Swipper/Swiper"
+import Hambergour from "../Layouts/Hamburgeur"
 
 function CobaDoang() {
     return (
@@ -12,7 +12,7 @@ function CobaDoang() {
         </header>
         <main>
           <Notif/>
-          <Swiper/>
+          <Hambergour/>
         </main>
       </div>
     );

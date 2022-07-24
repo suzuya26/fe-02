@@ -2,7 +2,8 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import
+import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom'
 
 function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,8 +23,9 @@ function BasicMenu() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        color="inherit"
       >
-        Dashboard
+        <MenuIcon/>
       </Button>
       <Menu
         id="basic-menu"
@@ -34,8 +36,9 @@ function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Halaman Jual</MenuItem>
-        <MenuItem onClick={handleClose}>Daftar Penawar</MenuItem>
+        <MenuItem onClick={handleClose}>        <Link to={''}  color="inherit" style={{ textDecoration: 'none' }}>Halaman Jual</Link></MenuItem>
+        <MenuItem onClick={handleClose}>        <Link to={'/jual-produk'}  color="inherit" style={{ textDecoration: 'none' }}>Jual Produk</Link></MenuItem>
+        <MenuItem onClick={handleClose}>        <Link to={''}  color="inherit" style={{ textDecoration: 'none' }}>Daftar Penawar</Link></MenuItem>
       </Menu>
     </div>
   );
