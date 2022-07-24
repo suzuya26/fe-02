@@ -214,12 +214,12 @@ export default function HalamanProduk() {
                     </Grid>
                   </Grid>
                 ) : produk.foto3 === null ? (
-                  <Grid>
-                    <Grid item md={3}>
+                  <Grid container>
+                    <Grid item xs={6}>
                     <Box
                         component="img"
                         sx={{
-                          height: 200,
+                          height: 400,
                           maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
@@ -230,11 +230,11 @@ export default function HalamanProduk() {
                         src={produk.foto1}
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={6}>
                     <Box
                         component="img"
                         sx={{
-                          height: 200,
+                          height: 400,
                           maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
@@ -247,12 +247,12 @@ export default function HalamanProduk() {
                     </Grid>
                   </Grid>
                 ) : produk.foto4 === null ? (
-                  <Grid>
-                    <Grid item md={3}>
+                  <Grid container>
+                    <Grid item xs={4}>
                     <Box
                         component="img"
                         sx={{
-                          height: 200,
+                          height: 300,
                           maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
@@ -263,11 +263,11 @@ export default function HalamanProduk() {
                         src={produk.foto1}
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={4}>
                     <Box
                         component="img"
                         sx={{
-                          height: 200,
+                          height: 300,
                           maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
@@ -278,11 +278,11 @@ export default function HalamanProduk() {
                         src={produk.foto2}
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={4}>
                     <Box
                         component="img"
                         sx={{
-                          height: 200,
+                          height: 300,
                           maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
@@ -295,13 +295,12 @@ export default function HalamanProduk() {
                     </Grid>
                   </Grid>
                 ) : (
-                  <Grid>
-                    <Grid item md={3}>
+                  <Grid container>
+                    <Grid item xs={6}>
                     <Box
                         component="img"
                         sx={{
                           height: 200,
-                          maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
                           width: "100%",
@@ -311,12 +310,11 @@ export default function HalamanProduk() {
                         src={produk.foto1}
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={6}>
                     <Box
                         component="img"
                         sx={{
                           height: 200,
-                          maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
                           width: "100%",
@@ -326,12 +324,11 @@ export default function HalamanProduk() {
                         src={produk.foto2}
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={6}>
                     <Box
                         component="img"
                         sx={{
                           height: 200,
-                          maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
                           width: "100%",
@@ -341,12 +338,11 @@ export default function HalamanProduk() {
                         src={produk.foto3}
                       />
                     </Grid>
-                    <Grid item md={3}>
+                    <Grid item xs={6}>
                     <Box
                         component="img"
                         sx={{
                           height: 200,
-                          maxWidth: "auto",
                           display: "block",
                           overflow: "hidden",
                           width: "100%",
