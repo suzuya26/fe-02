@@ -53,19 +53,29 @@ function App() {
           <CheckProfile><Halpro /></CheckProfile>
           </Protected>} />
         <Route path="/daftar-jual/:idseller" element={<Protected>
+          <CheckProfile>
           <Dafju /> <DaftarJualSemua/>
+          </CheckProfile>
           </Protected>} />
         <Route path="/daftar-jual/favorit/:idseller" element={<Protected>
+          <CheckProfile>
           <Dafju /> <DaftarJualFavorit/>
+          </CheckProfile>
           </Protected>} />
         <Route path="/daftar-jual/terjual/:idseller" element={<Protected>
+          <CheckProfile>
           <Dafju /> <DaftarJualTerjual/>
+          </CheckProfile>
           </Protected>} />
         <Route path="/info-penawar/:idproduk" element={<Protected>
+          <CheckProfile>
           <Inpar />
+          </CheckProfile>
           </Protected>} />
         <Route path="/detail-tawaran/:zaparam" element={<Protected>
+          <CheckProfile>
           <DetailTawaran />
+          </CheckProfile>
           </Protected>} />
       </Routes>
     </BrowserRouter>
