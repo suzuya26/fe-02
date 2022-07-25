@@ -41,7 +41,7 @@ function App() {
           <Profil />
           </Protected>} />
         <Route path="/jual-produk" element={<Protected>
-          <Produk />
+          <CheckProfile><Produk /></CheckProfile>
           </Protected>} />
         <Route path="/edit-foto-user" element={<Protected>
           <Edfuus />
