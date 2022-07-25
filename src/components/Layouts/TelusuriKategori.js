@@ -46,7 +46,7 @@ function TelusuriKategori() {
                                 return (
                                     <Grid item xs={2} sm={2} md={2}>
                                         <Link to={'/halaman-produk/'+product.id} style={{ textDecoration: 'none' }}>
-                                        <Card sx={{ maxWidth: 345 }}>
+                                        <Card sx={{ maxWidth: 345, height: 300, borderRadius: "0.5em" }}>
                                             <CardActionArea>
                                                 <CardMedia
                                                     component="img"
@@ -56,7 +56,7 @@ function TelusuriKategori() {
 
                                                 />
                                                 <CardContent>
-                                                    <Typography gutterBottom variant="h5" component="div">
+                                                    <Typography gutterBottom variant="h6" component="div" fontWeight="bold" fontSize={18} height="60px">
                                                         {product.namaproduk}
                                                     </Typography>
                                                     <Typography variant="caption">

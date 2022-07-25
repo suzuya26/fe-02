@@ -246,11 +246,14 @@ export default function FullWidthTextField() {
   return (
     <Container sx={{ display: "flex", justifyContent: "center" }}>
       <Stack>
-        <Stack>
-          <Button sx={{ color: "text.primary", m: 4 }}>
-            <ArrowBackIcon />
-          </Button>
-        </Stack>
+      <Box mt={2}>
+              <Button
+                sx={{ color: "text.primary" }}
+                onClick={() => navigate(-1)}
+              >
+                <ArrowBackIcon />
+              </Button>
+            </Box>
       </Stack>
       <Stack
         sx={{
@@ -363,9 +366,9 @@ export default function FullWidthTextField() {
                     type="submit"
                     variant="contained"
                     sx={{
-                      width: "50%",
+                      width: "60%",
                       p: 1,
-                      ml: 1,
+                      mx:1,
                       borderRadius: "12px",
                     }}
                     color="secondary"

@@ -22,6 +22,18 @@ import { useNavigate } from "react-router-dom";
 
 const kotas = [
   {
+    value: "Banda Aceh",
+    label: "Banda Aceh",
+  },
+  {
+    value: "Padang",
+    label: "Padang",
+  },
+  {
+    value: "Bukit Tinggi",
+    label: "Bukit Tinggi",
+  },
+  {
     value: "Lamongan",
     label: "Lamongan",
   },
@@ -36,6 +48,22 @@ const kotas = [
   {
     value: "Madura",
     label: "Madura",
+  },
+  {
+    value: "Bogor",
+    label: "Bogor",
+  },
+  {
+    value: "Depok",
+    label: "Depok",
+  },  
+  {
+    value: "Bekasi",
+    label: "Bekasi",
+  },
+  {
+    value: "Jakarta",
+    label: "Jakarta",
   },
   
 ];
@@ -294,6 +322,7 @@ export default function FullWidthTextField() {
                         <Button
                           variant="contained"
                           sx={{
+                            mt: 1,
                             mx: 1,
                             borderRadius: "12px",
                             color: "primary",

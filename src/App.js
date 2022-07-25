@@ -49,9 +49,6 @@ function App() {
         <Route path="/edit-profil" element={<Protected>
           <Edpro />
           </Protected>} />
-        <Route path="/NyobaQaqa" element={<Protected>
-          <CheckProfile><Cobs /></CheckProfile><Form/>
-          </Protected>} />
         <Route path="/halaman-produk/:id" element={<Protected>
           <CheckProfile><Halpro /></CheckProfile>
           </Protected>} />

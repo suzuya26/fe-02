@@ -8,12 +8,10 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import jwtDecode from "jwt-decode";
 import Notif from "./Notif";
-import Hamburgeur from "./Hamburgeur";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentNotif } from "../../actions/totalnotifAction";
 import { Link } from 'react-router-dom'
@@ -125,11 +123,11 @@ export default function Nav() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}><PermIdentityIcon/>{decoded.nama}</MenuItem>
+      <MenuItem onClick={handleMenuClose}><PermIdentityIcon />{decoded.nama}</MenuItem>
       <Link to={'/daftar-jual/' + decoded.id} style={{ color: 'inherit', textDecoration: 'none' }}>
-        <MenuItem ><StorefrontIcon/>Jualanku</MenuItem>
+        <MenuItem ><StorefrontIcon />Jualanku</MenuItem>
       </Link>
-      <MenuItem onClick={handleLogout}><LogoutIcon/>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}><LogoutIcon />Logout</MenuItem>
     </Menu>
   );
 
@@ -151,25 +149,30 @@ export default function Nav() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-          </Badge>
-        </IconButton>
-        <p>Menu</p>
-      </MenuItem>
-      <MenuItem>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <Notif />
-          </Badge>
+          {listTotalNotifResult ? (
+            <Badge badgeContent={listTotalNotifResult.total} color="error">
+              <Notif />
+            </Badge>
+          ) : listTotalNotifLoading ? (
+            <Badge badgeContent={0} color="error">
+            </Badge>
+          ) : (
+            <Badge badgeContent={0} color="error">
+              <Notif />
+            </Badge>
+          )}
         </IconButton>
         <p>Notifications</p>
+        <Box width="20px"/>
       </MenuItem>
+
       <MenuItem onClick={handleProfileMenuOpen}>
+      <Box width="10px"/>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -179,6 +182,7 @@ export default function Nav() {
         >
           <AccountCircle />
         </IconButton>
+        <Box width="7px"/>
         <p>Profile</p>
       </MenuItem>
     </Menu>
@@ -189,13 +193,13 @@ export default function Nav() {
       <AppBar position="static" color="inherit">
         <Toolbar>
           <Link to="/">
-          <Box
-            sx={{
-              width: 50,
-              height: 20,
-              backgroundColor: "secondary.main",
-            }}
-          />
+            <Box
+              sx={{
+                width: 50,
+                height: 20,
+                backgroundColor: "secondary.main",
+              }}
+            />
           </Link>
 
           <Box sx={{ flexGrow: 1 }} />
